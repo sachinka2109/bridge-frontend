@@ -24,7 +24,7 @@
     </div>
 
     <div id="container">
-        <form action="../pages/employee-detail.html" class="form">
+        <form id="form" onsubmit="onSubmit(event)">
             <h2>Employee Payroll Form</h2>
             <div class="form-group">
                 <label for="name">Name</label>
@@ -35,10 +35,10 @@
             <div class="form-group">
                 <span>Profile Image</span>
                 <div class="options">
-                    <input type="radio" name="image" value="1" class="pr1"><img src="https://i.pravatar.cc/35?img=1" class="img1"><br>
-                    <input type="radio" name="image" value="2" class="pr2"><img src="https://i.pravatar.cc/35?img=8" class="img2"><br>
-                    <input type="radio" name="image" value="3" class="pr3"><img src="https://i.pravatar.cc/35?img=5" class="img3"><br>
-                    <input type="radio" name="image" value="4" class="pr4"><img src="https://i.pravatar.cc/35?img=11" class="img4"><br>
+                    <input type="radio" name="image" value="https://i.pravatar.cc/35?img=1" class="pr1"><img src="https://i.pravatar.cc/35?img=1" class="img"><br>
+                    <input type="radio" name="image" value="https://i.pravatar.cc/35?img=8" class="pr2"><img src="https://i.pravatar.cc/35?img=8" class="img"><br>
+                    <input type="radio" name="image" value="https://i.pravatar.cc/35?img=5" class="pr3"><img src="https://i.pravatar.cc/35?img=5" class="img"><br>
+                    <input type="radio" name="image" value="https://i.pravatar.cc/35?img=11" class="pr4"><img src="https://i.pravatar.cc/35?img=11" class="img"><br>
                 </div>
             </div>
             <div class="form-group">
@@ -51,15 +51,15 @@
             <div class="form-group">
                 <span>Department</span>
                 <div class="options">
-                    <input type="checkbox" id="checkbox1" name="hr" value="HR">
+                    <input type="checkbox" class="checkbox" name="department" value="HR">
                     <label for="hr">HR</label><br>
-                    <input type="checkbox" id="checkbox2" name="sales" value="Sales">
+                    <input type="checkbox" class="checkbox" name="department" value="Sales">
                     <label for="sales">Sales</label><br>
-                    <input type="checkbox" id="checkbox3" name="finance" value="Finance">
+                    <input type="checkbox" class="checkbox" name="department" value="Finance">
                     <label for="finance">Finance</label><br>
-                    <input type="checkbox" id="checkbox4" name="Engineer" value="Engineer">
+                    <input type="checkbox" class="checkbox" name="department" value="Engineer">
                     <label for="Engineer">Engineer</label><br>
-                    <input type="checkbox" id="checkbox5" name="Others" value="Others">
+                    <input type="checkbox" class="checkbox" name="department" value="Others">
                     <label for="Others">Others</label><br>
                 </div>
             </div>
@@ -85,6 +85,36 @@
                         <select id="day">
                           <option value="">Day</option>
                           <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                          <option value="17">17</option>
+                          <option value="18">18</option>
+                          <option value="19">19</option>
+                          <option value="20">20</option>
+                          <option value="21">21</option>
+                          <option value="22">22</option>
+                          <option value="23">23</option>
+                          <option value="24">24</option>
+                          <option value="25">25</option>
+                          <option value="26">26</option>
+                          <option value="27">27</option>
+                          <option value="28">28</option>
+                          <option value="29">29</option>
+                          <option value="30">30</option>
+                          <option value="31" id="oddMonth">31</option>
                         </select>
                         <i class="fa-solid fa-caret-down"></i>
                     </div>
@@ -92,12 +122,46 @@
                         <select id="month">
                           <option value="">Month</option>
                           <option value="January">January</option>
+                          <option value="February">February</option>
+                          <option value="March">March</option>
+                          <option value="April">April</option>
+                          <option value="May">May</option>
+                          <option value="June">June</option>
+                          <option value="July">July</option>
+                          <option value="August">August</option>
+                          <option value="September">September</option>
+                          <option value="October">October</option>
+                          <option value="November">November</option>
+                          <option value="December">December</option>
                         </select>    
                         <i class="fa-solid fa-caret-down"></i>
                     </div>
                     <div class="year">
                         <select id="year">
                           <option value="">Year</option>
+                          <option value="2000">2000</option>
+                          <option value="2001">2001</option>
+                          <option value="2002">2002</option>
+                          <option value="2003">2003</option>
+                          <option value="2004">2004</option>
+                          <option value="2005">2005</option>
+                          <option value="2006">2006</option>
+                          <option value="2007">2007</option>
+                          <option value="2008">2008</option>
+                          <option value="2009">2009</option>
+                          <option value="2010">2010</option>
+                          <option value="2011">2011</option>
+                          <option value="2012">2012</option>
+                          <option value="2013">2013</option>
+                          <option value="2014">2014</option>
+                          <option value="2015">2015</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
                           <option value="2023">2023</option>
                         </select>
                         <i class="fa-solid fa-caret-down"></i>
@@ -117,6 +181,7 @@
             </div>
         </form>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="../scripts/payroll-form.js"></script>
 </body>
 </html>

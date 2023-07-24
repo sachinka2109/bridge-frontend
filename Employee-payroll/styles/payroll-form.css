@@ -127,7 +127,7 @@ select {
     align-items: center;
     text-align: center;
     display: flex;
-    width: 480px;
+    width: 400px;
 }
 
 .options label {
@@ -149,7 +149,7 @@ select {
     margin-left: 20px;
 }
 
-.img1,.img2,.img3,.img4 {
+.img {
     border-radius: 50%;
     margin-left: 10px;
 }
@@ -220,13 +220,13 @@ select {
     right: 22px;
 }
 
-#checkbox1 {
+.checkbox:first-child {
     border: 1px solid #BDBDBD;
     width: 20px;
     height: 20px;
 }
 
-#checkbox2,#checkbox3,#checkbox4,#checkbox5 {
+.checkbox:not(:first-child) {
     margin-left: 20px;
     border: 1px solid #BDBDBD;
     width: 20px;
