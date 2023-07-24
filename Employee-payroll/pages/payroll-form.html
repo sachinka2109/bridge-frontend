@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Payroll</title>
+    <link rel="stylesheet" href="../styles/payroll-form.css">
+    <script src="https://kit.fontawesome.com/6f47752a54.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="navbar">
+        <a href="../pages/employee-detail.html">
+            <div class="navbar-logo">
+                <div class="logo-icon">
+                    <i class="fa-regular fa-user fa-xl"></i>
+                </div>
+                <div class="logo-title">
+                    <h5>EMPLOYEE</h5>
+                    <h5>PAYROLL</h5>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div id="container">
+        <form action="../pages/employee-detail.html" class="form">
+            <h2>Employee Payroll Form</h2>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <div class="options">
+                    <input type="text" id="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <span>Profile Image</span>
+                <div class="options">
+                    <input type="radio" name="image" value="1" class="pr1"><img src="https://i.pravatar.cc/35?img=1" class="img1"><br>
+                    <input type="radio" name="image" value="2" class="pr2"><img src="https://i.pravatar.cc/35?img=8" class="img2"><br>
+                    <input type="radio" name="image" value="3" class="pr3"><img src="https://i.pravatar.cc/35?img=5" class="img3"><br>
+                    <input type="radio" name="image" value="4" class="pr4"><img src="https://i.pravatar.cc/35?img=11" class="img4"><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <span>Gender</span>
+                <div class="options">
+                    <input type="radio" name="gender" value="male" class="gen1" id="male"> <label for="male">Male</label><br>
+                    <input type="radio" name="gender" value="female" class="gen2" id="female"> <label for="female">Female</label><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <span>Department</span>
+                <div class="options">
+                    <input type="checkbox" id="checkbox1" name="hr" value="HR">
+                    <label for="hr">HR</label><br>
+                    <input type="checkbox" id="checkbox2" name="sales" value="Sales">
+                    <label for="sales">Sales</label><br>
+                    <input type="checkbox" id="checkbox3" name="finance" value="Finance">
+                    <label for="finance">Finance</label><br>
+                    <input type="checkbox" id="checkbox4" name="Engineer" value="Engineer">
+                    <label for="Engineer">Engineer</label><br>
+                    <input type="checkbox" id="checkbox5" name="Others" value="Others">
+                    <label for="Others">Others</label><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <span>Salary</span>
+                <div class="options">
+                    <div class="salary">
+                        <select id="select-salary">
+                            <option value="">Select Salary</option>
+                            <option value="15000">15000</option>
+                            <option value="15000">20000</option>
+                            <option value="15000">25000</option>
+                            <option value="15000">30000</option>
+                        </select>  
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Start Date</label>
+                <div class="options">
+                    <div class="day">
+                        <select id="day">
+                          <option value="">Day</option>
+                          <option value="1">1</option>
+                        </select>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                    <div class="month">
+                        <select id="month">
+                          <option value="">Month</option>
+                          <option value="January">January</option>
+                        </select>    
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                    <div class="year">
+                        <select id="year">
+                          <option value="">Year</option>
+                          <option value="2023">2023</option>
+                        </select>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <div class="options">
+                    <textarea name="notes" id="notes"></textarea>
+                </div>
+            </div>
+            <div class="button-group">
+                <button type="button">Cancel</button>
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="button">Reset</button>
+            </div>
+        </form>
+    </div>
+    <script src="../scripts/payroll-form.js"></script>
+</body>
+</html>
