@@ -1,61 +1,13 @@
 {
   "employees": [
     {
-      "id": 1,
-      "name": "Sachin Kaythamwar",
-      "imageUrl": "https://i.pravatar.cc/35?img=1",
-      "gender": "male",
-      "department[]": "Engineer",
-      "salary": "30000",
-      "startDate": "1 January 2023",
-      "notes": "good"
-    },
-    {
-      "name": "parth ghag",
-      "gender": "male",
-      "department[]": "Engineer",
-      "salary": "15000",
-      "startDate": "1 August 2007",
-      "notes": "adwdwa",
-      "id": 2
-    },
-    {
       "name": "shubham kaythamwar",
-      "gender": "male",
-      "department[]": [
-        "HR",
-        "Engineer"
-      ],
+      "gender": "Male",
+      "department": "[\"Sales\",\"HR\"]",
       "salary": "15000",
-      "startDate": "1 August 2006",
-      "notes": "dwdqw",
-      "id": 3
-    },
-    {
-      "name": "shubham kaythamwar",
-      "imageUrl": "https://i.pravatar.cc/35?img=8",
-      "gender": "male",
-      "department[]": [
-        "Sales",
-        "Finance"
-      ],
-      "salary": "15000",
-      "startDate": "9 June 2007",
-      "notes": "wdadwadaw",
-      "id": 4
-    },
-    {
-      "name": "shubham kaythamwar",
-      "imageUrl": "https://i.pravatar.cc/35?img=8",
-      "gender": "male",
-      "department[]": [
-        "Sales",
-        "Finance"
-      ],
-      "salary": "15000",
-      "startDate": "9 October 2006",
-      "notes": "awadwad",
-      "id": 5
+      "startDate": "5 July 2005",
+      "notes": "wadawdaw",
+      "id": 1
     }
   ]
 }

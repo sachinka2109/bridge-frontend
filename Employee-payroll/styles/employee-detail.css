@@ -139,6 +139,27 @@ tbody td{
     background-color: white;
 }
 
+td .actions {
+    margin-left: 10px;
+    color: #658292;
+    cursor: pointer;
+}
+
+.department-data {
+    background-color: #E9FEA5;
+    color: #3D3D3D;
+    border-radius: 13px;
+    padding: 5px;
+}
+
+.fa-trash-can:hover {
+    color: lightcoral;
+}
+
+.fa-pen:hover {
+    color: lightskyblue;
+}
+
 /*********************************************************Responsive section ************************************************/
 
 @media (max-width: 900px) {
