@@ -14,6 +14,7 @@ let imageUrl;
 let selectedDepartment = [];
 let submitButton = document.getElementsByClassName('submit-btn')[0];
 let updateButton = document.getElementsByClassName('update-btn')[0];
+let form = document.getElementById('form');
 
 if(localStorage.getItem('employee')) {
     getData();
@@ -24,15 +25,17 @@ if(localStorage.getItem('employee')) {
     updateButton.style.display = 'none';
 }
 
+updateButton.addEventListener('click',updateData);
 
 function onSubmit(event) {
-    let name = name.value;
-    let salary = salary.value;
-    let day = day.value;
-    let month = month.value;
-    let year = year.value;
-    let notes = notes.value;
-    
+    event.preventDefault();
+    name = name.value;
+    salary = salary.value;
+    day = day.value;
+    month = month.value;
+    year = year.value;
+    notes = notes.value;
+    console.log(name + ' ' + salary + ' ' + day + ' ' + month + ' ' + year + ' ' + notes)
     for (let i = 0; i < img.length; i++) {
         if (img[i].checked) {
             imageUrl = img[i].value;
@@ -66,19 +69,18 @@ function onSubmit(event) {
     }
     console.log(data);
     
-    // setTimeout(() => {
-        $.ajax({
-            url: 'http://localhost:3000/employees',
-            type: 'POST',
-            data: data,
-            success: function (data) {
-                console.log(data);
-            },
-            // error: function (error) {
-            //     console.log(error);
-            // }
-        });
-    // }, 2000);
+    $.ajax({
+        url: 'http://localhost:3000/employees',
+        type: 'POST',
+        data: data,
+        success: function (data) {
+            console.log(data);
+            onReset();
+        },
+        // error: function (error) {
+        //     console.log(error);
+        // }
+    });
 }
 
 function getData() {
@@ -93,12 +95,10 @@ function getData() {
                         img[i].checked = true;
                         break;
                     }
-                } 
+                }           
                 if(data.gender === 'Male') {
-                    gender = gender1.value;
                     gender1.checked = true;
                 } else { 
-                    gender = gender2.value;
                     gender2.checked = true;
                 }
                 let depart = JSON.parse(data.department);
@@ -110,12 +110,7 @@ function getData() {
                         }
                     }
                 }
-                for(let i = 0; i < checkbox.length; i++) {
-                    if(checkbox[i].checked) {
-                        selectedDepartment.push(checkbox[i].value);
-                    }
-                }
-                selectedDepartment.sort().reverse();
+                // salary.value = data.salary;
                 salary.value = data.salary;
                 day.value = data.startDate.split(' ')[0];
                 month.value = data.startDate.split(' ')[1];
@@ -131,6 +126,24 @@ function getData() {
 
 function updateData(event) {
     event.preventDefault();
+    for (let i = 0; i < img.length; i++) {
+        if (img[i].checked) {
+            imageUrl = img[i].value;
+            break;
+        }
+    }  
+
+    if(gender1.checked) {
+        gender = gender1.value;
+    } else {
+        gender = gender2.value;
+    }
+    for(let i = 0; i < checkbox.length; i++) {
+        if(checkbox[i].checked && !selectedDepartment.includes(checkbox[i].value)) {
+            selectedDepartment.push(checkbox[i].value);
+        }
+    }
+    selectedDepartment.sort().reverse();
     const data = {
         name: name.value,
         imageUrl: imageUrl,
@@ -138,7 +151,8 @@ function updateData(event) {
         department:JSON.stringify(selectedDepartment),
         salary: salary.value,
         startDate: `${day.value} ${month.value} ${year.value}`, 
-        notes:notes.value
+        notes:notes.value,
+        id:id,
     }
     console.log(data);
     $.ajax({
@@ -163,7 +177,6 @@ function onCancel() {
 }
 
 function onReset(event) {
-    event.preventDefault();
     let form = document.getElementById('form');
     form.reset();
 }

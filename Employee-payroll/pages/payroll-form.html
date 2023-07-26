@@ -24,7 +24,7 @@
     </div>
 
     <div id="container">
-        <form id="form">
+        <form id="form" onsubmit="onSubmit(event)">
             <h2>Employee Payroll Form</h2>
             <div class="form-group">
                 <label for="name">Name</label>
@@ -70,13 +70,13 @@
                         <select id="select-salary">
                             <option value="">Select Salary</option>
                             <option value="15000">15000</option>
-                            <option value="15000">20000</option>
-                            <option value="15000">25000</option>
-                            <option value="15000">30000</option>
-                            <option value="15000">35000</option>
-                            <option value="15000">40000</option>
-                            <option value="15000">45000</option>
-                            <option value="15000">50000</option>
+                            <option value="20000">20000</option>
+                            <option value="25000">25000</option>
+                            <option value="30000">30000</option>
+                            <option value="35000">35000</option>
+                            <option value="40000">40000</option>
+                            <option value="45000">45000</option>
+                            <option value="50000">50000</option>
                         </select>  
                         <i class="fa-solid fa-caret-down"></i>
                     </div>
@@ -180,8 +180,8 @@
             </div>
             <div class="button-group">
                 <button type="button" onclick="onCancel()">Cancel</button>
-                <button type="submit" class="submit-btn" onclick="onSubmit(event)">Submit</button>
-                <button type="submit" class="update-btn" onclick="updateData(event)">Update</button>
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="button" class="update-btn">Update</button>
                 <button type="button" onclick="onReset(event)">Reset</button>
             </div>
         </form>

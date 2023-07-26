@@ -2,11 +2,12 @@
   "employees": [
     {
       "name": "shubham kaythamwar",
+      "imageUrl": "https://i.pravatar.cc/35?img=11",
       "gender": "Male",
-      "department": "[\"Sales\",\"HR\"]",
-      "salary": "15000",
-      "startDate": "5 July 2005",
-      "notes": "wadawdaw",
+      "department": "[\"HR\",\"Engineer\"]",
+      "salary": "50000",
+      "startDate": "8 August 2008",
+      "notes": "hii",
       "id": 1
     }
   ]
