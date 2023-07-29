@@ -24,7 +24,7 @@
     </div>
 
     <div id="container">
-        <form id="form" onsubmit="onSubmit(event)">
+         <form id="form">  <!-- onsubmit="onSubmit(event)" -->
             <h2>Employee Payroll Form</h2>
             <div class="form-group">
                 <label for="name">Name</label>
@@ -182,12 +182,13 @@
                 <button type="button" onclick="onCancel()">Cancel</button>
                 <button type="submit" class="submit-btn">Submit</button>
                 <button type="button" class="update-btn">Update</button>
-                <button type="button" onclick="onReset(event)">Reset</button>
+                <button type="button" onclick="onReset()">Reset</button>
             </div>
         </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="../scripts/payroll-form.js"></script>
+    <!-- <script src="../scripts/payroll-form.js"></script> -->
+    <script src="../scripts/payroll-form-jquery.js"></script>
 </body>
 </html>
 

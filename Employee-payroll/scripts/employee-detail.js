@@ -16,7 +16,9 @@ function displayData() {
                 <td>${employee.name}</td>
                 <td>${employee.gender}</td>
                 <td>
-                    <span class='department-data'>${departments}</span>
+                    <span class='department-data'>
+                        ${departments.map(department => `<span>${department}</span>`).join(' ')}
+                    </span>
                 </td>
                 <td>${employee.salary}</td>
                 <td>${employee.startDate}</td>

@@ -173,10 +173,11 @@ function updateData(event) {
 
 
 function onCancel() {
+    localStorage.removeItem('employee');
     window.history.go(-1);
 }
 
-function onReset(event) {
+function onReset() {
     let form = document.getElementById('form');
     form.reset();
 }
