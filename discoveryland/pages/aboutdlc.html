@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discovery Land Company</title>
+    <title>News and Press | Discovery Land Company</title>
     <link rel="shortcut icon" href="../assets/favicon.avif" type="image/x-icon">
-    <link rel="stylesheet" href="../styles/gallery.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/aboutdlc.css">
     <script src="https://kit.fontawesome.com/6f47752a54.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="gallery-bg">
-        <img src="../assets/gallery/gallery.png" alt="gallery-bg">
-    </div>
-    <div class="gallery-title">
-        <p>Gallery</p>
+    <div class="hero">
+        <div class="gallery-bg">    
+            <img src="../assets/aboutdlc/hero.jpg" alt="">
+        </div>
+        <div class="gallery-title">
+            <span>News</span><br>
+            <span>
+                and Press
+            </span>    
+        </div>
+        <div class="hero-help">
+            <span>Scroll to explore</span>
+            <button><i class="fa-solid fa-arrow-down"></i></button>
+        </div>
     </div>
     <header>
-        <nav class="navbar">
-            <!-- For brand -->
-            <div class="navbar-brand">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand mx-5" href="#">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 433.6 97.1" style="enable-background:new 0 0 433.6 97.1;" xml:space="preserve">
                     <style type="text/css">
                         .st0{fill:#FFFFFF;}
@@ -241,23 +251,29 @@
                         </g>
                     </g>
                 </svg>
-            </div>
-            <!-- For links -->
-            <div class="navbar-right">
-                <ul class="navbar-nav">
-                    <li class="navbar-item"><a href="../pages/aboutdlc.html" class="navbar-link">About DLC</a></li>
-                    <li class="navbar-item"><a href="./ourworld.html" class="navbar-link">Our Worlds</a></li>
-                    <li class="navbar-item"><a href="./experience.html" class="navbar-link">Experiences</a></li>
-                    <li class="navbar-item"><a href="#" class="navbar-link active">Gallery</a></li>
-                    <li class="navbar-item"><a href="./press.html" class="navbar-link">Press</a></li>
+              </a>
+              <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item mx-3">
+                    <a class="nav-link active" href="#">About DLC</a>
+                  </li>
+                  <li class="nav-item mx-3">
+                    <a class="nav-link" href="../pages/ourworld.html">Our Worlds</a>
+                  </li>
+                  <li class="nav-item mx-3">
+                    <a class="nav-link" href="../pages/experience.html">Experiences</a>
+                  </li>
+                  <li class="nav-item mx-3">
+                    <a class="nav-link" href="../pages/gallery.html">Gallery</a>
+                  </li>
+                  <li class="nav-item mx-3">
+                    <a class="nav-link" aria-current="page" href="#">Press</a>
+                  </li>
                 </ul>
-                <div class="navbar-menu">
-                    <i class="fa-solid fa-bars fa-lg"></i>
-                    <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
-                </div>
+              </div>
             </div>
-        </nav>
-        <div class="navbar-top">
+          </nav>
+        <!-- <div class="navbar-top">
             <ul class="navbar-inner">
                 <li class="navbar-inner-item"><a href="#" class="navbar-link">Magzine</a></li>
                 <li class="navbar-inner-item"><a href="#" class="navbar-link">Company</a></li>
@@ -265,65 +281,148 @@
                 <li class="navbar-inner-item"><a href="#" class="navbar-link">Careers</a></li>
                 <li class="navbar-inner-item"><a href="#" class="navbar-link">Contact</a></li>
             </ul>
-        </div>
+        </div> -->
     </header>
 
     <main>
-        <article class="main-container">
-            <article>
-                <div class="container">
-                    <a href="#">    
-                        <img src="../assets/gallery/gallery1.jpg" alt="Outdoor Pursuits">
-                        <p class="title">Outdoor Pursuits</p>
-                    </a>
+        <div class="main-container">
+            <div class="main-post">
+                <div class="main-post-title">
+                    <h2>Latest News</h2>
                 </div>
-            </article>
-            <article>
-                <div class="container">
-                    <a href="#">    
-                        <img src="../assets/gallery/gallery2.jpg" alt="Golf">
-                        <p class="title">Golf</p>
-                    </a>
+            </div>
+            <div id="carousel" class="carousel slide">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="../assets/press/carousel1.jpg" class="img-fluid" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="../assets/press/carousel2.jpg" class="img-fluid" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="../assets/press/carousel3.jpg" class="img-fluid" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="../assets/press/carousel4.jpg" class="img-fluid" alt="...">
+                  </div>
                 </div>
-            </article>
-            <article>
-                <div class="container">
-                    <a href="#">    
-                        <img src="../assets/gallery/gallery3.jpg" alt="Lifestyle">
-                        <p class="title">Lifestyle</p>
-                    </a>
+                <div class="btn-group">
+                    <button class="previous-button" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                        <i class="fa-solid fa-arrow-left fa-xl"></i>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <span class="mx-3">1 - 4</span>
+                    <button class="next-button" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                        <i class="fa-solid fa-arrow-right fa-xl"></i>
+                        <span class="visually-hidden">Next</span>
+                    </button>   
                 </div>
-            </article>
-            <article>
-                <div class="container">
-                    <a href="#">    
-                        <img src="../assets/gallery/gallery4.jpg" alt="Lifestyle">
-                        <p class="title">Landscape</p>
-                    </a>
+                <div class="card">
+                    <p>News</p>
+                    <h5>Discovery's newest property in Kaua'i North Shore Preserve</h5>
+                    <div>
+                        <p>
+                            Discovery Land Company is excited to announce our 25th residential club community on the majestic North Shore of Kaua'i. North Shore Preserve, a one-of-a-kind residential community, spans one thousand acres at the base of the mountains in the pastoral Hanalei valley. This newly re-imagined, low-density project is a secluded and peaceful island oasis with limited initial homesite and hale offerings.
+                        </p>
+                    </div>
+                    <button>Read Article</button>
                 </div>
-            </article>
-            <article>
-                <div class="container">
-                    <a href="#">    
-                        <img src="../assets/gallery/gallery5.jpg" alt="Lifestyle">
-                        <p class="title">Clubhouse</p>
-                    </a>
+            </div>
+
+            <section id="press-section">
+                <div class="press">
+                    <h2 class="press-title">Press</h2>
+                    <div id="carousel1" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col">
+                                        <article>
+                                            <h2>10 Fairways to Tee Off on Now</h2>
+                                            <p>Vegas Magazine I September 2021</p>
+                                            <button>Read Article</button>
+                                        </article>
+                                    </div>
+                                    <div class="col">
+                                        <article>
+                                            <h2>Golf Real Estate Roars Back as Vacation Homes Boom in Pandemic</h2>
+                                            <p>Bloomberg I September 2021</p>
+                                            <button>Read Article</button>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="row my-5">
+                                    <div class="col">
+                                        <article>
+                                            <h2>Brexit drives British millionaires to Portugal for tax and EU perks — but it’s about to get complicated</h2>
+                                            <p>Telegraph UK | August 20, 2021</p>
+                                            <button>Read Article</button>
+                                        </article>
+                                    </div>
+                                    <div class="col">
+                                        <article>
+                                            <h2>This Property Company Ups the Ante with  Luxury and Sustainability</h2>
+                                            <p>Sunset Magazine | August 13, 2021</p>
+                                            <button>Read Article</button>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col">
+                                        <article>
+                                            <h2>Meet the Man With a Plan to Build Greener Golf Communities</h2>
+                                            <p>New York Times</p>
+                                            <button>Read Article</button>
+                                        </article>
+                                    </div>
+                                    <div class="col">
+                                        <article>
+                                            <h2>Discovery Land Company's Mike Meldman Opens Up About Building the Unexpected</h2>
+                                            <p>New York Times</p>
+                                            <button>Read Article</button>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="row my-5">
+                                    <div class="col">
+                                        <article>
+                                            <h2>Interview with Michael Meldman</h2>
+                                            <p>Golf Today</p>
+                                            <button>Read Article</button>
+                                        </article>
+                                    </div>
+                                    <div class="col">
+                                        <article>
+                                            <h2>On The Portuguese Coast, An Appealing Spot For Seaside Homes</h2>
+                                            <p>The New York Times</p>
+                                            <button>Read Article</button>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="previous-button" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+                                <i class="fa-solid fa-arrow-left fa-xl"></i>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <span class="mx-3">1 - 16</span>
+                            <button class="next-button" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+                                <i class="fa-solid fa-arrow-right fa-xl"></i>
+                                <span class="visually-hidden">Next</span>
+                            </button>   
+                        </div>
+                    </div>
                 </div>
-            </article>
-            <article>
-                <div class="container">
-                    <a href="#">    
-                        <img src="../assets/gallery/gallery6.jpg" alt="Lifestyle">
-                        <p class="title">Wellness</p>
-                    </a>
-                </div>
-            </article>
-        </article>
+            </section>
+        </div>
     </main>
+
 
     <footer>
         <div class="main-footer-container">
-
             <div class="container-footer">
                 <div class="footer-logo">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 359 360" style="enable-background:new 0 0 359 360;" xml:space="preserve">
@@ -552,7 +651,7 @@
             </div>
         </div>
     </footer>
-
-    <script src="../scripts/gallery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../scripts/aboutdlc.js"></script>
 </body>
 </html>
