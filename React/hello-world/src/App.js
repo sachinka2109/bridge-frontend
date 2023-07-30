@@ -1,9 +1,12 @@
 import './App.css';
-import ClassClick from './components/ClassClick';
-import Counter from './components/Counter';
-import EventBindClass from './components/EventBindClass';
-import FunctionClick from './components/FunctionClick';
-import ParentComponent from './components/ParentComponent';
+import Inline from './components/Inline';
+// import ClassClick from './components/ClassClick';
+// import Counter from './components/Counter';
+// import EventBindClass from './components/EventBindClass';
+// import FunctionClick from './components/FunctionClick';
+// import ListRendering from './components/ListRendering';
+// import ParentComponent from './components/ParentComponent';
+import Stylesheets from './components/Stylesheets';
 // import {Greet} from './components/Greet';
 // import Subscribe from './components/Subscribe';
 // import Welcome from './components/Welcome';
@@ -26,7 +29,10 @@ function App() {
       <FunctionClick/>
 
       <EventBindClass/> */}
-      <ParentComponent/>
+      {/* <ParentComponent/> */}
+      {/* <ListRendering/> */}
+      <Stylesheets primary={true}/>
+      <Inline/>
     </div>
   );
 }

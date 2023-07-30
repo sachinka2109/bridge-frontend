@@ -23,7 +23,7 @@ export default class StateClass extends Component {
     this.setState({
       name: 'User'
     },() => {
-      console.log('change back')
+      // console.log('change back')
     })
   }
 

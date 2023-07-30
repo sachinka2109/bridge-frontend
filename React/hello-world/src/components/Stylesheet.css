@@ -1,0 +1,11 @@
+.primary {
+    color: aqua;
+}
+
+.font-xl {
+    font-size: 72px;
+}
+
+.error {
+    background-color: lightcoral;
+}

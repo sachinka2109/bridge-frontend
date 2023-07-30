@@ -33,7 +33,7 @@ function FunctionProps(props) {
     return(
         <div className="">
             <div className="container">
-                <h1>Villian - {props.name}</h1>
+                <h1>Villain - {props.name}</h1>
                 <h2>Movie - {props.movieName}</h2>
                 {/* <marquee behavior="scroll">{props.children}</marquee> */}
                 <h5 ref={elementRef} onMouseOver={changeColor} onMouseLeave={changeBack}>{props.children}</h5>
