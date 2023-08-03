@@ -13,13 +13,15 @@ import ViewStreamIcon from '@mui/icons-material/ViewStream';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import AppsIcon from '@mui/icons-material/Apps';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: '#f1f3f4',
+    '&:focus': {
+        backgroundColor:'white',
     },
     width: '100%', // Take the whole width
   }));
@@ -46,11 +48,19 @@ const Search = styled('div')(({ theme }) => ({
   }));
 
 function Header() {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
   return (
     <div>
         <Box sx={{ flexGrow: 1 }} >
             <AppBar position="static" >
-                <Toolbar sx={{ display: 'flex', alignItems: 'center' }}>
+                <Toolbar sx={{ display: 'flex', alignItems: 'center',backgroundColor:'white',color:'#5f6368'}}>
                     <IconButton
                         size="large"
                         edge="start"
@@ -64,13 +74,13 @@ function Header() {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ display: { xs:'flex',alignItems:'center' } }}
-                        width={'25vw'}
+                        sx={{ display: { xs:'flex',alignItems:'center' },flexGrow:1 }}
+                        width={'20vw'}
                     >
                         <img className="gb_Rc gb_Rd" src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x " alt="" aria-hidden="true" role="presentation" style={{width:'40px',height:'40px'}}></img>
                         Keep
                     </Typography>
-                    <Search sx={{flexGrow:1,display:'flex',justifyContent:'flex-start',mx:5}}>
+                    <Search sx={{flexGrow:1,display:{xs:'none',lg:'flex'},justifyContent:'flex-start',mx:5}}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -79,11 +89,14 @@ function Header() {
                         inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
-                    <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ display: 'flex',justifyContent:'flex-end'}}>
+                        <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',lg:'none'}}}>
+                            <SearchIcon />
+                        </IconButton>
                         <IconButton size="large"  color="inherit">
                             <RefreshIcon />
                         </IconButton>
-                        <IconButton size="large"  color="inherit" style={{display:{xs:'none',md:'flex'}}}>
+                        <IconButton size="large"  color="inherit" sx={{display:{xs:'none',md:'flex'}}}>
                             <ViewStreamIcon />
                         </IconButton>
                         <IconButton size="large"  color="inherit">
@@ -98,9 +111,25 @@ function Header() {
                         aria-label="account of current user"
                         aria-haspopup="true"
                         color="inherit"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
                         >
                             <AccountCircle />   
                         </IconButton>
+                        <Menu
+                            id="basic-menu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                            }}
+                            >
+                            <MenuItem onClick={handleClose}>Profile</MenuItem>
+                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                            <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        </Menu>
                     </Box>
                 </Toolbar>
             </AppBar>
