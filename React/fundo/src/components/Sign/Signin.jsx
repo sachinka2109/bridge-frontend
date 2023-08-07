@@ -3,9 +3,11 @@ import { Grid,TextField,Button,Container} from '@mui/material'
 // import './Signin.css'
 // import axios from 'axios';
 import { signIn } from '../../services/userFunction';
+import { useNavigate,Link } from 'react-router-dom';
 
 
 function Signin() {
+    const navigate = useNavigate();
     const emailRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]+(.in)*$/;
     const passwordRegex = /^.*(?=.{8,})(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/;
     const [details,setDetails] = useState({email:"",password:""})
@@ -38,17 +40,20 @@ function Signin() {
         if(emailTest === false) {
             setCheckError({
                 EmailTrue: true,
-                EmailError: 'Invalid email'
+                EmailError: 'Please Enter valid Email'
             })
         } else if(passwordTest === false) {
             setCheckError({
                 PasswordTrue: true,
-                PasswordError: 'Invalid password'
+                PasswordError: 'Incorrect Password'
             })
         }
         if(emailTest === true && passwordTest === true) {
             let response = await signIn(details)
             console.log(response.data.id)
+            console.log(response.data)
+            sessionStorage.setItem('id',response.data.id);
+            navigate('/')
         }
         // axios.get('http://localhost:4000/users').then((response) => {
         //     let users = response.data;
@@ -117,7 +122,9 @@ function Signin() {
                     </Grid> */}
                     <Grid container marginBottom={'30px'} padding={'30px'} justifyContent={'space-between'} >                
                         <Grid item>
-                            <Button variant="text" size={'small'} style={{textTransform: 'none',fontWeight:'bold',fontSize:'14px'}}>Create account</Button>
+                            <Link to='/signup'>
+                                <Button variant="text" size={'small'} style={{textTransform: 'none',fontWeight:'bold',fontSize:'14px'}}>Create account</Button>
+                            </Link>
                         </Grid>
                         <Grid item>
                             <Button variant="contained" type='submit' style={{textTransform: 'none'}}>Login</Button>

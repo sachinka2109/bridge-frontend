@@ -5,8 +5,10 @@ import './Signup.css'
 import Google from '../../images/google-img.png';
 // import axios from 'axios';
 import { signUp } from '../../services/userFunction';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Signup() {
+    const navigate = useNavigate();
     const NameRegex = /^[A-Z]{1}[a-z]{2,}$/;
     const UserNameRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]*$/;
     const passRegex = /^.*(?=.{8,})(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/
@@ -85,6 +87,7 @@ function Signup() {
         if(firstNameTest && lastNameTest && emailTest && passwordTest === true && checkError.confirmPasswordTrue === false) {
             let response = await signUp(details)
             console.log(response.data)
+            navigate('/signin')
         }
     }
 
@@ -170,7 +173,9 @@ function Signup() {
                                 </Grid>
                                 <Grid container style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'50px'}}>
                                     <Grid item xs={12} md={12} style={{display:'flex',justifyContent:'space-between'}}>
-                                        <Button variant='text' style={{ textTransform: 'none',fontSize:'16px'}}>Sign in instead</Button>
+                                        <Link to='/signin'>
+                                            <Button variant='text' style={{ textTransform: 'none',fontSize:'16px'}}>Sign in instead</Button>
+                                        </Link>
                                         <Button variant='contained' type='submit'>
                                             Next
                                         </Button>
