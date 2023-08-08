@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +15,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import AppsIcon from '@mui/icons-material/Apps';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -48,8 +47,7 @@ const Search = styled('div')(({ theme }) => ({
     width: '100%',
   }));
 
-function Header() {
-    const navigate = useNavigate();
+function Header(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -59,10 +57,6 @@ function Header() {
         setAnchorEl(null);
     };
 
-    const handleLogout = () => {
-        sessionStorage.removeItem('id')
-        navigate('/signin')
-    } 
   return (
     <div>
         <Box sx={{ flexGrow: 1 }} >
@@ -74,20 +68,21 @@ function Header() {
                         color="inherit"
                         aria-label="open drawer"
                         sx={{ mr: 1 }}
+                        onClick={props.handleOpen}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
                         sx={{ display: { xs:'flex',alignItems:'center' },flexGrow:1 }}
-                        width={'20vw'}
+                        width={'15vw'}
                     >
                         <img className="gb_Rc gb_Rd" src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x " alt="" aria-hidden="true" role="presentation" style={{width:'40px',height:'40px'}}></img>
                         Keep
                     </Typography>
-                    <Search sx={{flexGrow:1,display:{xs:'none',lg:'flex'},justifyContent:'flex-start',mx:5}}>
+                    <Search sx={{flexGrow:1,display:{xs:'none',lg:'flex'},justifyContent:'flex-start',alignItems:'center',mx:5,borderRadius:'10px',padding:'5px'}}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -133,9 +128,7 @@ function Header() {
                             'aria-labelledby': 'basic-button',
                             }}
                             >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>My account</MenuItem>
-                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                            <MenuItem onClick={handleClose}>Sign Out</MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>

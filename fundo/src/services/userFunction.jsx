@@ -1,4 +1,3 @@
-import React from 'react'
 import axios from 'axios'
 
 export let signIn = async(data) => {
@@ -12,7 +11,3 @@ export let signUp = async(data) => {
     console.log(response)
     return response
 }
-
-// export let getSignIn = async(data) => {
-//     let response = await axios.get('')
-// }
