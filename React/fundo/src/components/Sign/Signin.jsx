@@ -52,8 +52,7 @@ function Signin() {
             let response = await signIn(details)
             console.log(response.data.id)
             console.log(response.data)
-            sessionStorage.setItem('id',response.data.id);
-            navigate('/')
+            localStorage.setItem('token',response.data.id);
         }
         // axios.get('http://localhost:4000/users').then((response) => {
         //     let users = response.data;

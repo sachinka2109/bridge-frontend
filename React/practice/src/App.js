@@ -7,27 +7,31 @@ import StateFunction from './components/function-component/StateFunction';
 import StateClass from './components/class-component/StateClass';
 import ParentClass from './components/class-component/ParentClass';
 import ParentFunction from './components/function-component/ParentFunction';
+import ParentFun from './components/function-component/ParentFun';
+import StateFunctionArray from './components/function-component/StateFunctionArray';
 
 function App() {
   return (
     <div className="App">
       <div className="ClassComponents">
-        <ClassCounter/>
+        {/* <ClassCounter/> */}
         {/* <CreateElement/> */}
-        <StateClass hobby='Music'/>
+        {/* <StateClass hobby='Music'/> */}
         <br />
-        <ParentClass />
+        {/* <ParentClass /> */}
       </div>
       <hr />
       <div className="FunctionComponents">
-        <FunctionCounter/>
+        {/* <FunctionCounter/> */}
         {/* <FunctionProps name="Sachin Kaythamwar"/> */}
-        <FunctionProps name='Jason' movieName="Friday the 13th">
-          <h2>I am a serial killer</h2>
-        </FunctionProps>
-        <StateFunction/>
+        {/* <FunctionProps name='Jason' movieName="Friday the 13th"> */}
+          {/* <h2>I am a serial killer</h2> */}
+        {/* </FunctionProps> */}
+        {/* <StateFunction/> */}
         <br />
-        <ParentFunction/>
+        {/* <ParentFunction/> */}
+        <ParentFun />
+        <StateFunctionArray/>
       </div>
     </div>
   );
