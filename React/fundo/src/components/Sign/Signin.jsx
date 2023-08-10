@@ -3,28 +3,21 @@ import { Grid,TextField,Button,Container} from '@mui/material'
 // import './Signin.css'
 // import axios from 'axios';
 import { signIn } from '../../services/userFunction';
-import { useNavigate,Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 function Signin() {
-    const navigate = useNavigate();
     const emailRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]+(.in)*$/;
     const passwordRegex = /^.*(?=.{8,})(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/;
     const [details,setDetails] = useState({email:"",password:""})
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [showPassword, setShowPassword] = useState(false);
+
     const [checkError, setCheckError] = React.useState({
         EmailTrue: false,
         EmailError: '',
         PasswordTrue: false,
         PasswordError: ''
     })
-    // const [error, setError] = useState('');
 
-    // const handlePasswordVisibility = () => {
-    //     setShowPassword(!showPassword);
-    // };
 
     const handleChange =(event) => {
         setDetails({

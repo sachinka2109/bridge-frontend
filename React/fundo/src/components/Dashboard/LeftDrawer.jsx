@@ -10,12 +10,13 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Button } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
+import Header from '../Header/Header';
+import './LeftDrawer.css';
 
 function LeftDrawer(props) {
   const [state, setState] = React.useState({
-    left: false,
+    left: true,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -28,7 +29,7 @@ function LeftDrawer(props) {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width:'280px'}}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -47,20 +48,26 @@ function LeftDrawer(props) {
     </Box>
   );
 
+  let handleOpen = () => {
+    setState({...state,left:!state.left});
+  }
+
   return (
-    <div>   
-      {['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-            anchor={'left'}
-            open={state['left']}
-            onClose={toggleDrawer(false)}
-          >
-            {list('left')}
-          </Drawer>
-        </React.Fragment>
-      ))}  
+    <div>  
+      <div className='drawer-container'>
+        <Header handleOpen={handleOpen}></Header> 
+        <Drawer
+          anchor={'left'}
+          open={state['left']}
+          onClose={toggleDrawer(false)}
+          variant="persistent" 
+          PaperProps={{
+            sx:{position:'absolute',top:'65px',paddingLeft:'8px'}
+          }}
+        >
+          {list('left')}
+        </Drawer>
+      </div>
     </div>
   );
 }

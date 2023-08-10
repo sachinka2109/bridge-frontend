@@ -1,5 +1,5 @@
-import React from 'react'
-import { styled, alpha } from '@mui/material/styles';
+import React, { useRef, useState } from 'react'
+import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +15,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import AppsIcon from '@mui/icons-material/Apps';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { useNavigate } from 'react-router-dom';
+import GridViewIcon from '@mui/icons-material/GridView';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -48,9 +48,9 @@ const Search = styled('div')(({ theme }) => ({
     width: '100%',
   }));
 
-function Header() {
-    const navigate = useNavigate();
+function Header(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [hide,setHide] = useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -58,10 +58,10 @@ function Header() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const handleLogout = () => {
-        sessionStorage.removeItem('id')
-        navigate('/signin')
-    } 
+    let showListView = () => {
+        setHide(!hide);
+    }
+
   return (
     <div>
         <Box sx={{ flexGrow: 1 }} >
@@ -73,8 +73,9 @@ function Header() {
                         color="inherit"
                         aria-label="open drawer"
                         sx={{ mr: 1 }}
+                        onClick={props.handleOpen}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography
                         variant="h6"
@@ -102,8 +103,8 @@ function Header() {
                         <IconButton size="large"  color="inherit">
                             <RefreshIcon />
                         </IconButton>
-                        <IconButton size="large"  color="inherit" sx={{display:{xs:'none',md:'flex'}}}>
-                            <ViewStreamIcon />
+                        <IconButton size="large"  color="inherit" sx={{display:{xs:'none',md:'flex'}}} onClick={showListView}>
+                            {hide? <ViewStreamIcon /> : <GridViewIcon />}
                         </IconButton>
                         <IconButton size="large"  color="inherit">
                             <SettingsIcon />
@@ -132,7 +133,6 @@ function Header() {
                             'aria-labelledby': 'basic-button',
                             }}
                             >
-                            
                             <MenuItem onClick={handleClose}>Sign Out</MenuItem>
                         </Menu>
                     </Box>

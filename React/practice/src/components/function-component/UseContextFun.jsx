@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { createContext } from 'react'
 
-function UseContextFun() {
-  return (
-    <div>UseContextFun</div>
-  )
-}
+const ColorContext =  createContext();
+const ColorProvider = ColorContext.Provider
+const ColorConsumer = ColorContext.Consumer
 
-export default UseContextFun
+export {ColorProvider,ColorConsumer}
