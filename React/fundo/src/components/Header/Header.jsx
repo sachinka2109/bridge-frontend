@@ -24,7 +24,7 @@ const Search = styled('div')(({ theme }) => ({
     '&:focus': {
         backgroundColor:'white',
     },
-    width: '100%', // Take the whole width
+    width: '100%', 
   }));
   
   const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -50,7 +50,7 @@ const Search = styled('div')(({ theme }) => ({
 
 function Header(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [hide,setHide] = useState(false);
+    const [hide,setHide] = useState(true);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -60,12 +60,13 @@ function Header(props) {
     };
     let showListView = () => {
         setHide(!hide);
+        props.toggleView();
     }
 
   return (
     <div>
         <Box sx={{ flexGrow: 1 }} >
-            <AppBar position="static" >
+            <AppBar  elevation={0} sx={{position:"static",borderBottom:'1px solid #dadce0'}}>
                 <Toolbar sx={{ display: 'flex', alignItems: 'center',backgroundColor:'white',color:'#5f6368'}}>
                     <IconButton
                         size="large"

@@ -16,7 +16,7 @@ import './LeftDrawer.css';
 
 function LeftDrawer(props) {
   const [state, setState] = React.useState({
-    left: true,
+    left: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -55,18 +55,24 @@ function LeftDrawer(props) {
   return (
     <div>  
       <div className='drawer-container'>
-        <Header handleOpen={handleOpen}></Header> 
-        <Drawer
-          anchor={'left'}
-          open={state['left']}
-          onClose={toggleDrawer(false)}
-          variant="persistent" 
-          PaperProps={{
-            sx:{position:'absolute',top:'65px',paddingLeft:'8px'}
-          }}
-        >
-          {list('left')}
-        </Drawer>
+        <Header handleOpen={handleOpen} toggleView={props.onButtonClick}></Header> 
+        <Box>
+          <Drawer
+            anchor={'left'}
+            open={state['left']}
+            onClose={toggleDrawer(false)}
+            variant="persistent" 
+            PaperProps={{
+              sx:{
+                position:'fixed',
+                top:'65px',
+                paddingLeft:'8px'
+              }
+            }}
+          >
+            {list('left')}
+          </Drawer>
+        </Box>
       </div>
     </div>
   );

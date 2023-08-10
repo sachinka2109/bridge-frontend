@@ -15,8 +15,11 @@ import PushPinIcon from '@mui/icons-material/PushPin';
 const card = (
   <React.Fragment>
     <CardContent>
-      <Typography sx={{ fontSize: 16,textAlign:'left'}} gutterBottom>
+      <Typography sx={{ fontSize: 16,textAlign:'left',display:'flex',justifyContent:'space-between',alignItems:'center'}} gutterBottom>
         Title
+        <IconButton>
+          <PushPinIcon/>
+        </IconButton>
       </Typography>
       <Typography sx={{fontSize:14,textAlign:'left' }} >
         well meaning and kindly.
@@ -55,9 +58,6 @@ function TakeNoteThreeList() {
         <Card variant="outlined" sx={{borderRadius:'10px'}}>
           <Box sx={{position:'absolute',left:'-10px',top:'-5px'}}>
             <CheckCircleIcon></CheckCircleIcon>
-          </Box>
-          <Box item sx={{display:'flex',flexGrow:1,margin:'10px',justifyContent:'flex-end'}}>
-            <PushPinIcon/>
           </Box>
           {card}
         </Card>

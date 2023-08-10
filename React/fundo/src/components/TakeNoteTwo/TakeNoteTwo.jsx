@@ -21,7 +21,7 @@ import { useState } from 'react';
 function TakeNoteTwo() {
   let [hide,setHide] = useState(false);
   let hideTakeNoteTwo = () => {
-    setHide(true);
+    setHide(!hide);
   }
   return (
     <div>
@@ -38,14 +38,6 @@ function TakeNoteTwo() {
                 <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center'}}>
                     <TextField id="notes" variant="standard" placeholder='Take a note...' fullWidth style={{ outline: 'none' }}   InputProps={{disableUnderline: true}}
                     />
-                    <>                  
-                        <IconButton>
-                        <CheckBoxIcon />
-                        </IconButton>
-                        <IconButton>
-                        <InsertPhotoIcon />
-                        </IconButton>
-                    </>
                 </Typography>
                 <Typography variant="body1" color="initial" sx={{margin:0,display:'flex',alignItems:'center'}}>
                     <Grid container sx={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
