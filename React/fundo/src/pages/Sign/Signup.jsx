@@ -113,7 +113,7 @@ function Signup() {
                             <Grid item xs={12} md={10}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} md={6}>
-                                        <TextField id="outlined-basic" label="First name" variant="outlined" 
+                                        <TextField id="firstname" label="First name" variant="outlined" 
                                         fullWidth
                                         value={details.fname} onChange={handleDetails}
                                         name='firstName'
@@ -122,7 +122,7 @@ function Signup() {
                                         />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
-                                        <TextField id="outlined-basic" label="Last name" variant="outlined" 
+                                        <TextField id="lastname" label="Last name" variant="outlined" 
                                         fullWidth
                                         value={details.lname} onChange={handleDetails}
                                         name='lastName'
@@ -132,7 +132,7 @@ function Signup() {
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={12} marginTop={'20px'}>
-                                    <TextField id="outlined-basic" label="Username" variant="outlined" 
+                                    <TextField id="email" label="Username" variant="outlined" 
                                     fullWidth
                                     value={details.email} onChange={handleDetails}
                                     name='email'
@@ -143,7 +143,7 @@ function Signup() {
                                 </Grid>
                                 <Grid container spacing={2} style={{display:'flex',alignItems:'center',marginTop:'20px'}}>
                                     <Grid item xs={12} md={6}>
-                                        <TextField id="outlined-basic" label="Password" variant="outlined" 
+                                        <TextField id="password" label="Password" variant="outlined" 
                                         fullWidth
                                         value={details.password} onChange={handleDetails}
                                         type={showPassword? 'text': 'password'}
@@ -153,7 +153,7 @@ function Signup() {
                                         />
                                     </Grid>
                                     <Grid item xs={12} md={6} sx={{display:'flex',alignItems:'center'}}>
-                                        <TextField id="outlined-basic" label="Confirm" variant="outlined" 
+                                        <TextField id="confirmPassword" label="Confirm" variant="outlined" 
                                         fullWidth
                                         type={showPassword? 'text': 'password'}
                                         name='confirmPassword'
@@ -164,7 +164,7 @@ function Signup() {
                                     <Grid item style={{color:'rgba(0, 0, 0, 0.6)',paddingTop:'0'}}>
                                         <h5>Use 8 or more characters with a mix of letters,numbers & symbols</h5>
                                     </Grid>
-                                    <Grid item justifyContent={'flex-start'} xs={6} style={{paddingTop:'0',textAlign:'left'}}>
+                                    <Grid item justifyContent={'flex-start'} xs={10} style={{paddingTop:'0',textAlign:'left'}}>
                                         <FormControlLabel
                                         control={<Checkbox size='medium' checked={showPassword} onChange={handlePasswordVisibility}/>}
                                         label="Show password"
@@ -173,7 +173,7 @@ function Signup() {
                                 </Grid>
                                 <Grid container style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'50px'}}>
                                     <Grid item xs={12} md={12} style={{display:'flex',justifyContent:'space-between'}}>
-                                        <Link to='/signin'>
+                                        <Link to='/'>
                                             <Button variant='text' style={{ textTransform: 'none',fontSize:'16px'}}>Sign in instead</Button>
                                         </Link>
                                         <Button variant='contained' type='submit'>

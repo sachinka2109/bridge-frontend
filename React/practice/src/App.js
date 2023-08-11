@@ -1,60 +1,37 @@
 import './App.css';
-// import ClassCounter from './components/class-component/ClassCounter';
-// import FunctionCounter from './components/function-component/FunctionCounter';
-// import CreateElement from './components/class-component/CreateElemet';
-// import FunctionProps from './components/function-component/FunctionProps';
-// import StateFunction from './components/function-component/StateFunction';
-// import StateClass from './components/class-component/StateClass';
-// import ParentClass from './components/class-component/ParentClass';
-// import ParentFunction from './components/function-component/ParentFunction';
-// import ParentFun from './components/function-component/ParentFun';
-// import StateFunctionArray from './components/function-component/StateFunctionArray';
-import ComponentC from './components/class-component/ComponentC';
-import { UserProvider } from './components/class-component/UseContextClass';
-import { ColorProvider } from './components/function-component/UseContextFun';
-import ComponentCFun from './components/function-component/ComponentCFun';
-import RefClass from './components/class-component/RefClass';
-import RefWithClass from './components/class-component/RefWithClass';
-import UseRefFun from './components/function-component/UseRefFun';
-import UseRefButton from './components/function-component/UseRefButton';
-import HigherOrderClass from './components/class-component/HigherOrderClass';
-import UpdatedComponent from './components/class-component/HOCClass';
-import HoverClass from './components/class-component/HoverClass';
-import CounterClass from './components/class-component/CounterClass';
+import MyCounter from './components/class-component/Render-props/MyCounter';
+import RenderCounterClass from './components/class-component/Render-props/RenderCounterClass'
+import RenderHoverClass from './components/class-component/Render-props/RenderHoverClass';
+import RenderNameClass from './components/class-component/Render-props/RenderNameClass';
+import UseReducerExample from './components/function-component/UseReducer/UseReducerExample';
+import UseReducerFun from './components/function-component/UseReducer/UseReducerFun';
+import UseReducerObject from './components/function-component/UseReducer/UseReducerObject';
+import UseRefButton from './components/function-component/UseRef/UseRefButton';
+import UseRefCounter from './components/function-component/UseRef/UseRefCounter';
+import UseRefFun from './components/function-component/UseRef/UseRefFun';
+import UseRefParentFun from './components/function-component/UseRef/UseRefParentFun';
 
 function App() {
   return (
     <div className="App">
       <div className="ClassComponents">
-        {/* <ClassCounter/> */}
-        {/* <CreateElement/> */}
-        {/* <StateClass hobby='Music'/> */}
-        <br />
-        {/* <ParentClass /> */}
-        {/* <UserProvider value={{name:'sachin',nickname:'inflame21'}} >
-          <ComponentC />
-        </UserProvider> */}
-        {/* <RefClass/>
-        <RefWithClass /> */}
-        {/* <HoverClass />
-        <CounterClass name='Sachin'/> */}
+        {/* <RenderCounterClass />
+        <RenderHoverClass/> */}
+        {/* <RenderNameClass render={(isLoggedIn) => isLoggedIn ? 'Sachin': 'Guest'} /> */}
+        {/* <MyCounter render ={(count,incrementCounter) => <RenderCounterClass count={count} incrementCounter={incrementCounter}/> } />
+        <MyCounter render ={(count,incrementCounter) => <RenderHoverClass count={count} incrementCounter={incrementCounter}/> } /> */}
+        {/* <MyCounter>{(count,incrementCounter) => <RenderCounterClass count={count} incrementCounter={incrementCounter}/>}</MyCounter> */}
+      
       </div>
       <hr />
       <div className="FunctionComponents">
-        {/* <FunctionCounter/> */}
-        {/* <FunctionProps name="Sachin Kaythamwar"/> */}
-        {/* <FunctionProps name='Jason' movieName="Friday the 13th"> */}
-          {/* <h2>I am a serial killer</h2> */}
-        {/* </FunctionProps> */}
-        {/* <StateFunction/> */}
-        <br />
-        {/* <ParentFunction/> */}
-        {/* <ParentFun /> */}
-        {/* <StateFunctionArray/> */}  
-        {/* <ColorProvider value={'red'}>
-          <ComponentCFun/>      
-        </ColorProvider> */}
-        {/* <UseRefButton/> */}
+          {/* <UseRefButton />
+          <UseRefFun />
+          <UseRefCounter /> */}
+          {/* <UseRefParentFun /> */}
+          <UseReducerFun />
+          <UseReducerExample />
+          <UseReducerObject />
       </div>
     </div>
   );

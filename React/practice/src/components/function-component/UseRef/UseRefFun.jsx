@@ -11,7 +11,7 @@ const UseRefFun = ({setFocusInput}) => {
 //   useImperativeHandle(ref, () => ({
 //     focusInput: focusInput
 //   }));
-setFocusInput(focusInput);
+// setFocusInput(focusInput);
 
   return (
     <div>

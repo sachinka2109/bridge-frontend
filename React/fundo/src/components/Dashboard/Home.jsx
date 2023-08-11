@@ -17,6 +17,7 @@ function Home() {
   const onChangeNote = () => {
     changeNote(!note);
   }
+  
   return (
     <div>
       <Box>
@@ -24,7 +25,7 @@ function Home() {
       </Box>
       <Box marginTop={'20px'}>
         {
-          note? <TakeNoteTwo></TakeNoteTwo> :<TakeNoteOne></TakeNoteOne>
+          note? <TakeNoteTwo></TakeNoteTwo>:<TakeNoteOne></TakeNoteOne>
         } 
       </Box> 
       {/* <Notes></Notes> */}
