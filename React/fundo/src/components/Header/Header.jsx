@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -63,6 +63,10 @@ function Header(props) {
         props.toggleView();
     }
 
+    const openSearchBar = () => {
+
+    }
+
   return (
     <div>
         <Box sx={{ flexGrow: 1 }} >
@@ -88,7 +92,7 @@ function Header(props) {
                         <img className="gb_Rc gb_Rd" src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x " alt="" aria-hidden="true" role="presentation" style={{width:'40px',height:'40px'}}></img>
                         Keep
                     </Typography>
-                    <Search sx={{flexGrow:1,display:{xs:'none',lg:'flex'},justifyContent:'flex-start',alignItems:'center',mx:5,borderRadius:'10px',padding:'5px'}}>
+                    <Search sx={{flexGrow:1,display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',mx:5,borderRadius:'10px',padding:'5px'}}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -98,7 +102,7 @@ function Header(props) {
                         />
                     </Search>
                     <Box sx={{ display: 'flex',justifyContent:'flex-end'}}>
-                        <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',lg:'none'}}}>
+                        <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',lg:'none'}}} onClick={openSearchBar}>
                             <SearchIcon />
                         </IconButton>
                         <IconButton size="large"  color="inherit">

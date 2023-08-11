@@ -9,28 +9,30 @@ import {useState} from 'react';
 
 function Home() {
   const [viewList,changeViewList] = useState(false);
-  const [note,changeNote] = useState(true);
+  const [note,changeNote] = useState(false);
   const onChangeView = () => {
     changeViewList(!viewList);
   }
 
   const onChangeNote = () => {
     changeNote(!note);
-  }
+  } 
   
   return (
     <div>
       <Box>
         <LeftDrawer onButtonClick={onChangeView}/>
       </Box>
-      <Box marginTop={'20px'}>
-        {
-          note? <TakeNoteTwo></TakeNoteTwo>:<TakeNoteOne></TakeNoteOne>
-        } 
-      </Box> 
-      {/* <Notes></Notes> */}
-      <Box marginTop={'20px'}>
-        {viewList ? <TakeNoteThree></TakeNoteThree> : <TakeNoteThreeList></TakeNoteThreeList>}
+      <Box marginLeft={'65px'}>
+        <Box marginTop={'20px'}>
+          {
+            note? <TakeNoteTwo></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
+          } 
+        </Box> 
+        {/* <Notes></Notes> */}
+        <Box sx={{marginTop:'20px'}}>
+          {viewList ? <TakeNoteThree></TakeNoteThree> : <TakeNoteThreeList></TakeNoteThreeList>}
+        </Box>
       </Box>
     </div>
   )

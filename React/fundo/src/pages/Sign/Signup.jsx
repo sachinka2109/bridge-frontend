@@ -1,7 +1,6 @@
 import React,{useState} from 'react'
 import { Grid,TextField,Button,Container, FormControlLabel, Checkbox} from '@mui/material'
 // import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import './Signup.css'
 import Google from '../../images/google-img.png';
 // import axios from 'axios';
 import { signUp } from '../../services/userFunction';
@@ -102,7 +101,7 @@ function Signup() {
     <div>
         <form onSubmit={handleSubmit}>
             <Container maxWidth="lg">
-                <Grid container style={{padding:'30px',border:'1px solid #dadce0',margin:'50px 0',borderRadius:'8px',alignItems:'center'}}>
+                <Grid container sx={{padding:'30px',border:'1px solid #dadce0',margin:'50px 0',borderRadius:'8px',alignItems:'center'}}>
                     <Grid item xs={12} md={8}>
                         <Grid container justifyContent="flex-start" alignItems="flex-start">
                             <Grid item xs={12} textAlign={'left'}>

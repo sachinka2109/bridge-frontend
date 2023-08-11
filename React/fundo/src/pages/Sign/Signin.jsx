@@ -1,7 +1,5 @@
 import React,{useState} from 'react'
 import { Grid,TextField,Button,Container} from '@mui/material'
-// import './Signin.css'
-// import axios from 'axios';
 import { signIn } from '../../services/userFunction';
 import { Link } from 'react-router-dom';
 

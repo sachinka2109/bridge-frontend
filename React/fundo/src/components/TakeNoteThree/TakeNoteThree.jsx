@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
@@ -53,16 +53,18 @@ const card = (
 
 function TakeNoteThree() {
   return (
-    <Grid container sx={{display:'flex',justifyContent:'center'}}>
-      <Grid item sx={{position:'relative',minWidth:'300px'}}>
-        <Card variant="outlined" sx={{borderRadius:'10px'}}>
-          <Box sx={{position:'absolute',left:'-10px',top:'-5px'}}>
-            <CheckCircleIcon></CheckCircleIcon>
-          </Box>
-          {card}
-        </Card>
+    <Container>
+      <Grid container sx={{display:'flex',justifyContent:'flex-start',marginLeft:'20px'}}>
+        <Grid item sx={{position:'relative',minWidth:'300px'}}>
+          <Card variant="outlined" sx={{borderRadius:'10px'}}>
+            <Box sx={{position:'absolute',left:'-10px',top:'-5px'}}>
+              <CheckCircleIcon></CheckCircleIcon>
+            </Box>
+            {card}
+          </Card>
+        </Grid>
       </Grid>
-    </Grid>
+    </Container>
   )
 }
 
