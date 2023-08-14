@@ -20,7 +20,7 @@ const UpdatedComponent = OriginalComponent => {
             return <OriginalComponent 
                 count={this.state.count} 
                 incrementCounter={this.incrementCounter}
-                {... this.props}
+                {...this.props}
             />
         }
     }

@@ -1,4 +1,4 @@
-import React, { useRef, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef} from 'react';
 
 const UseRefFun = ({setFocusInput}) => {
   const myInputRef = useRef();

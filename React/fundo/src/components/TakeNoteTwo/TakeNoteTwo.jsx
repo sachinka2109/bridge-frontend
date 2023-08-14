@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import PushPinIcon from '@mui/icons-material/PushPin';
@@ -16,6 +16,7 @@ import RedoIcon from '@mui/icons-material/Redo';
 import Button from '@mui/material/Button';
 
 function TakeNoteTwo(props) {
+  const inputField = useRef();
   return (
     <div>
       <Grid container marginTop={'20px'} sx={{display:'flex',justifyContent:'center'}}>
@@ -31,6 +32,7 @@ function TakeNoteTwo(props) {
                 <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center'}}>
                     <TextField id="notes" variant="standard" placeholder='Take a note...' fullWidth style={{ outline: 'none' }} 
                     InputProps={{disableUnderline: true}}
+                    ref={inputField}
                     />
                 </Typography>
                 <Typography variant="body1" color="initial" sx={{margin:0,display:'flex',alignItems:'center'}}>

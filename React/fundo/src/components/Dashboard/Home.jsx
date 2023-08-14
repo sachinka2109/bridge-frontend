@@ -17,6 +17,12 @@ function Home() {
   const onChangeNote = () => {
     changeNote(!note);
   } 
+
+  const focusInput = (e) => {
+    if(onChangeNote) {
+      e.target.current.focus();
+    }
+  }
   
   return (
     <div>
@@ -26,7 +32,7 @@ function Home() {
       <Box marginLeft={'65px'}>
         <Box marginTop={'20px'}>
           {
-            note? <TakeNoteTwo></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
+            note? <TakeNoteTwo onFocus={focusInput}></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
           } 
         </Box> 
         {/* <Notes></Notes> */}
