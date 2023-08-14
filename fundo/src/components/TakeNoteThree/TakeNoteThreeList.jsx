@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Box, Container, Grid, Typography } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -12,29 +12,36 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import ColorPalette from '../ColorPalette/ColorPalette';
 
-const card = (
-  <React.Fragment>
-    
-  </React.Fragment>
-);
+// const card = (
+//   <React.Fragment>
+ 
+//   </React.Fragment>
+// );
 
 
 
-function TakeNoteThree({data}) {
-  {data.map((item,index) => (
-    console.log(item)
-  ))}
+function TakeNoteThreeList() {
+  const[notes,setNotes] = useState({
+    title:'',
+    description:'',
+    color:'#ffff',
+    isArchived:false,
+    isDeleted:false
+  })
+  const handleSetNotes = (updatedNotes) => {
+    setNotes(updatedNotes);
+  };
   return (
-    <Container>
-      <Grid container sx={{display:'flex',justifyContent:'flex-start',marginLeft:'20px'}}>
-        <Grid item sx={{position:'relative',minWidth:'300px'}}>
-          <Card variant="outlined" sx={{borderRadius:'10px'}}>
+    <Container maxWidth='sm'>
+      <Grid container sx={{display:'flex',justifyContent:'flex-start'}}>
+        <Grid item sx={{position:'relative',width:'550px'}} >
+          <Card variant="outlined" sx={{borderRadius:'10px',backgroundColor:notes.color}}>
             <Box sx={{position:'absolute',left:'-10px',top:'-5px'}}>
               <CheckCircleIcon></CheckCircleIcon>
             </Box>
             <CardContent>
               <Typography sx={{ fontSize: 18,textAlign:'left',display:'flex',justifyContent:'space-between',alignItems:'center'}} gutterBottom>
-
+                Title
                 <IconButton>
                   <PushPinIcon/>
                 </IconButton>
@@ -45,7 +52,7 @@ function TakeNoteThree({data}) {
             </CardContent>
             <CardActions sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
               <Grid container sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
-                <Grid item sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
+                <Grid item sx={{display:'flex',flexBasis:'250px',justifyContent:'space-between'}}>
                   <IconButton size="small">
                   <AddAlertIcon fontSize='12px'/>
                   </IconButton>
@@ -55,7 +62,7 @@ function TakeNoteThree({data}) {
                   {/* <IconButton size="small">
                   <ColorLensIcon fontSize='12px'/>
                   </IconButton> */}
-                  <ColorPalette fontSize='12px'/>
+                  <ColorPalette fontSize='12px' action={'edit'} setNotes={setNotes}/>
                   <IconButton size="small">
                   <ArchiveIcon fontSize='12px'/>
                   </IconButton>
@@ -72,4 +79,4 @@ function TakeNoteThree({data}) {
   )
 }
 
-export default TakeNoteThree
+export default TakeNoteThreeList
