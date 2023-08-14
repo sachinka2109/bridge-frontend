@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,6 +15,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import AppsIcon from '@mui/icons-material/Apps';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import GridViewIcon from '@mui/icons-material/GridView';
+import { Navigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -23,7 +25,7 @@ const Search = styled('div')(({ theme }) => ({
     '&:focus': {
         backgroundColor:'white',
     },
-    width: '100%', // Take the whole width
+    width: '100%', 
   }));
   
   const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -49,6 +51,7 @@ const Search = styled('div')(({ theme }) => ({
 
 function Header(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [hide,setHide] = useState(true);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -56,11 +59,24 @@ function Header(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    let showListView = () => {
+        setHide(!hide);
+        props.toggleView();
+    }
+
+    let onSignOut = () => {
+        localStorage.removeItem('token');
+        return <Navigate to={'/'} />
+    }
+
+    const openSearchBar = () => {
+        
+    }
 
   return (
     <div>
         <Box sx={{ flexGrow: 1 }} >
-            <AppBar position="static" >
+            <AppBar  elevation={0} sx={{position:"static",borderBottom:'1px solid #dadce0'}}>
                 <Toolbar sx={{ display: 'flex', alignItems: 'center',backgroundColor:'white',color:'#5f6368'}}>
                     <IconButton
                         size="large"
@@ -82,7 +98,7 @@ function Header(props) {
                         <img className="gb_Rc gb_Rd" src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x " alt="" aria-hidden="true" role="presentation" style={{width:'40px',height:'40px'}}></img>
                         Keep
                     </Typography>
-                    <Search sx={{flexGrow:1,display:{xs:'none',lg:'flex'},justifyContent:'flex-start',alignItems:'center',mx:5,borderRadius:'10px',padding:'5px'}}>
+                    <Search sx={{flexGrow:1,display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',mx:5,borderRadius:'10px',padding:'5px'}}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -92,14 +108,14 @@ function Header(props) {
                         />
                     </Search>
                     <Box sx={{ display: 'flex',justifyContent:'flex-end'}}>
-                        <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',lg:'none'}}}>
+                        <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',lg:'none'}}} onClick={openSearchBar}>
                             <SearchIcon />
                         </IconButton>
                         <IconButton size="large"  color="inherit">
                             <RefreshIcon />
                         </IconButton>
-                        <IconButton size="large"  color="inherit" sx={{display:{xs:'none',md:'flex'}}}>
-                            <ViewStreamIcon />
+                        <IconButton size="large"  color="inherit" sx={{display:{xs:'none',md:'flex'}}} onClick={showListView}>
+                            {hide? <ViewStreamIcon /> : <GridViewIcon />}
                         </IconButton>
                         <IconButton size="large"  color="inherit">
                             <SettingsIcon />
@@ -128,7 +144,7 @@ function Header(props) {
                             'aria-labelledby': 'basic-button',
                             }}
                             >
-                            <MenuItem onClick={handleClose}>Sign Out</MenuItem>
+                            <MenuItem onClick={onSignOut}>Sign Out</MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>

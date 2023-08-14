@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -13,10 +12,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import Drawer from '@mui/material/Drawer';
 import Header from '../Header/Header';
 import './LeftDrawer.css';
+import { IconButton } from '@mui/material';
 
 function LeftDrawer(props) {
   const [state, setState] = React.useState({
-    left: true,
+    left: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -29,7 +29,7 @@ function LeftDrawer(props) {
 
   const list = (anchor) => (
     <Box
-      sx={{ width:'280px'}}
+      sx={{width: state.left ? '280px' : '65px'}}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -38,9 +38,11 @@ function LeftDrawer(props) {
         {[{text:'Notes',icon: <LightbulbIcon/>},{text:'Remainder',icon: <NotificationsIcon/>},{text:'Edit Label',icon: <EditIcon/>},{text:'Archive',icon: <ArchiveIcon/>},{text:'Trash',icon: <DeleteIcon/>}]
         .map(({text,icon}, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={text} />
+            <ListItemButton onMouseOver={() => setState({left: true})}>
+              <IconButton size='large'>
+                {icon}
+              </IconButton>
+              <ListItemText primary={text} sx={{marginLeft:'20px'}}/>
             </ListItemButton>
           </ListItem>
         ))}
@@ -55,18 +57,23 @@ function LeftDrawer(props) {
   return (
     <div>  
       <div className='drawer-container'>
-        <Header handleOpen={handleOpen}></Header> 
-        <Drawer
-          anchor={'left'}
-          open={state['left']}
-          onClose={toggleDrawer(false)}
-          variant="persistent" 
-          PaperProps={{
-            sx:{position:'absolute',top:'65px',paddingLeft:'8px'}
-          }}
-        >
-          {list('left')}
-        </Drawer>
+        <Header handleOpen={handleOpen} toggleView={props.onButtonClick}></Header> 
+        <Box onMouseLeave={() => setState({left: false})}>
+          <Drawer
+            anchor={'left'}
+            open={state['left']}
+            onClose={toggleDrawer(false)}
+            variant="permanent" 
+            PaperProps={{
+              sx:{
+                top:'65px',
+                border:'none'
+              }
+            }}
+          >
+            {list('left')}
+          </Drawer>
+        </Box>
       </div>
     </div>
   );
