@@ -34,71 +34,69 @@ function Notes() {
 
 
   return (
-    <div>
-      <Grid marginTop={'20px'} sx={{display:'flex',justifyContent:'center'}}>
-        <Container maxWidth="sm">          
-          <form>
-            <Paper elevation={3} style={{ border: 'none',padding:'5px 10px 5px 10px',borderRadius:'10px'}}>
-              {show && (
-                <Typography variant="body1" color="initial" sx={{margin:0,display:'flex',alignItems:'flex-start',justifyContent:'space-between'}} >
-                  <TextField variant='standard' id="title" placeholder='Title' fullWidth style={{ outline: 'none' }}   InputProps={{disableUnderline: true}}/>
-                  <IconButton aria-label="pin">
-                    <PushPinIcon/>
+    <Grid marginTop={'20px'} sx={{display:'flex',justifyContent:'center'}}>
+      <Container maxWidth="sm">          
+        <form>
+          <Paper elevation={3} style={{ border: 'none',padding:'5px 10px 5px 10px',borderRadius:'10px'}}>
+            {show && (
+              <Typography variant="body1" color="initial" sx={{margin:0,display:'flex',alignItems:'flex-start',justifyContent:'space-between'}} >
+                <TextField variant='standard' id="title" placeholder='Title' fullWidth style={{ outline: 'none' }}   InputProps={{disableUnderline: true}}/>
+                <IconButton aria-label="pin">
+                  <PushPinIcon/>
+                </IconButton>
+              </Typography >
+            )}
+            <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center'}}>
+              <TextField id="notes" variant="standard" placeholder='Take a note...' fullWidth style={{ outline: 'none' }}   InputProps={{disableUnderline: true}} onFocus={showOptions}/>
+              {!show &&(
+                <>                  
+                  <IconButton>
+                    <CheckBoxIcon />
                   </IconButton>
-                </Typography >
-              )}
-              <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center'}}>
-                <TextField id="notes" variant="standard" placeholder='Take a note...' fullWidth style={{ outline: 'none' }}   InputProps={{disableUnderline: true}} onFocus={showOptions}/>
-                {!show &&(
-                  <>                  
-                    <IconButton>
-                      <CheckBoxIcon />
+                  <IconButton>
+                    <InsertPhotoIcon />
+                  </IconButton>
+                </>
+              )} 
+            </Typography>
+            {show && (
+              <Typography variant="body1" color="initial" sx={{margin:0,display:'flex',alignItems:'center'}}>
+                <Grid container sx={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                  <Grid item sx={{display:'flex',flexBasis:'350px',justifyContent:'space-between'}}>
+                    <IconButton size="small">
+                      <AddAlertIcon fontSize='12px'/>
                     </IconButton>
-                    <IconButton>
-                      <InsertPhotoIcon />
+                    <IconButton size="small"> 
+                      <PersonAddAlt1Icon fontSize='12px'/>
                     </IconButton>
-                  </>
-                )} 
-              </Typography>
-              {show && (
-                <Typography variant="body1" color="initial" sx={{margin:0,display:'flex',alignItems:'center'}}>
-                  <Grid container sx={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                    <Grid item sx={{display:'flex',flexBasis:'350px',justifyContent:'space-between'}}>
-                      <IconButton size="small">
-                        <AddAlertIcon fontSize='12px'/>
-                      </IconButton>
-                      <IconButton size="small"> 
-                        <PersonAddAlt1Icon fontSize='12px'/>
-                      </IconButton>
-                      <IconButton size="small">
-                        <ColorLensIcon fontSize='12px'/>
-                      </IconButton>
-                      <IconButton size="small">
-                        <ArchiveIcon fontSize='12px'/>
-                      </IconButton>
-                      <IconButton size="small">
-                        <MoreVertIcon fontSize='12px'/>
-                      </IconButton>
-                      <IconButton size="small">
-                        <UndoIcon fontSize='12px'/>
-                      </IconButton>
-                      <IconButton size="small">
-                        <RedoIcon fontSize='12px'/>
-                      </IconButton>
-                    </Grid>
-                    <Grid item sx={{display:'flex',alignSelf:'flex-end'}}>
-                      <Button variant="text" sx={{color:'black'}} onClick={hideOptions}>
-                        Close
-                      </Button>
-                    </Grid>
+                    <IconButton size="small">
+                      <ColorLensIcon fontSize='12px'/>
+                    </IconButton>
+                    <IconButton size="small">
+                      <ArchiveIcon fontSize='12px'/>
+                    </IconButton>
+                    <IconButton size="small">
+                      <MoreVertIcon fontSize='12px'/>
+                    </IconButton>
+                    <IconButton size="small">
+                      <UndoIcon fontSize='12px'/>
+                    </IconButton>
+                    <IconButton size="small">
+                      <RedoIcon fontSize='12px'/>
+                    </IconButton>
                   </Grid>
-                </Typography>
-              )}
-            </Paper>
-          </form>
-        </Container>
-      </Grid>
-    </div>
+                  <Grid item sx={{display:'flex',alignSelf:'flex-end'}}>
+                    <Button variant="text" sx={{color:'black'}} onClick={hideOptions}>
+                      Close
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Typography>
+            )}
+          </Paper>
+        </form>
+      </Container>
+    </Grid>
   )
 }
 

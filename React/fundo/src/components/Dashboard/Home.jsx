@@ -6,10 +6,14 @@ import TakeNoteThree from '../TakeNoteThree/TakeNoteThree'
 import { Box } from '@mui/material'
 import TakeNoteThreeList from '../TakeNoteThree/TakeNoteThreeList'
 import {useState} from 'react';
+import { useEffect } from 'react'
+import {getNotes} from '../../services/dataService'
+
 
 function Home() {
   const [viewList,changeViewList] = useState(false);
   const [note,changeNote] = useState(false);
+  const [data,setData] = useState([]);
   const onChangeView = () => {
     changeViewList(!viewList);
   }
@@ -24,23 +28,31 @@ function Home() {
     }
   }
   
+  useEffect(()=> {
+    async function fetchData() {
+      let response = await getNotes();
+      setData(response.data.data.data)
+    }
+    fetchData();
+  },[])
+
   return (
-    <div>
+    <Box>
       <Box>
         <LeftDrawer onButtonClick={onChangeView}/>
       </Box>
       <Box marginLeft={'65px'}>
         <Box marginTop={'20px'}>
           {
-            note? <TakeNoteTwo onFocus={focusInput}></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
+            note? <TakeNoteTwo onFocus={focusInput} onChangeNote={onChangeNote}></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
           } 
         </Box> 
         {/* <Notes></Notes> */}
         <Box sx={{marginTop:'20px'}}>
-          {viewList ? <TakeNoteThree></TakeNoteThree> : <TakeNoteThreeList></TakeNoteThreeList>}
+          {viewList ? <TakeNoteThree data={data}></TakeNoteThree> : <TakeNoteThreeList></TakeNoteThreeList>}
         </Box>
       </Box>
-    </div>
+    </Box>
   )
 }
 

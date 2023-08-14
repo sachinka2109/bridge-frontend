@@ -6,52 +6,15 @@ import Card from '@mui/material/Card';
 import IconButton from '@mui/material/IconButton'
 import AddAlertIcon from '@mui/icons-material/AddAlert';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import ColorLensIcon from '@mui/icons-material/ColorLens';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PushPinIcon from '@mui/icons-material/PushPin';
-
-const card = (
-  <React.Fragment>
-    <CardContent>
-      <Typography sx={{ fontSize: 16,textAlign:'left',display:'flex',justifyContent:'space-between',alignItems:'center'}} gutterBottom>
-        Title
-        <IconButton>
-          <PushPinIcon/>
-        </IconButton>
-      </Typography>
-      <Typography sx={{fontSize:14,textAlign:'left' }} >
-        well meaning and kindly.
-      </Typography>
-    </CardContent>
-    <CardActions sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
-      <Grid container sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
-        <Grid item sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
-          <IconButton size="small">
-          <AddAlertIcon fontSize='12px'/>
-          </IconButton>
-          <IconButton size="small"> 
-          <PersonAddAlt1Icon fontSize='12px'/>
-          </IconButton>
-          <IconButton size="small">
-          <ColorLensIcon fontSize='12px'/>
-          </IconButton>
-          <IconButton size="small">
-          <ArchiveIcon fontSize='12px'/>
-          </IconButton>
-          <IconButton size="small">
-          <MoreVertIcon fontSize='12px'/>
-          </IconButton>
-        </Grid>
-      </Grid>
-    </CardActions>
-  </React.Fragment>
-);
+import ColorPalette from '../ColorPalette/ColorPalette';
 
 
 
-function TakeNoteThree() {
+function TakeNoteThree({data}) {
   return (
     <Container>
       <Grid container sx={{display:'flex',justifyContent:'flex-start',marginLeft:'20px'}}>
@@ -60,7 +23,39 @@ function TakeNoteThree() {
             <Box sx={{position:'absolute',left:'-10px',top:'-5px'}}>
               <CheckCircleIcon></CheckCircleIcon>
             </Box>
-            {card}
+            <CardContent>
+              <Typography sx={{ fontSize: 18,textAlign:'left',display:'flex',justifyContent:'space-between',alignItems:'center'}} gutterBottom>
+                Title
+                <IconButton>
+                  <PushPinIcon/>
+                </IconButton>
+              </Typography>
+              <Typography sx={{fontSize:20,textAlign:'left' }} >
+                well meaning and kindly.
+              </Typography>
+            </CardContent>
+            <CardActions sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
+              <Grid container sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
+                <Grid item sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
+                  <IconButton size="small">
+                  <AddAlertIcon fontSize='12px'/>
+                  </IconButton>
+                  <IconButton size="small"> 
+                  <PersonAddAlt1Icon fontSize='12px'/>
+                  </IconButton>
+                  {/* <IconButton size="small">
+                  <ColorLensIcon fontSize='12px'/>
+                  </IconButton> */}
+                  <ColorPalette fontSize='12px'/>
+                  <IconButton size="small">
+                  <ArchiveIcon fontSize='12px'/>
+                  </IconButton>
+                  <IconButton size="small">
+                  <MoreVertIcon fontSize='12px'/>
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </CardActions>
           </Card>
         </Grid>
       </Grid>
