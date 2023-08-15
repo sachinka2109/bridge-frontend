@@ -55,25 +55,27 @@ function LeftDrawer(props) {
   }
 
   return (
-    <Box className='drawer-container'>
-      <Header handleOpen={handleOpen} toggleView={props.onButtonClick}></Header> 
-      <Box onMouseLeave={() => setState({left: false})}>
-        <Drawer
-          anchor={'left'}
-          open={state['left']}
-          onClose={toggleDrawer('left',false)}
-          variant="permanent" 
-          PaperProps={{
-            sx:{
-              top:'65px',
-              border:'none'
-            }
-          }}
-        >
-          {list('left')}
-        </Drawer>
+    <React.Fragment>
+      <Box className='drawer-container'>
+        <Header handleOpen={handleOpen} toggleView={props.onButtonClick}></Header> 
+        <Box onMouseLeave={() => setState({left: false})}>
+          <Drawer
+            anchor={'left'}
+            open={state['left']}
+            onClose={toggleDrawer('left',false)}
+            variant="permanent" 
+            PaperProps={{
+              sx:{
+                top:'65px',
+                border:'none'
+              }
+            }}
+          >
+            {list('left')}
+          </Drawer>
+        </Box>
       </Box>
-    </Box>
+    </React.Fragment>
   );
 }
 

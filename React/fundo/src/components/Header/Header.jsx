@@ -74,81 +74,83 @@ function Header(props) {
     }
 
   return (
-    <Box sx={{ flexGrow: 1 }} >
-        <AppBar  elevation={0} sx={{position:"static",borderBottom:'1px solid #dadce0'}}>
-            <Toolbar sx={{ display: 'flex', alignItems: 'center',backgroundColor:'white',color:'#5f6368'}}>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    sx={{ mr: 1 }}
-                    onClick={props.handleOpen}
-                >
-                    <MenuIcon/>
-                </IconButton>
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{ display: { xs:'flex',alignItems:'center' },flexGrow:1 }}
-                    width={'15vw'}
-                >
-                    <img className="gb_Rc gb_Rd" src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x " alt="" aria-hidden="true" role="presentation" style={{width:'40px',height:'40px'}}></img>
-                    Keep
-                </Typography>
-                <Search sx={{flexGrow:1,display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',mx:5,borderRadius:'10px',padding:'5px'}}>
-                    <SearchIconWrapper>
-                        <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
-                    />
-                </Search>
-                <Box sx={{ display: 'flex',justifyContent:'flex-end'}}>
-                    <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',lg:'none'}}} onClick={openSearchBar}>
-                        <SearchIcon />
-                    </IconButton>
-                    <IconButton size="large"  color="inherit">
-                        <RefreshIcon />
-                    </IconButton>
-                    <IconButton size="large"  color="inherit" sx={{display:{xs:'none',md:'flex'}}} onClick={showListView}>
-                        {hide? <ViewStreamIcon /> : <GridViewIcon />}
-                    </IconButton>
-                    <IconButton size="large"  color="inherit">
-                        <SettingsIcon />
-                    </IconButton>
-                    <IconButton size="large"  color="inherit">
-                        <AppsIcon />
-                    </IconButton>
+    <React.Fragment>
+        <Box sx={{ flexGrow: 1 }} >
+            <AppBar  elevation={0} sx={{position:"static",borderBottom:'1px solid #dadce0'}}>
+                <Toolbar sx={{ display: 'flex', alignItems: 'center',backgroundColor:'white',color:'#5f6368'}}>
                     <IconButton
-                    size="large"
-                    edge="end"
-                    aria-label="account of current user"
-                    aria-haspopup="true"
-                    color="inherit"
-                    aria-controls={open ? 'basic-menu' : undefined}
-                    aria-expanded={open ? 'true' : undefined}
-                    onClick={handleClick}
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        sx={{ mr: 1 }}
+                        onClick={props.handleOpen}
                     >
-                        <AccountCircle />   
+                        <MenuIcon/>
                     </IconButton>
-                    <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                        }}
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ display: { xs:'flex',alignItems:'center' },flexGrow:1 }}
+                        width={'15vw'}
+                    >
+                        <img className="gb_Rc gb_Rd" src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x " alt="" aria-hidden="true" role="presentation" style={{width:'40px',height:'40px'}}></img>
+                        Keep
+                    </Typography>
+                    <Search sx={{flexGrow:1,display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',mx:5,borderRadius:'10px',padding:'5px'}}>
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                        placeholder="Search…"
+                        inputProps={{ 'aria-label': 'search' }}
+                        />
+                    </Search>
+                    <Box sx={{ display: 'flex',justifyContent:'flex-end'}}>
+                        <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',lg:'none'}}} onClick={openSearchBar}>
+                            <SearchIcon />
+                        </IconButton>
+                        <IconButton size="large"  color="inherit">
+                            <RefreshIcon />
+                        </IconButton>
+                        <IconButton size="large"  color="inherit" sx={{display:{xs:'none',md:'flex'}}} onClick={showListView}>
+                            {hide? <ViewStreamIcon /> : <GridViewIcon />}
+                        </IconButton>
+                        <IconButton size="large"  color="inherit">
+                            <SettingsIcon />
+                        </IconButton>
+                        <IconButton size="large"  color="inherit">
+                            <AppsIcon />
+                        </IconButton>
+                        <IconButton
+                        size="large"
+                        edge="end"
+                        aria-label="account of current user"
+                        aria-haspopup="true"
+                        color="inherit"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
                         >
-                        <MenuItem onClick={onSignOut}>Sign Out</MenuItem>
-                    </Menu>
-                </Box>
-            </Toolbar>
-        </AppBar>
-    </Box>
+                            <AccountCircle />   
+                        </IconButton>
+                        <Menu
+                            id="basic-menu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                            }}
+                            >
+                            <MenuItem onClick={onSignOut}>Sign Out</MenuItem>
+                        </Menu>
+                    </Box>
+                </Toolbar>
+            </AppBar>
+        </Box>
+    </React.Fragment>
   )
 }
 

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React ,{useState}from 'react'
 import { Box, Container, Grid, Typography } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -14,62 +14,65 @@ import ColorPalette from '../ColorPalette/ColorPalette';
 
 
 
-function TakeNoteThreeList() {
-  const[notes,setNotes] = useState({
-    title:'',
-    description:'',
-    color:'#ffff',
-    isArchived:false,
-    isDeleted:false
-  })
-  const handleSetNotes = (updatedNotes) => {
-    setNotes(updatedNotes);
-  };
+function TakeNoteThreeList(props) {
+  // const onChangeState = (e) => {
+  //   props.changeState((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name] : e.target.value
+  //   }))
+  // }
+
+  const updatecolor = () => {
+    props.getData();
+  }
+
   return (
-    <Container maxWidth='sm'>
-      <Grid container sx={{display:'flex',justifyContent:'flex-start'}}>
-        <Grid item sx={{position:'relative',width:'550px'}} >
-          <Card variant="outlined" sx={{borderRadius:'10px',backgroundColor:notes.color}}>
-            <Box sx={{position:'absolute',left:'-10px',top:'-5px'}}>
-              <CheckCircleIcon></CheckCircleIcon>
-            </Box>
-            <CardContent>
-              <Typography sx={{ fontSize: 18,textAlign:'left',display:'flex',justifyContent:'space-between',alignItems:'center'}} gutterBottom>
-                Title
-                <IconButton>
-                  <PushPinIcon/>
-                </IconButton>
-              </Typography>
-              <Typography sx={{fontSize:20,textAlign:'left' }} >
-                well meaning and kindly.
-              </Typography>
-            </CardContent>
-            <CardActions sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
-              <Grid container sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
-                <Grid item sx={{display:'flex',flexBasis:'250px',justifyContent:'space-between'}}>
-                  <IconButton size="small">
-                  <AddAlertIcon fontSize='12px'/>
+    <React.Fragment>
+      <Container maxWidth='sm'>
+        <Grid container sx={{display:'flex',justifyContent:'flex-start',marginTop:'20px'}}>
+          <Grid item sx={{position:'relative',width:'550px'}} >
+            <Card variant="outlined" sx={{borderRadius:'10px',backgroundColor:props.data.color}}>
+              <Box sx={{position:'absolute',left:'-10px',top:'-5px'}}>
+                <CheckCircleIcon></CheckCircleIcon>
+              </Box>
+              <CardContent>
+                <Typography sx={{ fontSize: 18,textAlign:'left',display:'flex',justifyContent:'space-between',alignItems:'center'}} gutterBottom>
+                  {props.data.title}
+                  <IconButton>
+                    <PushPinIcon/>
                   </IconButton>
-                  <IconButton size="small"> 
-                  <PersonAddAlt1Icon fontSize='12px'/>
-                  </IconButton>
-                  {/* <IconButton size="small">
-                  <ColorLensIcon fontSize='12px'/>
-                  </IconButton> */}
-                  <ColorPalette fontSize='12px' action={'edit'} setNotes={setNotes}/>
-                  <IconButton size="small">
-                  <ArchiveIcon fontSize='12px'/>
-                  </IconButton>
-                  <IconButton size="small">
-                  <MoreVertIcon fontSize='12px'/>
-                  </IconButton>
+                </Typography>
+                <Typography sx={{fontSize:20,textAlign:'left' }} >
+                  {props.data.description}
+                </Typography>
+              </CardContent>
+              <CardActions sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
+                <Grid container sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
+                  <Grid item sx={{display:'flex',flexBasis:'250px',justifyContent:'space-between'}}>
+                    <IconButton size="small">
+                    <AddAlertIcon fontSize='12px'/>
+                    </IconButton>
+                    <IconButton size="small"> 
+                    <PersonAddAlt1Icon fontSize='12px'/>
+                    </IconButton>
+                    {/* <IconButton size="small">
+                    <ColorLensIcon fontSize='12px'/>
+                    </IconButton> */}
+                    <ColorPalette fontSize='12px' action={'edit'} Noteid={props.data.id} updatecolor={updatecolor}/>
+                    <IconButton size="small" onClick={props.onArchive}>
+                      <ArchiveIcon fontSize='12px' />
+                    </IconButton>
+                    <IconButton size="small">
+                    <MoreVertIcon fontSize='12px'/>
+                    </IconButton>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </CardActions>
-          </Card>
+              </CardActions>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </React.Fragment>
   )
 }
 

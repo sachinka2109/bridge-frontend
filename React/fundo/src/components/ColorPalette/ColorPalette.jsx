@@ -26,11 +26,11 @@ const handleClick = (newPlacement) => (event) => {
   if(action==="create") {
     setNotes((prevState)=>({...prevState, color:color}))
   } else if(action==="edit") {
-  // let data={noteIdList:[Noteid],color:color}
-    // let response = await updateColor(data);
-    // updatecolor()   
-    // console.log(response);  
-    setNotes((prevState)=>({...prevState, color:color}))
+  let data={noteIdList:[Noteid],color:color}
+    let response = await updateColor(data);
+    updatecolor();
+    console.log(response);  
+    // setNotes((prevState)=>({...prevState, color:color}))
   }
   
  }
@@ -40,25 +40,27 @@ const handleClick = (newPlacement) => (event) => {
  const id = open ? 'simple-popper' : undefined;
 
  return (
-  <Box>
-    <Popper id={id} open={open} anchorEl={anchorEl} placement={placement} transition>
-      {({ TransitionProps }) => (
-        <Fade {...TransitionProps} timeout={350}>
-          <Paper sx={{borderRadius:'10px'}}>
-            <Typography sx={{ p: 2 }}>
-              <Box sx={{p: 1, bgcolor: 'background.paper',display:"flex", alignItems:"center", height:25 }}>
-                {
-                  colors.map((uu,index)=>(<div onClick={()=>selectColor(uu)} key={index} style={{backgroundColor:uu, height:25, width : 25, margin: 2, borderRadius:50 }}></div>))
-                }
-              </Box>
-            </Typography>
-          </Paper>
-        </Fade>
-      )}
-    </Popper>
-    <IconButton size='small' onClick={handleClick('bottom-start')} >
-      <ColorLensIcon fontSize='small'/>
-    </IconButton>
-  </Box>
+  <React.Fragment>
+    <Box>
+      <Popper id={id} open={open} anchorEl={anchorEl} placement={placement} transition>
+        {({ TransitionProps }) => (
+          <Fade {...TransitionProps} timeout={350}>
+            <Paper sx={{borderRadius:'10px'}}>
+              <Typography sx={{ p: 2 }} component={'span'}>
+                <Box sx={{p: 1, bgcolor: 'background.paper',display:"flex", alignItems:"center", height:25 }}>
+                  {
+                    colors.map((uu,index)=>(<div onClick={()=>selectColor(uu)} key={index} style={{backgroundColor:uu, height:25, width : 25, margin: 2, borderRadius:50 }}></div>))
+                  }
+                </Box>
+              </Typography>
+            </Paper>
+          </Fade>
+        )}
+      </Popper>
+      <IconButton size='small' onClick={handleClick('bottom-start')} >
+        <ColorLensIcon fontSize='small'/>
+      </IconButton>
+    </Box>
+  </React.Fragment>
 );
 }
