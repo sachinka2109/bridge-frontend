@@ -15,7 +15,7 @@ function TakeNoteOne(props) {
     <React.Fragment>
       <Container maxWidth='sm'>
         <Paper elevation={3} style={{ border: 'none',padding:'5px 10px 5px 10px',borderRadius:'10px'}}>
-          <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center'}}>
+          <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center'}} component={'div'}>
               <TextField id="notes" variant="standard" placeholder='Take a note...' fullWidth style={{ outline: 'none' }}  InputProps={{disableUnderline: true}} onFocus={openTakeNoteTwo}/>
                 <IconButton>
                 <CheckBoxIcon />

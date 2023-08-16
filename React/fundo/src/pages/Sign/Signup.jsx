@@ -100,7 +100,7 @@ function Signup() {
   return (
     <form onSubmit={handleSubmit}>
         <Container maxWidth="lg">
-            <Grid container sx={{padding:'30px',border:'1px solid #dadce0',margin:'50px 0',borderRadius:'8px',alignItems:'center'}}>
+            <Grid container sx={{padding:{xs:0,sm:'30px'},border:{xs:0,sm:'1px solid #dadce0'},margin:'50px 0',borderRadius:'8px',alignItems:'center'}}>
                 <Grid item xs={12} md={8}>
                     <Grid container justifyContent="flex-start" alignItems="flex-start">
                         <Grid item xs={12} textAlign={'left'}>

@@ -1,4 +1,4 @@
-import React ,{useState}from 'react'
+import React from 'react'
 import { Box, Container, Grid, Typography } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -7,14 +7,16 @@ import IconButton from '@mui/material/IconButton'
 import AddAlertIcon from '@mui/icons-material/AddAlert';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import ArchiveIcon from '@mui/icons-material/Archive';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import ColorPalette from '../ColorPalette/ColorPalette';
-
-
+import MoreOptions from '../MoreOption/MoreOption';
+import UnarchiveIcon from '@mui/icons-material/Unarchive';
+import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function TakeNoteThreeList(props) {
+  const location = window.location.href;
   // const onChangeState = (e) => {
   //   props.changeState((prevState) => ({
   //     ...prevState,
@@ -26,47 +28,62 @@ function TakeNoteThreeList(props) {
     props.getData();
   }
 
+  const restoreItem = (id) => {
+    props.restoreItem(id);
+  }
+
   return (
     <React.Fragment>
       <Container maxWidth='sm'>
         <Grid container sx={{display:'flex',justifyContent:'flex-start',marginTop:'20px'}}>
-          <Grid item sx={{position:'relative',width:'550px'}} >
+          <Grid item sx={{position:'relative',minWidth:{xs:'350px'},width:'550px'}}>
             <Card variant="outlined" sx={{borderRadius:'10px',backgroundColor:props.data.color}}>
               <Box sx={{position:'absolute',left:'-10px',top:'-5px'}}>
                 <CheckCircleIcon></CheckCircleIcon>
               </Box>
               <CardContent>
-                <Typography sx={{ fontSize: 18,textAlign:'left',display:'flex',justifyContent:'space-between',alignItems:'center'}} gutterBottom>
+                <Typography component={'div'} sx={{ fontSize: 18,textAlign:'left',display:'flex',justifyContent:'space-between',alignItems:'center'}} gutterBottom>
                   {props.data.title}
                   <IconButton>
                     <PushPinIcon/>
                   </IconButton>
                 </Typography>
-                <Typography sx={{fontSize:20,textAlign:'left' }} >
+                <Typography sx={{fontSize:20,textAlign:'left' }} component={'div'}>
                   {props.data.description}
                 </Typography>
               </CardContent>
               <CardActions sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
-                <Grid container sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
-                  <Grid item sx={{display:'flex',flexBasis:'250px',justifyContent:'space-between'}}>
-                    <IconButton size="small">
-                    <AddAlertIcon fontSize='12px'/>
-                    </IconButton>
-                    <IconButton size="small"> 
-                    <PersonAddAlt1Icon fontSize='12px'/>
-                    </IconButton>
-                    {/* <IconButton size="small">
-                    <ColorLensIcon fontSize='12px'/>
-                    </IconButton> */}
-                    <ColorPalette fontSize='12px' action={'edit'} Noteid={props.data.id} updatecolor={updatecolor}/>
-                    <IconButton size="small" onClick={props.onArchive}>
-                      <ArchiveIcon fontSize='12px' />
-                    </IconButton>
-                    <IconButton size="small">
-                    <MoreVertIcon fontSize='12px'/>
-                    </IconButton>
+                {location.includes('trash') ? (
+                    <Grid container sx={{display:'flex',flexGrow:1}}>
+                      <Grid item sx={{display:'flex',flexGrow:1}}>
+                        <IconButton size="small">
+                          <DeleteForeverIcon fontSize='12px'/>
+                        </IconButton>
+                        <IconButton size="small"  sx={{marginLeft:'10px'}} onClick={()=> restoreItem(props.data.id)}> 
+                          <RestoreFromTrashIcon fontSize='12px'/>
+                        </IconButton>
+                      </Grid>
+                    </Grid>
+                ): (
+                  <Grid container sx={{display:'flex',flexBasis:'250px',justifyContent:'space-between'}}>
+                    <Grid item sx={{display:'flex',flexGrow:1,justifyContent:'space-between'}}>
+                      <IconButton size="small">
+                      <AddAlertIcon fontSize='12px'/>
+                      </IconButton>
+                      <IconButton size="small"> 
+                      <PersonAddAlt1Icon fontSize='12px'/>
+                      </IconButton>
+                      <ColorPalette fontSize='12px' action={'edit'} noteId={props.data.id} updatecolor={updatecolor}/>
+                      <IconButton size="small" onClick={() => props.onArchive(props.data)}>
+                        {props.data.isArchived? 
+                          ( <UnarchiveIcon fontSize='12px'/>) :
+                          ( <ArchiveIcon fontSize='12px'/>)
+                        }
+                      </IconButton>
+                      <MoreOptions noteId={props.data.id} updateData={props.getData}/>
+                    </Grid>
                   </Grid>
-                </Grid>
+                )}
               </CardActions>
             </Card>
           </Grid>

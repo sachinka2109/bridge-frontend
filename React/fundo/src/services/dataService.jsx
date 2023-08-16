@@ -17,18 +17,18 @@ export let getNotes = async() => {
     return response;
 }
 
+export let updateColor = async(data) => {
+    let response = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/changesColorNotes',data,headerConfig)
+    return response;
+}
+
 export const updateArchive= async(data)=>{
     console.log(data);
     let response = await axios.post("http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes",data,headerConfig)
     return response
 }
 
-export let updateColor = async(data) => {
-    let response = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/changesColorNotes',data,headerConfig)
-    return response;
-}
-
-export const deleteItem= async(data)=>{
+export const deleteItem = async(data)=>{
     let response = await axios.post("http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes",data,headerConfig)
     return response
 }

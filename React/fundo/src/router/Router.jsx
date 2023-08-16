@@ -5,6 +5,9 @@ import Signup from '../pages/Sign/Signup'
 import Home from '../components/Dashboard/Home'
 import AuthRoute from './AuthRoute'
 import ProtectedRoute from './ProtectedRoute'
+import Archive from '../pages/Drawer/Archive'
+import Trash from '../pages/Drawer/Trash'
+import ForgotPassword from '../pages/Sign/ForgotPassword'
 
 function Router() {
     return (
@@ -12,7 +15,10 @@ function Router() {
             <Routes>
                 <Route exact path='/' element={<AuthRoute><Signin/></AuthRoute>}/>
                 <Route path='/signup' element={<AuthRoute><Signup/></AuthRoute>}/>
+                <Route path='/forgotpassword' element={<ForgotPassword/>} />
                 <Route path="/dashboard" element={<ProtectedRoute><Home/></ProtectedRoute>} />
+                <Route path="/archive" element={<ProtectedRoute><Archive/></ProtectedRoute>} />
+                <Route path="/trash" element={<ProtectedRoute><Trash/></ProtectedRoute>} />
                 <Route path='*'>Error</Route>
             </Routes>
         </BrowserRouter>

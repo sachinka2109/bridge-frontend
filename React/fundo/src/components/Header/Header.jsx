@@ -53,6 +53,7 @@ function Header(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [hide,setHide] = useState(true);
     const open = Boolean(anchorEl);
+    const location = window.location.href;
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -91,24 +92,42 @@ function Header(props) {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="div"
-                        sx={{ display: { xs:'flex',alignItems:'center' },flexGrow:1 }}
-                        width={'15vw'}
+                        component={'span'}
+                        sx={{ display: { xs:'flex',alignItems:'center' }}}
+                        width={'13vw'}
                     >
-                        <img className="gb_Rc gb_Rd" src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x " alt="" aria-hidden="true" role="presentation" style={{width:'40px',height:'40px'}}></img>
-                        Keep
+                        {location.includes('dashboard') ? (
+                        <React.Fragment>
+                            <img
+                            className="gb_Rc gb_Rd"
+                            src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
+                            srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x "
+                            alt=""
+                            aria-hidden="true"
+                            role="presentation"
+                            style={{ width: '40px', height: '40px' }}
+                            />
+                            Keep
+                        </React.Fragment>
+                        ) : location.includes('archive') ? (
+                        'Archive'
+                        ) : location.includes('trash') ? (
+                        'Trash'
+                        ) : null}
                     </Typography>
-                    <Search sx={{flexGrow:1,display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',mx:5,borderRadius:'10px',padding:'5px'}}>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                        placeholder="Search…"
-                        inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
+                    <Box sx={{flexGrow:1,marginRight:'10vw'}}>
+                        <Search sx={{flexGrow:1,display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',borderRadius:'10px',padding:'5px'}}>
+                            <SearchIconWrapper>
+                                <SearchIcon />
+                            </SearchIconWrapper>
+                            <StyledInputBase
+                            placeholder="Search…"
+                            inputProps={{ 'aria-label': 'search' }}
+                            />
+                        </Search>
+                    </Box>
                     <Box sx={{ display: 'flex',justifyContent:'flex-end'}}>
-                        <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',lg:'none'}}} onClick={openSearchBar}>
+                        <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',md:'none'}}} onClick={openSearchBar}>
                             <SearchIcon />
                         </IconButton>
                         <IconButton size="large"  color="inherit">

@@ -9,10 +9,10 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import AddAlertIcon from '@mui/icons-material/AddAlert';
 import { deleteItem } from "../../services/dataService";
 
-export default function MoreOptions({noteId,updateData}) {
+export default function Reminder({noteId,updateData}) {
   // console.log(action)
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -27,11 +27,7 @@ export default function MoreOptions({noteId,updateData}) {
 
   //  const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
-  const onDeleteItem = async() => {
-    let data={noteIdList:[noteId],isDeleted:true}
-    await deleteItem(data);
-    updateData();
-  }
+
   return (
     <React.Fragment>
       <Box>
@@ -44,49 +40,76 @@ export default function MoreOptions({noteId,updateData}) {
         >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
-              <Paper sx={{ borderRadius: "10px" }}>
-                <Typography sx={{ p: 2 }} component={"span"}>
+              <Paper sx={{ borderRadius: "4px" }}>
+                <Typography sx={{ py: 2 }} component={"div"}>
                   <Box
                     sx={{
                       bgcolor: "background.paper",
                       display: "flex",
                       alignItems: "center",
-                      height: 150,
+                      height: 306,
+                      width: 302
                     }}
                   >
-                    <List>
+                    <List sx={{width:'100%'}}>
+                      <ListItem disablePadding sx={{textAlign:'left'}} >
+                        <ListItemText primary="Reminder :" 
+                        primaryTypographyProps={{
+                            fontSize: "0.9rem",
+                            p:2
+                        }}
+                        />
+                      </ListItem>
                       <ListItem disablePadding>
-                        <ListItemButton sx={{textAlign:'left'}} onClick={onDeleteItem}>
-                          <ListItemText primary="Delete Note" 
+                        <ListItemButton sx={{textAlign:'left'}}>
+                          <ListItemText primary="Later Today" 
                             primaryTypographyProps={{
-                                fontSize: "0.9rem",
+                                fontSize: "0.8rem", 
                             }}
                           />
                         </ListItemButton>
                       </ListItem>
                       <ListItem disablePadding>
                         <ListItemButton sx={{textAlign:'left'}}>
-                          <ListItemText primary="Add label" 
+                          <ListItemText primary="Tomorrow" 
                             primaryTypographyProps={{
-                                fontSize: "0.9rem", 
+                                fontSize: "0.8rem", 
                             }}
                           />
                         </ListItemButton>
                       </ListItem>
                       <ListItem disablePadding>
                         <ListItemButton sx={{textAlign:'left'}}>
-                          <ListItemText primary="Make a copy" 
+                          <ListItemText primary="Next Week" 
                             primaryTypographyProps={{
-                                fontSize: "0.9rem", 
+                                fontSize: "0.8rem", 
                             }}
                           />
                         </ListItemButton>
                       </ListItem>
                       <ListItem disablePadding>
                         <ListItemButton sx={{textAlign:'left'}}>
-                          <ListItemText primary="Hide Checkboxes" 
+                          <ListItemText primary="Home" 
                             primaryTypographyProps={{
-                                fontSize: "0.9rem", 
+                                fontSize: "0.8rem", 
+                            }}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton sx={{textAlign:'left'}}>
+                          <ListItemText primary="Pick date & time" 
+                            primaryTypographyProps={{
+                                fontSize: "0.8rem", 
+                            }}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton sx={{textAlign:'left'}}>
+                          <ListItemText primary="Pick place" 
+                            primaryTypographyProps={{
+                                fontSize: "0.8rem", 
                             }}
                           />
                         </ListItemButton>
@@ -99,7 +122,7 @@ export default function MoreOptions({noteId,updateData}) {
           )}
         </Popper>
         <IconButton size="small" onClick={handleClick("bottom-start")}>
-          <MoreVertIcon fontSize="12px" />
+          <AddAlertIcon fontSize="12px" />
         </IconButton>
       </Box>
     </React.Fragment>

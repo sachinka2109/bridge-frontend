@@ -10,23 +10,23 @@ import { useEffect } from 'react'
 import {getNotes} from '../../services/dataService'
 import { updateArchive } from '../../services/dataService'
 
-
 function Home() {
-  const [viewList,changeViewList] = useState(false);
+  const [viewList,changeViewList] = useState(true);
   const [note,changeNote] = useState(false);
   const [data,setData] = useState([]);
-  const [noteState,setNoteState] = useState({
-    title:'',
-    description:'',
-    color:'',
-    isArchived:false,
-    isDeleted:false,
-  })
+  const[leftDrawerOpen,setLeftDrawerOpen] = useState(false);
+  // const [noteState,setNoteState] = useState({
+  //   title:'',
+  //   description:'',
+  //   color:'',
+  //   isArchived:false,
+  //   isDeleted:false,
+  // })
 
   const onArchive = async (item) => {
-    console.log(item)
-    setNoteState({title:item.title,description:item.description,color:item.color,isArchived:true,isDeleted:false},console.log(noteState));
-    await updateArchive(noteState);
+    let data = {noteIdList:[item.id],isArchived:true}
+    await updateArchive(data);
+    getData();
   }
 
   const onChangeView = () => {
@@ -51,29 +51,37 @@ function Home() {
   },[])
 
   const getData = async() => {
+    let currentUrl = window.location.href;
     let response = await getNotes();
     // console.log(response.data.data.data)
     let arr = response.data.data.data
-    let newArray = arr.filter(item => item.isArchived === false && item.isDeleted === false)
-    setData(newArray)
+    if(currentUrl.includes('dashboard')) {
+      let newArray = arr.filter(item => item.isArchived === false && item.isDeleted === false)
+      setData(newArray)
+    } else if (currentUrl.includes('archive')) {
+      let newArray = arr.filter(item => item.isArchived === true)
+      setData(newArray)
+    } else if(currentUrl.includes('trash')) {
+      let newArray = arr.filter(item => item.isDeleted === true)
+      setData(newArray)
+    }
   }
   
-
   return (
     <Box>
       <Box>
-        <LeftDrawer onButtonClick={onChangeView}/>
+        <LeftDrawer onButtonClick={onChangeView} leftDrawerOpen={leftDrawerOpen} setLeftDrawerOpen={()=> setLeftDrawerOpen()}/>
       </Box>
-      <Box marginLeft={'65px'}>
+      <Box sx={{marginLeft:{xs:'65px',md:!leftDrawerOpen? '65px':'280px'},display:'flex',flexDirection:'column'}}>
         <Box marginTop={'20px'}>
           {
-            note? <TakeNoteTwo onFocus={focusInput} onChangeNote={onChangeNote}></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
+            note? <TakeNoteTwo onFocus={focusInput} onChangeNote={onChangeNote} getData={getData}></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
           } 
         </Box> 
-        <Box sx={{display:viewList? 'flex':'block',flexWrap:'wrap',justifyContent:'space-evenly',mx:'80px',my:'30px',rowGap:'30px'}}>
+        <Box sx={{display:viewList? 'flex':'block',flexWrap:'wrap',justifyContent:'center',my:'30px',rowGap:'30px'}}>
         {data.map((item) => (viewList ? 
-          (<TakeNoteThree key={item.id} data={item} onArchive={()=> onArchive(item)} getData={getData}/>) : 
-          (<TakeNoteThreeList key={item.id} data={item} onArchive={()=> onArchive(item)} getData={getData}/>))
+          (<TakeNoteThree key={item.id} data={item} onArchive={()=> onArchive(item)} getData={getData} /> ) : 
+          (<TakeNoteThreeList key={item.id} data={item} onArchive={()=> onArchive(item)} getData={getData}/> ))
         )}
         </Box>
       </Box>

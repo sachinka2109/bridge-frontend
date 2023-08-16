@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import { IconButton } from '@mui/material';
 import { updateColor } from '../../services/dataService';
 
-export default function ColorPalette({action,Noteid,setNotes,updatecolor}) {
+export default function ColorPalette({action,noteId,setNotes,updatecolor}) {
 // console.log(action)
 
 
@@ -26,7 +26,7 @@ const handleClick = (newPlacement) => (event) => {
   if(action==="create") {
     setNotes((prevState)=>({...prevState, color:color}))
   } else if(action==="edit") {
-  let data={noteIdList:[Noteid],color:color}
+  let data={noteIdList:[noteId],color:color}
     let response = await updateColor(data);
     updatecolor();
     console.log(response);  
