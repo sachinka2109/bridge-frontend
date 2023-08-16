@@ -32,6 +32,11 @@ function TakeNoteThreeList(props) {
     props.restoreItem(id);
   }
 
+  const deleteForever = (id) => {
+    props.deleteForeverItem(id);
+  }
+
+
   return (
     <React.Fragment>
       <Container maxWidth='sm'>
@@ -56,7 +61,7 @@ function TakeNoteThreeList(props) {
                 {location.includes('trash') ? (
                     <Grid container sx={{display:'flex',flexGrow:1}}>
                       <Grid item sx={{display:'flex',flexGrow:1}}>
-                        <IconButton size="small">
+                        <IconButton size="small" onClick={()=> deleteForever(props.data.id)}>
                           <DeleteForeverIcon fontSize='12px'/>
                         </IconButton>
                         <IconButton size="small"  sx={{marginLeft:'10px'}} onClick={()=> restoreItem(props.data.id)}> 

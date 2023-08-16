@@ -32,3 +32,8 @@ export const deleteItem = async(data)=>{
     let response = await axios.post("http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes",data,headerConfig)
     return response
 }
+
+export const deleteForever = async(data)=>{
+    let response = await axios.post("http://fundoonotes.incubation.bridgelabz.com/api/notes/deleteForeverNotes",data,headerConfig)
+    return response
+}

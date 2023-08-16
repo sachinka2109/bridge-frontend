@@ -5,11 +5,13 @@ import TakeNoteThreeList from '../../components/TakeNoteThree/TakeNoteThreeList'
 import { getNotes } from '../../services/dataService';
 import LeftDrawer from '../../components/Dashboard/LeftDrawer';
 import { deleteItem } from '../../services/dataService';
+import { deleteForever } from '../../services/dataService';
 
 function Trash(props) {
     const [viewList,changeViewList] = useState(true);
     const [data,setData] = useState([]);
-    
+    const[leftDrawerOpen,setLeftDrawerOpen] = useState(false);
+    const [searchText,setSearchText] = useState('');
     const onChangeView = () => {
     changeViewList(!viewList);
     }
@@ -20,12 +22,27 @@ function Trash(props) {
         getData();
     }
 
+    const deleteForeverItem = async(id) => {
+        let data = {noteIdList:[id]}
+        await deleteForever(data);
+        getData()
+    }
+
     useEffect(()=> {
     async function fetchData() {
         getData();
     }
     fetchData();
     },[])
+
+    useEffect(()=> {
+        if(searchText !== '') {
+            const searchResult = data.filter(data => data.title.toLowerCase().includes(searchText.toLowerCase()) || data.description.toLowerCase().includes(searchText.toLowerCase()));
+            setData(searchResult);
+        } else {
+            getData();
+        }
+    },[searchText,data])
     
     const getData = async() => {
         let currentUrl = window.location.href;
@@ -46,13 +63,15 @@ function Trash(props) {
     return (
         <Box>
             <Box>
-                <LeftDrawer onButtonClick={onChangeView}/>
+                <LeftDrawer onButtonClick={onChangeView} leftDrawerOpen={leftDrawerOpen} setLeftDrawerOpen={setLeftDrawerOpen}
+                searchText={searchText} setSearchText={setSearchText}
+                />
             </Box>
-            <Box marginLeft={'65px'}>
+            <Box sx={{marginLeft:{xs:'65px',md:leftDrawerOpen? '280px': '68px'}}}>
                 <Box sx={{display:viewList? 'flex':'block',flexWrap:'wrap',justifyContent:'flex-start',mx:'80px',my:'30px',rowGap:'30px'}}>
                 {data.map((item) => (viewList ? 
-                (<TakeNoteThree key={item.id} data={item} getData={getData} restoreItem={() => restoreItem(item.id)}/>) : 
-                (<TakeNoteThreeList key={item.id} data={item} getData={getData} restoreItem={() => restoreItem(item.id)}/>))
+                (<TakeNoteThree key={item.id} data={item} getData={getData} restoreItem={() => restoreItem(item.id)} deleteForeverItem={()=> deleteForeverItem(item.id)}/>) : 
+                (<TakeNoteThreeList key={item.id} data={item} getData={getData} restoreItem={() => restoreItem(item.id)} deleteForeverItem={()=> deleteForeverItem(item.id)}/>))
                 )}
                 </Box>
             </Box>

@@ -10,7 +10,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import AddAlertIcon from '@mui/icons-material/AddAlert';
-import { deleteItem } from "../../services/dataService";
 
 export default function Reminder({noteId,updateData}) {
   // console.log(action)

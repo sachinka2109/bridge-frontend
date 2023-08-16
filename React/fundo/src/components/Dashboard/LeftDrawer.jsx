@@ -32,7 +32,6 @@ function LeftDrawer(props) {
       return;
     }
     setState({ ...state, [anchor]: open });
-    props.setLeftDrawerOpen(true);
   };
 
   const list = (anchor) => (
@@ -46,13 +45,22 @@ function LeftDrawer(props) {
         {[{text:'Notes',icon: <LightbulbIcon/>,route:'/dashboard'},{text:'Remainder',icon: <NotificationsIcon/>},{text:'Edit Label',icon: <EditIcon/>},{text:'Archive',icon: <ArchiveIcon/>,route:'/archive'},{text:'Trash',icon: <DeleteIcon/>,route:'/trash'}]
         .map(({text,icon,route}, index) => (
           <Link  key={text} to={route} style={{ textDecoration: 'none', color: 'inherit' }}>   
-            <ListItem disablePadding>            
-                <ListItemButton onMouseOver={() => setState({left: true})}>
-                  <IconButton size='large'>
+            <ListItem disablePadding>
+              {state.left? 
+                (
+                  <ListItemButton>
+                    <IconButton size='large' disabled>
+                      {icon}
+                    </IconButton>
+                    <ListItemText primary={text} sx={{marginLeft:'20px'}}/>
+                  </ListItemButton> 
+                ):
+                (
+                  <IconButton size='large' sx={{margin:'8px 16px'}} onMouseEnter={() => setState({left:true})}>
                     {icon}
                   </IconButton>
-                  <ListItemText primary={text} sx={{marginLeft:'20px'}}/>
-                </ListItemButton> 
+                )
+              }            
             </ListItem>
           </Link>
         ))}
@@ -62,13 +70,14 @@ function LeftDrawer(props) {
 
   let handleOpen = () => {
     setState({...state,left:!state.left});
+    props.setLeftDrawerOpen(!props.leftDrawerOpen,console.log(props.leftDrawerOpen));
   }
 
   return (
     <React.Fragment>
       <Box className='drawer-container'>
-        <Header handleOpen={handleOpen} toggleView={props.onButtonClick}></Header> 
-        <Box onMouseLeave={() => setState({left: false})}>
+        <Header handleOpen={handleOpen} toggleView={props.onButtonClick} searchText={props.searchText} setSearchText={props.setSearchText}></Header> 
+        <Box onMouseLeave={() => setState({left:false})}>
           <Drawer
             anchor={'left'}
             open={state['left']}

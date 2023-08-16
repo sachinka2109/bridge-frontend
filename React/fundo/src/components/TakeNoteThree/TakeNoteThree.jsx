@@ -14,6 +14,7 @@ import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Reminder from '../Reminder/Reminder'
+import { deleteForever } from '../../services/dataService';
 
 function TakeNoteThree(props) {
   const location = window.location.href;
@@ -24,6 +25,9 @@ function TakeNoteThree(props) {
     console.log(id);
     // props.restoreItem(id);
     props.restoreItem(id)
+  }
+  const deleteForever = (id) => {
+    props.deleteForeverItem(id);
   }
 
   return (
@@ -49,7 +53,7 @@ function TakeNoteThree(props) {
                 {location.includes('trash') ? (
                     <Grid container sx={{display:'flex',flexGrow:1}}>
                       <Grid item sx={{display:'flex',flexGrow:1}}>
-                        <IconButton size="small">
+                        <IconButton size="small" onClick={()=> deleteForever(props.data.id)}>
                           <DeleteForeverIcon fontSize='12px'/>
                         </IconButton>
                         <IconButton size="small"  sx={{marginLeft:'10px'}} onClick={()=> restoreItem(props.data.id)}> 

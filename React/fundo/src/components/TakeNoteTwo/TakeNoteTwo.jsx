@@ -52,7 +52,7 @@ function TakeNoteTwo(props) {
 
   return (
     <React.Fragment>
-      <Grid container marginTop={'20px'} sx={{ display: 'flex', justifyContent: 'center'}}>
+      <Grid container sx={{ display: 'flex', justifyContent: 'center'}}>
         <Container maxWidth="sm">
           <form>
             <Paper elevation={3} sx={{ border: 'none', padding: '5px 10px 5px 10px', borderRadius: '10px',backgroundColor:notes.color}}>

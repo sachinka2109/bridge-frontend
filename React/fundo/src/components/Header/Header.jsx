@@ -49,6 +49,7 @@ const Search = styled('div')(({ theme }) => ({
     width: '100%',
   }));
 
+
 function Header(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [hide,setHide] = useState(true);
@@ -123,6 +124,7 @@ function Header(props) {
                             <StyledInputBase
                             placeholder="Search…"
                             inputProps={{ 'aria-label': 'search' }}
+                            value={props.searchText} onChange={(e) => props.setSearchText(e.target.value)}
                             />
                         </Search>
                     </Box>

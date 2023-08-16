@@ -15,6 +15,7 @@ function Home() {
   const [note,changeNote] = useState(false);
   const [data,setData] = useState([]);
   const[leftDrawerOpen,setLeftDrawerOpen] = useState(false);
+  const [searchText,setSearchText] = useState('');
   // const [noteState,setNoteState] = useState({
   //   title:'',
   //   description:'',
@@ -50,6 +51,15 @@ function Home() {
     fetchData();
   },[])
 
+  useEffect(()=> {
+    if(searchText !== '') {
+      const searchResult = data.filter(data => data.title.toLowerCase().includes(searchText.toLowerCase()) || data.description.toLowerCase().includes(searchText.toLowerCase()));
+      setData(searchResult);
+    } else {
+      getData();
+    }
+  },[searchText,data])
+
   const getData = async() => {
     let currentUrl = window.location.href;
     let response = await getNotes();
@@ -70,9 +80,9 @@ function Home() {
   return (
     <Box>
       <Box>
-        <LeftDrawer onButtonClick={onChangeView} leftDrawerOpen={leftDrawerOpen} setLeftDrawerOpen={()=> setLeftDrawerOpen()}/>
+        <LeftDrawer onButtonClick={onChangeView} leftDrawerOpen={leftDrawerOpen} setLeftDrawerOpen={setLeftDrawerOpen} searchText={searchText} setSearchText={setSearchText}/>
       </Box>
-      <Box sx={{marginLeft:{xs:'65px',md:!leftDrawerOpen? '65px':'280px'},display:'flex',flexDirection:'column'}}>
+      <Box sx={{marginLeft:{xs:'65px',md:leftDrawerOpen? '280px': '68px'},display:'flex',flexDirection:'column'}}>
         <Box marginTop={'20px'}>
           {
             note? <TakeNoteTwo onFocus={focusInput} onChangeNote={onChangeNote} getData={getData}></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
