@@ -14,6 +14,7 @@ import Header from '../Header/Header';
 import './LeftDrawer.css';
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 function LeftDrawer(props) {
   const [state, setState] = React.useState({
@@ -98,5 +99,10 @@ function LeftDrawer(props) {
   );
 }
 
+const mapStateToProps = (state) => {
+  return {
+      title: state.title
+  };
+};
 
-export default LeftDrawer
+export default connect(mapStateToProps)(LeftDrawer)

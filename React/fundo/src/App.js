@@ -1,10 +1,14 @@
 import './App.css';
+import store from './components/Reducer/Store';
 import Router from './router/Router';
+import { Provider } from 'react-redux';
 
 function App() {
   // const [auth,setIsAuth] = useState(false);
   return (
-    <Router></Router>
+    <Provider store={store}>
+      <Router></Router>
+    </Provider>
   );
 }
 

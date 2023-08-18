@@ -14,7 +14,6 @@ import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Reminder from '../Reminder/Reminder'
-import { deleteForever } from '../../services/dataService';
 
 function TakeNoteThree(props) {
   const location = window.location.href;

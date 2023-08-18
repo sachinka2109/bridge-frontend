@@ -17,6 +17,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import GridViewIcon from '@mui/icons-material/GridView';
 import { Navigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -54,7 +55,7 @@ function Header(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [hide,setHide] = useState(true);
     const open = Boolean(anchorEl);
-    const location = window.location.href;
+    // const location = window.location.href;
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -97,7 +98,7 @@ function Header(props) {
                         sx={{ display: { xs:'flex',alignItems:'center' }}}
                         width={'13vw'}
                     >
-                        {location.includes('dashboard') ? (
+                        {/* {location.includes('dashboard') ? ( */}
                         <React.Fragment>
                             <img
                             className="gb_Rc gb_Rd"
@@ -108,16 +109,16 @@ function Header(props) {
                             role="presentation"
                             style={{ width: '40px', height: '40px' }}
                             />
-                            Keep
+                            {props.title}
                         </React.Fragment>
-                        ) : location.includes('archive') ? (
+                        {/* ) : location.includes('archive') ? (
                         'Archive'
                         ) : location.includes('trash') ? (
                         'Trash'
-                        ) : null}
+                        ) : null} */}
                     </Typography>
                     <Box sx={{flexGrow:1,marginRight:'10vw'}}>
-                        <Search sx={{flexGrow:1,display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',borderRadius:'10px',padding:'5px'}}>
+                        <Search sx={{flexGrow:1,display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',borderRadius:'10px',padding:'5px',bgcolor: "background.paper",boxShadow:' 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)'}}>
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
@@ -175,4 +176,10 @@ function Header(props) {
   )
 }
 
-export default Header
+const mapStateToProps = (state) => {
+    return {
+        title: state.title
+    };
+};
+
+export default connect(mapStateToProps)(Header)

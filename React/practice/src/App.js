@@ -3,7 +3,9 @@ import MyCounter from './components/class-component/Render-props/MyCounter';
 import RenderCounterClass from './components/class-component/Render-props/RenderCounterClass'
 import RenderHoverClass from './components/class-component/Render-props/RenderHoverClass';
 import RenderNameClass from './components/class-component/Render-props/RenderNameClass';
+import UseCallback from './components/function-component/UseCallback/UseCallback';
 import UseEffectExample from './components/function-component/UseEffect/UseEffectExample';
+import UseMemo from './components/function-component/UseMemo/UseMemo';
 import UseReducerExample from './components/function-component/UseReducer/UseReducerExample';
 import UseReducerFun from './components/function-component/UseReducer/UseReducerFun';
 import UseReducerObject from './components/function-component/UseReducer/UseReducerObject';
@@ -39,7 +41,9 @@ function App() {
           <UseReducerObject /> */}
           {/* <ParentState/> */}
           {/* <StateWithPrev /> */}
-          <Task />
+          {/* <Task /> */}
+          <UseCallback/>
+          <UseMemo />
       </div>
     </div>
   );
