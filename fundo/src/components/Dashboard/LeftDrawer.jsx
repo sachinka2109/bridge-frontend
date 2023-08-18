@@ -13,19 +13,35 @@ import Drawer from '@mui/material/Drawer';
 import Header from '../Header/Header';
 import './LeftDrawer.css';
 import { IconButton } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { connect ,useDispatch} from 'react-redux';
 
 function LeftDrawer(props) {
   const [state, setState] = React.useState({
     left: false,
   });
 
+  // if(state.left === true) {
+  //   props.setLeftDrawerOpen(true);
+  // } 
+  // if(state.left === false) {
+  //   props.setLeftDrawerOpen(false);
+  // }
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
+
+  // const handleRouting = (text) => {
+  //   props.title = text;
+  // }
+  let dispatch = useDispatch();
+  const handleTitleUpdate = (text) => {
+    dispatch({type:text})
+  }
 
   const list = (anchor) => (
     <Box
@@ -35,16 +51,27 @@ function LeftDrawer(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[{text:'Notes',icon: <LightbulbIcon/>},{text:'Remainder',icon: <NotificationsIcon/>},{text:'Edit Label',icon: <EditIcon/>},{text:'Archive',icon: <ArchiveIcon/>},{text:'Trash',icon: <DeleteIcon/>}]
-        .map(({text,icon}, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton onMouseOver={() => setState({left: true})}>
-              <IconButton size='large'>
-                {icon}
-              </IconButton>
-              <ListItemText primary={text} sx={{marginLeft:'20px'}}/>
-            </ListItemButton>
-          </ListItem>
+        {[{text:'Notes',icon: <LightbulbIcon/>,route:'/dashboard'},{text:'Remainder',icon: <NotificationsIcon/>},{text:'Edit Label',icon: <EditIcon/>},{text:'Archive',icon: <ArchiveIcon/>,route:'/archive'},{text:'Trash',icon: <DeleteIcon/>,route:'/trash'}]
+        .map(({text,icon,route}, index) => (
+          <Link  key={text} to={route} style={{ textDecoration: 'none', color: 'inherit' }} onClick={()=>handleTitleUpdate(text)}>   
+            <ListItem disablePadding>
+              {state.left? 
+                (
+                  <ListItemButton>
+                    <IconButton size='large' disabled>
+                      {icon}
+                    </IconButton>
+                    <ListItemText primary={text} sx={{marginLeft:'20px'}}/>
+                  </ListItemButton> 
+                ):
+                (
+                  <IconButton size='large' sx={{margin:'8px 16px'}} onMouseEnter={() => setState({left:true})}>
+                    {icon}
+                  </IconButton>
+                )
+              }            
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Box>
@@ -52,17 +79,18 @@ function LeftDrawer(props) {
 
   let handleOpen = () => {
     setState({...state,left:!state.left});
+    props.setLeftDrawerOpen(!props.leftDrawerOpen,console.log(props.leftDrawerOpen));
   }
 
   return (
-    <div>  
-      <div className='drawer-container'>
-        <Header handleOpen={handleOpen} toggleView={props.onButtonClick}></Header> 
-        <Box onMouseLeave={() => setState({left: false})}>
+    <React.Fragment>
+      <Box className='drawer-container'>
+        <Header handleOpen={handleOpen} toggleView={props.onButtonClick} searchText={props.searchText} setSearchText={props.setSearchText}></Header> 
+        <Box onMouseLeave={() => setState({left:false})}>
           <Drawer
             anchor={'left'}
             open={state['left']}
-            onClose={toggleDrawer(false)}
+            onClose={toggleDrawer('left',false)}
             variant="permanent" 
             PaperProps={{
               sx:{
@@ -74,10 +102,11 @@ function LeftDrawer(props) {
             {list('left')}
           </Drawer>
         </Box>
-      </div>
-    </div>
+      </Box>
+    </React.Fragment>
   );
 }
 
 
-export default LeftDrawer
+
+export default connect()(LeftDrawer)

@@ -8,12 +8,28 @@ import TakeNoteThreeList from '../TakeNoteThree/TakeNoteThreeList'
 import {useState} from 'react';
 import { useEffect } from 'react'
 import {getNotes} from '../../services/dataService'
-
+import { updateArchive } from '../../services/dataService'
 
 function Home() {
-  const [viewList,changeViewList] = useState(false);
+  const [viewList,changeViewList] = useState(true);
   const [note,changeNote] = useState(false);
   const [data,setData] = useState([]);
+  const[leftDrawerOpen,setLeftDrawerOpen] = useState(false);
+  const [searchText,setSearchText] = useState('');
+  // const [noteState,setNoteState] = useState({
+  //   title:'',
+  //   description:'',
+  //   color:'',
+  //   isArchived:false,
+  //   isDeleted:false,
+  // })
+
+  const onArchive = async (item) => {
+    let data = {noteIdList:[item.id],isArchived:true}
+    await updateArchive(data);
+    getData();
+  }
+
   const onChangeView = () => {
     changeViewList(!viewList);
   }
@@ -27,41 +43,60 @@ function Home() {
       e.target.current.focus();
     }
   }
-  
-  // useEffect(async()=> {
-  //   getData()
-  // },[])
+
+  useEffect(()=> {
+    async function fetchData() {
+      getData();
+    }
+    fetchData();
+  },[])
+
+  useEffect(()=> {
+    if(searchText !== '') {
+      const searchResult = data.filter(data => data.title.toLowerCase().includes(searchText.toLowerCase()) || data.description.toLowerCase().includes(searchText.toLowerCase()));
+      setData(searchResult);
+    } else {
+      getData()
+    }
+  },[searchText])
 
   const getData = async() => {
+    let currentUrl = window.location.href;
     let response = await getNotes();
     // console.log(response.data.data.data)
-    setData(response.data.data.data)
+    let arr = response.data.data.data
+    if(currentUrl.includes('dashboard')) {
+      let newArray = arr.filter(item => item.isArchived === false && item.isDeleted === false)
+      setData(newArray)
+    } else if (currentUrl.includes('archive')) {
+      let newArray = arr.filter(item => item.isArchived === true)
+      setData(newArray)
+    } else if(currentUrl.includes('trash')) {
+      let newArray = arr.filter(item => item.isDeleted === true)
+      setData(newArray)
+    }
+    console.log('getdata called')
   }
-
-  // useEffect(async() => {
-  //   await getData()
-  // },[])
-
-  // getData();
-  // console.log(data)
   
   return (
-    <div>
+    <Box>
       <Box>
-        <LeftDrawer onButtonClick={onChangeView}/>
+        <LeftDrawer onButtonClick={onChangeView} leftDrawerOpen={leftDrawerOpen} setLeftDrawerOpen={setLeftDrawerOpen} searchText={searchText} setSearchText={setSearchText}/>
       </Box>
-      <Box marginLeft={'65px'}>
+      <Box sx={{marginLeft:{xs:'65px',md:leftDrawerOpen? '280px': '68px'},display:'flex',flexDirection:'column'}}>
         <Box marginTop={'20px'}>
           {
-            note? <TakeNoteTwo onFocus={focusInput} onChangeNote={onChangeNote}></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
+            note? <TakeNoteTwo onFocus={focusInput} onChangeNote={onChangeNote} getData={getData}></TakeNoteTwo >:<TakeNoteOne onChangeNote={onChangeNote}></TakeNoteOne>
           } 
         </Box> 
-        {/* <Notes></Notes> */}
-        <Box sx={{marginTop:'20px'}}>
-          {viewList ? <TakeNoteThree data={data}></TakeNoteThree> : <TakeNoteThreeList></TakeNoteThreeList>}
+        <Box sx={{display:viewList? 'flex':'block',flexWrap:'wrap',justifyContent:'center',my:'30px',rowGap:'30px'}}>
+        {data.map((item) => (viewList ? 
+          (<TakeNoteThree key={item.id} data={item} onArchive={()=> onArchive(item)} getData={getData} /> ) : 
+          (<TakeNoteThreeList key={item.id} data={item} onArchive={()=> onArchive(item)} getData={getData}/> ))
+        )}
         </Box>
       </Box>
-    </div>
+    </Box>
   )
 }
 

@@ -6,19 +6,34 @@ const headerConfig = {
     }
 }
 
-export let createNotes = (data) => {
+export let createNotes = async(data) => {
     console.log(data)
-    let response = axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/addNotes',data,headerConfig)
+    let response = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/addNotes',data,headerConfig)
     return response;
 }
 
 export let getNotes = async() => {
-    let response = axios.get('http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList',headerConfig)
+    let response = await axios.get('http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList',headerConfig)
     return response;
 }
 
-
 export let updateColor = async(data) => {
-    let response = axios.get('http://fundoonotes.incubation.bridgelabz.com/explorer/api/notes/changesColorNotes',data,headerConfig)
+    let response = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/changesColorNotes',data,headerConfig)
     return response;
+}
+
+export const updateArchive= async(data)=>{
+    console.log(data);
+    let response = await axios.post("http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes",data,headerConfig)
+    return response
+}
+
+export const deleteItem = async(data)=>{
+    let response = await axios.post("http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes",data,headerConfig)
+    return response
+}
+
+export const deleteForever = async(data)=>{
+    let response = await axios.post("http://fundoonotes.incubation.bridgelabz.com/api/notes/deleteForeverNotes",data,headerConfig)
+    return response
 }

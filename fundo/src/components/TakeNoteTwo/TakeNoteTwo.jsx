@@ -21,7 +21,7 @@ function TakeNoteTwo(props) {
   const[notes,setNotes] = useState({
     title:'',
     description:'',
-    color:'#ffff',
+    color:'',
     isArchived:false,
   })
 
@@ -39,18 +39,24 @@ function TakeNoteTwo(props) {
   // }
 
   const onSubmit = async() => {
-    console.log(notes)
-    let response = await createNotes(notes)
-    console.log(response.data)
+    if(notes.title === '' && notes.description === ''){
+      props.onChangeNote();
+    } else {
+      console.log(notes)
+      let response = await createNotes(notes)
+      console.log(response.data)
+      props.getData();
+      props.onChangeNote();
+    }
   }
 
   return (
-    <div>
-      <Grid container marginTop={'20px'} sx={{ display: 'flex', justifyContent: 'center' }}>
+    <React.Fragment>
+      <Grid container sx={{ display: 'flex', justifyContent: 'center'}}>
         <Container maxWidth="sm">
           <form>
             <Paper elevation={3} sx={{ border: 'none', padding: '5px 10px 5px 10px', borderRadius: '10px',backgroundColor:notes.color}}>
-              <Typography variant="body1" color="initial" sx={{ margin: 0, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }} >
+              <Typography component={'div'} variant="body1" color="initial" sx={{ margin: 0, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }} >
                 <TextField variant='standard' id="title" placeholder='Title' fullWidth style={{ outline: 'none' }}
                   InputProps={{ disableUnderline: true }}
                   onChange={onChangeHandler}
@@ -60,14 +66,14 @@ function TakeNoteTwo(props) {
                   <PushPinIcon />
                 </IconButton>
               </Typography >
-              <Typography variant="body1" color="initial" sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography component={'div'} variant="body1" color="initial" sx={{ display: 'flex', alignItems: 'center' }}>
                 <TextField id="description" variant="standard" placeholder='Take a note...' fullWidth style={{ outline: 'none' }}
                   InputProps={{ disableUnderline: true }}
                   onChange={onChangeHandler}
                   name='description'
                 />
               </Typography>
-              <Typography variant="body1" color="initial" sx={{ margin: 0, display: 'flex', alignItems: 'center' }}>
+              <Typography component={'div'} variant="body1" color="initial" sx={{ margin: 0, display: 'flex', alignItems: 'center' }}>
                 <Grid container sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Grid item sx={{ display: 'flex', flexBasis: '350px', justifyContent: 'space-between' }}>
                     <IconButton size="small">
@@ -102,7 +108,7 @@ function TakeNoteTwo(props) {
           </form>
         </Container>
       </Grid>
-    </div>
+    </React.Fragment>
   )
 }
 
