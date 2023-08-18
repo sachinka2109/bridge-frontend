@@ -7,9 +7,13 @@
 .Login-link {
     position: relative;
     cursor: pointer;
+}
+
+.Signup-link {
+    cursor: pointer;
 } 
 
-.Login-link::after {
+.active::after {
     content: "";
     position: absolute;
     background-color: #A03037 !important;

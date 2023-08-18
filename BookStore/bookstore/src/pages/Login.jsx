@@ -20,12 +20,12 @@ function Login({changePage}) {
     return (
         <Grid container sx={{ justifyContent: 'center', gap: 2, flexDirection: 'column', alignItems: 'center',py:2}}>
             <Grid container sx={{ justifyContent: 'center', gap: 12 }}>
-                <Grid item className='Login-link'> 
+                <Grid item className='Login-link active'> 
                     <Link sx={{ fontSize: '25px', color: '#0A0102',fontWeight:'bold',textDecoration:'none'}} >
                         LOGIN
                     </Link>
                 </Grid>
-                <Grid item onClick={()=> changePage(true)}>
+                <Grid item onClick={()=> changePage(true)} className='Signup-link'>
                     <Link sx={{ fontSize: '25px', color: '#878787',fontWeight:'bold',textDecoration:'none'}}>
                         SIGNUP
                     </Link>

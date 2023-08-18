@@ -10,12 +10,15 @@ function SignCombined() {
     const [page,changePage] = useState(false);
   return (
     <Container maxWidth='lg'>
-        <Paper sx={{width:'624px',height:'391px',borderRadius:'21px'}} className='sign-img'>
-            <img src={SignCombinedImage} alt="" srcset="" style={{width:'245px',borderRadius:'50%',margin:'52px 53px 94px'}}/>
-        </Paper>
-        <Grid container sx={{justifyContent:'center',my:5}}>
+        <Grid container sx={{justifyContent:'center',my:5,border:'2px solid black'}} className='signform'>
             <Grid item>
-                <Paper sx={{ width: '389px', height: '425px',borderRadius:'6px' }} elevation={5}  className='sign-form'>
+                <Paper sx={{width:'200px',height:'391px',borderRadius:'21px',display:'flex',flexDirection:'column',justifyContent:'center',paddingLeft:'53px'}} elevation={5}>
+                    <img src={SignCombinedImage} alt="" srcSet="" style={{width:'245px',borderRadius:'50%'}}/>
+                    <p style={{fontWeight:'bold',textTransform:'uppercase',paddingLeft:'35px'}}>Online Book Shopping</p>
+                </Paper>
+            </Grid>
+            <Grid item>
+                <Paper sx={{ width: '389px', height: '425px',borderRadius:'6px' }} elevation={5}>
                     {page? (<Signup changePage={changePage}/>) : (<Login changePage={changePage}/>)}
                 </Paper>
             </Grid>
