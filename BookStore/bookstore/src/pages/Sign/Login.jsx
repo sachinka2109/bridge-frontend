@@ -83,10 +83,10 @@ function Login({changePage}) {
             <Divider sx={{marginTop:'26px',marginBottom:'20px',width: '50%'}}>OR</Divider>
             <Grid container sx={{ justifyContent: 'center', gap: 2 }}>
                 <Grid item>
-                    <Button variant='contained' sx={{ minWidth: '129px', backgroundColor: '#4266B2' }}>Facebook</Button>
+                    <Button variant='contained' sx={{ minWidth: '129px', backgroundColor: '#4266B2','&:hover':{backgroundColor: '#4266B2'}}}>Facebook</Button>
                 </Grid>
                 <Grid item>
-                    <Button variant='contained' sx={{ minWidth: '119px', backgroundColor: '#E4E4E4', color: 'black' }}>Google</Button>
+                    <Button variant='contained' sx={{ minWidth: '119px', backgroundColor: '#E4E4E4', color: 'black','&:hover':{backgroundColor: '#E4E4E4'} }}>Google</Button>
                 </Grid>
             </Grid>
         </Grid>

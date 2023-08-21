@@ -9,16 +9,19 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { ReactComponent as Education } from "../../Images/education.svg";
+import { Button, ButtonGroup, MenuList } from '@mui/material';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: '3px',
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -43,17 +46,15 @@ justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-color: 'inherit',
-'& .MuiInputBase-input': {
+  color: 'inherit',
+  borderRadius: '3px',
+  '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-    width: '20ch',
-    },
-},
+  },
+  width: '100%',
 }));
 
 function Header() {
@@ -157,8 +158,8 @@ function Header() {
     return (
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar>
-            <IconButton
+          <Toolbar sx={{display:'flex',justifyContent:'flex-start',alignItems:'center',backgroundColor:'#A03037'}}>
+            {/* <IconButton
               size="large"
               edge="start"
               color="inherit"
@@ -166,54 +167,49 @@ function Header() {
               sx={{ mr: 2 }}
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
+            <Box sx={{flexBasis:'80px'}}/>
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ display: { xs: 'none', sm: 'block' } }}
+              sx={{ display: { xs: 'none', sm: 'flex' },alignItems:'center',mx:'42px'}}
             >
-                <></>
-                Bookstore
+              <Education/>
+              Bookstore
             </Typography>
-            <Search>
+            <Search sx={{flexGrow:'2',bgcolor:'background.paper','&:hover':{bgcolor:'background.paper'}}}>
               <SearchIconWrapper>
-                <SearchIcon />
+                <SearchIcon sx={{color:'#9D9D9D'}}/>
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{ 'aria-label': 'search...'}}
+                sx={{color:'#9D9D9D'}}
               />
             </Search>
-            <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                <Badge badgeContent={4} color="error">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+            <Box sx={{flexGrow:2}}/>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }}}>
+                <Button variant='contained' sx={{display:'flex',flexDirection:'column',px:3,backgroundColor:'#A03037',
+                '&:hover':{backgroundColor: 'transparent',textDecoration: 'none'}}}
+                >
+                  <PersonOutlineIcon />
+                  Sachin
+                </Button>
+                {/* <MenuList>
+                  <MenuItem>
+                    <Button></Button>
+                  </MenuItem>
+                </MenuList> */}
+                <Button variant='contained' sx={{display:'flex',flexDirection:'column',px:4,backgroundColor:'#A03037',
+                '&:hover':{backgroundColor: 'transparent',textDecoration: 'none'}}}
+                >
+                  <ShoppingCartIcon />
+                  Cart
+                </Button>
             </Box>
-            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{flex:'1 0'}}/>
+            <Box sx={{ display: { xs: 'flex', md: 'none' }}}>
               <IconButton
                 size="large"
                 aria-label="show more"

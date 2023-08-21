@@ -1,6 +1,6 @@
 import './App.css';
 import Home from './components/dashboard/Home';
-import SignCombined from './pages/SignCombined';
+import SignCombined from './pages/Sign/SignCombined';
 
 function App() {
   // const [auth,setIsAuth] = useState(false);
