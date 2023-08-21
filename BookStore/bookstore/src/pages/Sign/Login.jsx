@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextField, Grid, Button, Link } from '@mui/material'
+import { TextField, Grid, Button,Link } from '@mui/material'
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Signup.css';
+import { Navigate,Link as Linky } from 'react-router-dom';
 
 function Login({changePage}) {
     const [showPassword, setShowPassword] = useState(false);
@@ -25,10 +26,12 @@ function Login({changePage}) {
                         LOGIN
                     </Link>
                 </Grid>
-                <Grid item onClick={()=> changePage(true)} className='Signup-link'>
-                    <Link sx={{ fontSize: '25px', color: '#878787',fontWeight:'bold',textDecoration:'none'}}>
-                        SIGNUP
-                    </Link>
+                <Grid item onClick={()=> {changePage(true)}} className='Signup-link'>
+                    <Linky to={'/signup'} style={{textDecoration:'none'}}>         
+                        <Link sx={{ fontSize: '25px', color: '#878787',fontWeight:'bold',textDecoration:'none'}}>
+                            SIGNUP
+                        </Link>
+                    </Linky>
                 </Grid>
             </Grid>
             <Grid item>

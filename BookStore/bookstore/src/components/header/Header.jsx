@@ -18,6 +18,9 @@ import { ReactComponent as Education } from "../../Images/education.svg";
 import { Button, ButtonGroup, MenuList } from '@mui/material';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import './Header.css';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -59,6 +62,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Header() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorElProfile, setAnchorElProfile] = React.useState(null);
+    const open = Boolean(anchorElProfile);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   
     const isMenuOpen = Boolean(anchorEl);
@@ -79,6 +84,15 @@ function Header() {
   
     const handleMobileMenuOpen = (event) => {
       setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const handleClick = (event) => {
+      setAnchorElProfile(event.currentTarget);
+      document.getElementById('profile-btn').classList.remove('active')
+    };
+    const handleClose = () => {
+      setAnchorElProfile(null);
+      document.getElementById('profile-btn').classList.add('active')
     };
   
     const menuId = 'primary-search-account-menu';
@@ -191,18 +205,34 @@ function Header() {
             <Box sx={{flexGrow:2}}/>
             <Box sx={{ display: { xs: 'none', md: 'flex' }}}>
                 <Button variant='contained' sx={{display:'flex',flexDirection:'column',px:3,backgroundColor:'#A03037',
-                '&:hover':{backgroundColor: 'transparent',textDecoration: 'none'}}}
+                textTransform:'none','&:hover':{backgroundColor: 'transparent',textDecoration: 'none'}}}
+                id="profile-btn"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+                className='active'
                 >
                   <PersonOutlineIcon />
                   Sachin
                 </Button>
-                {/* <MenuList>
-                  <MenuItem>
-                    <Button></Button>
-                  </MenuItem>
-                </MenuList> */}
+                <Menu
+                  id="profile-btn-menu"
+                  anchorEl={anchorElProfile}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <Typography variant="body1" color="initial" sx={{mx:2,fontSize:12,fontWeight:'bold'}}>Hello Poonam,</Typography>
+                  <MenuItem sx={{fontSize:12,'&:hover':{color:'#A03037'}}}><PersonOutlineIcon fontSize='sm' sx={{marginRight:'10px'}}/>Profile</MenuItem>
+                  <MenuItem sx={{fontSize:12,'&:hover':{color:'#A03037'}}}><MarkunreadMailboxIcon fontSize='sm' sx={{marginRight:'10px'}}/> My Orders</MenuItem>
+                  <MenuItem sx={{fontSize:12,'&:hover':{color:'#A03037'}}}><FavoriteBorderIcon fontSize='sm' sx={{marginRight:'10px'}}/>My Wishlist</MenuItem>
+                  <Button variant='outlined' sx={{textTransform:'none',px:4,mx:2,my:1,borderColor:'#A03037',color:'#A03037','&:hover':{color:'#A03037',borderColor:'#A03037'}}}>Logout</Button>
+                </Menu>
                 <Button variant='contained' sx={{display:'flex',flexDirection:'column',px:4,backgroundColor:'#A03037',
-                '&:hover':{backgroundColor: 'transparent',textDecoration: 'none'}}}
+                textTransform:'none','&:hover':{backgroundColor: 'transparent',textDecoration: 'none'}}}
                 >
                   <ShoppingCartIcon />
                   Cart

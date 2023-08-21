@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Paper from '@mui/material/Paper'
 import { Container, Grid} from '@mui/material'
 import Login from './Login';
@@ -6,8 +6,14 @@ import Signup from './Signup';
 import './SignCombined.css'
 import SignCombinedImage from '../../Images/SignCombined.png'
 
-function SignCombined() {
-    const [page,changePage] = useState(false);
+function SignCombined({page,changePage}) {
+    useEffect(()=> {
+        if(window.location.href.includes('login')){
+            changePage(false)
+        } else if(window.location.href.includes('signup')) {
+            changePage(true)
+        }
+    },[])
   return (
     <Container maxWidth='lg'>
         <Grid container sx={{justifyContent:'center',my:5}} className='signform'>
