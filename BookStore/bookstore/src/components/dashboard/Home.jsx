@@ -1,19 +1,18 @@
 import React from 'react'
-import Header from '../header/Header'
 import { Box,Grid, Typography } from '@mui/material'
 import BookCard from '../book-component/BookCard';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Pagination from '@mui/material/Pagination'
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
     <div>
-      <Header />  
       <Grid container sx={{width:'100%',justifyContent:'center'}}>
         <Grid item sx={{width:'100%',justifyContent:'space-between'}}>
-          <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center',justifyContent:'space-between',mx:20}}>
+          <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center',justifyContent:'space-between',mx:{xs:5,sm:10,md:22}}}>
             <Typography variant="body1" color="initial" sx={{fontSize:25,display:'flex',alignItems:'center'}}>
               Books
               <Typography variant="body1" color="initial" sx={{fontSize:12,color:'#9D9D9D'}}>
@@ -31,30 +30,11 @@ function Home() {
         </Grid>
         <Grid item sx={{width:'80%'}}>
           <Grid container sx={{gap:3,flexWrap:'wrap',justifyContent:'center'}}>
-            <Grid item>
-              <BookCard />
-            </Grid>
-            <Grid item>
-              <BookCard />
-            </Grid>
-            <Grid item>
-              <BookCard />
-            </Grid>
-            <Grid item>
-              <BookCard />
-            </Grid>
-            <Grid item>
-              <BookCard />
-            </Grid>
-            <Grid item>
-              <BookCard />
-            </Grid>
-            <Grid item>
-              <BookCard />
-            </Grid>
-            <Grid item>
-              <BookCard />
-            </Grid>
+            <Link to='/book-details' style={{textDecoration:'none'}}>
+              <Grid item>
+                <BookCard />
+              </Grid>
+            </Link>
           </Grid>
         </Grid>
         <Pagination count={10} variant="outlined" shape="rounded" sx={{color:'#8F2B2F',my:5}}/>

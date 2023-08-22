@@ -21,6 +21,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -170,7 +171,7 @@ function Header() {
     );
   
     return (
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow:{xs: 0,sm:1 },}}>
         <AppBar position="static">
           <Toolbar sx={{display:'flex',justifyContent:'flex-start',alignItems:'center',backgroundColor:'#A03037'}}>
             {/* <IconButton
@@ -182,17 +183,19 @@ function Header() {
             >
               <MenuIcon />
             </IconButton> */}
-            <Box sx={{flexBasis:'80px'}}/>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { xs: 'none', sm: 'flex' },alignItems:'center',mx:'42px'}}
-            >
-              <Education/>
-              Bookstore
-            </Typography>
-            <Search sx={{flexGrow:'2',bgcolor:'background.paper','&:hover':{bgcolor:'background.paper'}}}>
+            <Box sx={{flexBasis:{xs:0,sm:'80px'}}}/>
+            <Link to='/' style={{textDecoration:'none'}}>            
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ display:'flex',alignItems:'center',mx:{xs:0,md:'42px'},px:2,color:'white'}}
+              >
+                <Education/>
+                Bookstore
+              </Typography>
+            </Link>
+            <Search sx={{flexGrow:{xs:0,sm:2},bgcolor:'background.paper','&:hover':{bgcolor:'background.paper'}}}>
               <SearchIconWrapper>
                 <SearchIcon sx={{color:'#9D9D9D'}}/>
               </SearchIconWrapper>
@@ -253,8 +256,6 @@ function Header() {
             </Box>
           </Toolbar>
         </AppBar>
-        {renderMobileMenu}
-        {renderMenu}
       </Box>
     );
 }

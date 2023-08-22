@@ -17,6 +17,7 @@ function Signup({changePage}) {
     const handleMouseDownPassword = () => {
 
     }
+    
     return (
         <Grid container sx={{ justifyContent: 'center', gap: 2, flexDirection: 'column', alignItems: 'center',py:2}}>
             {/* <Paper sx={{marginTop:'15px',width:'300px',height:'391px',borderRadius:'21px 0px 0px 21px',display:'flex',flexDirection:'column',justifyContent:'center',paddingLeft:'53px'}} elevation={5}>
