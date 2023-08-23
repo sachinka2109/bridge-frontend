@@ -8,7 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Signup.css';
-import { Navigate,Link as Linky } from 'react-router-dom';
+import {Link as Linky } from 'react-router-dom';
 
 function Login({changePage}) {
     const [showPassword, setShowPassword] = useState(false);

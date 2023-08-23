@@ -9,6 +9,7 @@ import AuthRoute from './AuthRoute'
 import BookDetails from '../components/book-details/BookDetails'
 import MyOrder from '../components/my-order/MyOrder'
 import Success from '../pages/Successful/Success'
+import MyCart from '../components/cart-component/MyCart'
 
 function Router() {
   const [page,changePage] = useState(false);
@@ -23,6 +24,7 @@ function Router() {
             <Route path='/book-details/' element={<><Header/><BookDetails/></>} />
             <Route path='/my-orders' element={<><Header/><MyOrder/></>} />
             <Route path='/success' element={<><Header/><Success/></>} />
+            <Route path='/cart' element={<><Header/><MyCart/></>} />
             {/* <Route path='*'>Error</Route> */}
         </Routes>
     </BrowserRouter>

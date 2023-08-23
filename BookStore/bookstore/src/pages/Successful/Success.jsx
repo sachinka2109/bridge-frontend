@@ -6,7 +6,7 @@ function Success() {
   return (
     <Grid container sx={{flexDirection:'column',alignItems:'center',m:2}}>
         <Grid item>
-            <img src={OrderSuccess} />
+            <img src={OrderSuccess} alt='order-success'/>
         </Grid>
         <Grid item>
             <Typography variant="body1" color="initial" sx={{textAlign:'center',fontSize:18}}>

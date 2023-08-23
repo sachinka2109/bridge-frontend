@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box,Grid, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import BookCard from '../book-component/BookCard';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -11,8 +11,8 @@ function Home() {
   return (
     <div>
       <Grid container sx={{width:'100%',justifyContent:'center'}}>
-        <Grid item sx={{width:'100%',justifyContent:'space-between'}}>
-          <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center',justifyContent:'space-between',mx:{xs:5,sm:10,md:22}}}>
+        <Grid item sx={{width:'100%'}}>
+          <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center',justifyContent:'space-between',mx:{xs:0,sm:10,md:22}}}>
             <Typography variant="body1" color="initial" sx={{fontSize:25,display:'flex',alignItems:'center'}}>
               Books
               <Typography variant="body1" color="initial" sx={{fontSize:12,color:'#9D9D9D'}}>
