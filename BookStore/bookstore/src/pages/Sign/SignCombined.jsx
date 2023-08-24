@@ -18,7 +18,7 @@ function SignCombined({page,changePage}) {
     <Container maxWidth='lg'>
         <Grid container sx={{justifyContent:'center',my:10}} className='signform'>
             <Grid item sx={{display:{xs:'none',md:'flex'}}}>
-                <Paper sx={{marginTop:15,width:300,height:391,borderRadius:'21px 0px 0px 21px',display:'flex',flexDirection:'column',justifyContent:'center',paddingLeft:53}} elevation={5}>
+                <Paper sx={{marginTop:2,width:300,height:391,borderRadius:'21px 0px 0px 21px',display:'flex',flexDirection:'column',justifyContent:'center',paddingLeft:5}} elevation={5}>
                     <img src={SignCombinedImage} alt="" srcSet="" style={{width:'245px',borderRadius:'50%'}}/>
                     <p style={{fontWeight:'bold',textTransform:'uppercase',paddingLeft:'35px'}}>Online Book Shopping</p>
                 </Paper>

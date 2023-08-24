@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-function Cart() {
+function Cart({onPlaceOrder}) {
   return (
     <Grid container sx={{flexDirection:'column',border:'1px solid #DCDCDC',py:{xs:0,sm:2},px:{xs:0,sm:3}}}>
         <Grid item sx={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',p:1,px:3}}>
@@ -15,10 +15,11 @@ function Cart() {
               select
               InputProps={{
                 startAdornment: <InputAdornment position="start"><LocationOnIcon sx={{color:'#A03037'}}/></InputAdornment>,
-              }}
-              value='Use Current Location'
+                style:{margin:0}
+            }}
+            //   value='Use Current Location'
             >
-                <MenuItem defaultValue='Use Current Location'>Use Current Location</MenuItem>
+                <MenuItem defaultValue='Use Current Location' selected>Use Current Location</MenuItem>
             </TextField>
         </Grid>
         <Grid item sx={{p:1,px:3}}>
@@ -54,7 +55,7 @@ function Cart() {
 
                 </Grid>
                 <Grid item sx={{alignSelf:'end'}}>
-                    <Button variant="contained" sx={{width:150}}>
+                    <Button variant="contained" sx={{width:150}} onClick={() => onPlaceOrder()}>
                         Place Order
                     </Button>
                 </Grid>

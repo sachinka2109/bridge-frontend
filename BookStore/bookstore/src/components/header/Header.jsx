@@ -17,7 +17,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -165,6 +165,10 @@ function Header() {
     //     </MenuItem>
     //   </Menu>
     // );
+    const onLogout = () => {
+      localStorage.removeItem('token');
+      window.location.reload();
+    }
   
     return (
       <Box sx={{ flexGrow:{xs: 0,sm:1}}}>
@@ -238,7 +242,7 @@ function Header() {
                   <Link to='/wishlist' style={{textDecoration:'none',color:'#878787'}}>
                     <MenuItem sx={{fontSize:12,'&:hover':{color:'#A03037',backgroundColor:'lightcoral'}}}><FavoriteBorderIcon fontSize='sm' sx={{marginRight:'10px'}}/>My Wishlist</MenuItem>
                   </Link>
-                  <Button variant='outlined' sx={{textTransform:'none',px:4,mx:1,my:1,borderColor:'#A03037',color:'#A03037','&:hover':{color:'#A03037',borderColor:'#A03037'}}}>Logout</Button>
+                  <Button variant='outlined' sx={{textTransform:'none',px:4,mx:1,my:1,borderColor:'#A03037',color:'#A03037','&:hover':{color:'#A03037',borderColor:'#A03037'}}} onClick={onLogout}>Logout</Button>
                 </Menu>
                 <Link to='/cart' style={{textDecoration:'none'}}>                
                   <Button variant='contained' sx={{display:'flex',flexDirection:'column',px:4,backgroundColor:'#A03037',

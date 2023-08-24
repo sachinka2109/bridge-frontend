@@ -8,6 +8,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Login.css';
 import { Link as Linky } from 'react-router-dom';
+import { userSignUp } from '../../services/userService';
 
 function Signup({changePage}) {
     const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +17,24 @@ function Signup({changePage}) {
     }
     const handleMouseDownPassword = () => {
 
+    }
+    const [data,setData] = useState({
+        fullName: '',
+        email: '',
+        password:'', 
+        phone:''
+    })
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [e.target.id]: e.target.value 
+        })
+    }
+    const onSignUp = async() =>{ 
+        // localStorage.setItem('token',response.data.id)
+        let response = await userSignUp(data)
+        console.log(response)
+        window.location.reload();
     }
     
     return (
@@ -38,13 +57,15 @@ function Signup({changePage}) {
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <label style={{ fontSize: '10px' }}>Full Name</label>
                     <TextField
-                        id="fullname"
+                        id="fullName"
                         sx={{ width: '252px', height: '35px' }}
                         inputProps={{
                             style: {
                                 padding: 6
                             }
                         }}
+                        value={data.fullName}
+                        onChange={handleChange}
                     />
                 </div>
             </Grid>
@@ -60,6 +81,8 @@ function Signup({changePage}) {
                                 padding: 6
                             }
                         }}
+                        value={data.email}
+                        onChange={handleChange}
                     />
                 </div>
             </Grid>
@@ -68,8 +91,10 @@ function Signup({changePage}) {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         <label style={{ fontSize: '10px' }} htmlFor='passwordInput'>Password</label>
                         <OutlinedInput
-                            id="passwordInput"
-                            name='passwordInput'
+                            value={data.password}
+                            onChange={handleChange}
+                            id="password"
+                            name='password'
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
@@ -96,18 +121,20 @@ function Signup({changePage}) {
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <label style={{ fontSize: '10px' }}>Mobile Number</label>
                     <TextField
-                        id="phoneNumber"
+                        id="phone"
                         sx={{ width: '252px', height: '35px' }}
                         inputProps={{
                             style: {
                                 padding: 6
                             }
                         }}
+                        value={data.phone}
+                        onChange={handleChange}
                     />
                 </div>
             </Grid>
             <Grid item>
-                <Button variant='contained' sx={{ width: '252px', backgroundColor: '#A03037' }}>
+                <Button variant='contained' sx={{ width: '252px', backgroundColor: '#A03037' }} onClick={onSignUp}>
                     Signup
                 </Button>
             </Grid>

@@ -21,10 +21,10 @@ function Router() {
             <Route path='/login' element={<AuthRoute><SignCombined page={page} changePage={changePage}/></AuthRoute>} />
             <Route path="/signup" element={<AuthRoute><SignCombined page={page} changePage={changePage}/></AuthRoute>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>} />
-            <Route path='/book-details/' element={<><Header/><BookDetails/></>} />
-            <Route path='/my-orders' element={<><Header/><MyOrder/></>} />
-            <Route path='/success' element={<><Header/><Success/></>} />
-            <Route path='/cart' element={<><Header/><MyCart/></>} />
+            <Route path='/book-details/:id' element={<><Header/><BookDetails/></>} />
+            <Route path='/my-orders' element={<ProtectedRoute><><Header/><MyOrder/></></ProtectedRoute>} />
+            <Route path='/success' element={<ProtectedRoute><><Header/><Success/></></ProtectedRoute>} />
+            <Route path='/cart' element={<ProtectedRoute><><Header/><MyCart/></></ProtectedRoute>} />
             {/* <Route path='*'>Error</Route> */}
         </Routes>
     </BrowserRouter>

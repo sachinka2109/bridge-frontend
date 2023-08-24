@@ -8,7 +8,7 @@ import Book from '../../Images/Book.png';
 import './BookCard.css';
 import StarIcon from '@mui/icons-material/Star';
 
-function BookCard() {
+function BookCard({item}) {
     return (
         <Card sx={{ minWidth:235,maxWidth: 235}}>
             <CardActionArea>
@@ -23,10 +23,10 @@ function BookCard() {
             </CardContent>
             <CardContent>
                 <Typography gutterBottom variant="span" component="div" sx={{fontSize:'14px'}}>
-                    Don't Make Me Think
+                    {item.bookName}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{fontSize:'10px'}}>
-                    by Steve Krug
+                    {item.author}
                 </Typography>
                 <Typography variant="span" color="text.secondary" component="div" sx={{display:'flex',alignItems:'flex-start',my:1}}>
                     <span className='rating'>
@@ -39,10 +39,10 @@ function BookCard() {
                 </Typography>
                 <Typography variant="span" color="text.secondary" component="div" sx={{display:'flex',alignItems:'flex-start',my:1}}>
                     <span className='price'>
-                       Rs. 1500
+                       Rs. {item.price}
                     </span>
                     <span className='discount-price'>
-                        Rs. 2000
+                        Rs. {item.discountPrice}
                     </span>
                 </Typography>
             </CardContent>

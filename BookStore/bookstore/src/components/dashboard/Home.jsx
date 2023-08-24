@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import { Grid, Typography } from '@mui/material'
 import BookCard from '../book-component/BookCard';
 import MenuItem from '@mui/material/MenuItem';
@@ -6,8 +6,19 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Pagination from '@mui/material/Pagination'
 import { Link } from 'react-router-dom';
+import { getBooks } from '../../services/dataService';
 
 function Home() {
+  const [data,setData] = useState([]);
+  useEffect(() => {
+    getAllBooks()
+  }, [])
+
+  const getAllBooks = async() => {
+    let response = await getBooks();
+    setData(response.data.result)
+  }
+
   return (
     <div>
       <Grid container sx={{width:'100%',justifyContent:'center'}}>
@@ -16,7 +27,7 @@ function Home() {
             <Typography variant="body1" color="initial" sx={{fontSize:25,display:'flex',alignItems:'center'}}>
               Books
               <Typography variant="body1" color="initial" sx={{fontSize:12,color:'#9D9D9D'}}>
-                (128 Items)
+                ({data.length})
               </Typography>
             </Typography>
             <FormControl sx={{ m: 1, minWidth: 200 }}>
@@ -30,11 +41,15 @@ function Home() {
         </Grid>
         <Grid item sx={{width:'80%'}}>
           <Grid container sx={{gap:3,flexWrap:'wrap',justifyContent:'center'}}>
-            <Link to='/book-details' style={{textDecoration:'none'}}>
-              <Grid item>
-                <BookCard />
-              </Grid>
-            </Link>
+            {
+              data.map(item => (
+                <Link to={'/book-details/'+ item._id} style={{textDecoration:'none'}}>
+                  <Grid item>
+                    <BookCard item={item}/>
+                  </Grid>
+                </Link>
+              ))
+            }
           </Grid>
         </Grid>
         <Pagination count={10} variant="outlined" shape="rounded" sx={{color:'#8F2B2F',my:5}}/>

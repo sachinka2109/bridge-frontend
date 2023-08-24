@@ -1,14 +1,64 @@
-import { Box, Divider, Grid, Typography,Button, FormGroup, IconButton, TextField} from '@mui/material'
-import React from 'react'
+import { Box, Divider, Grid, Typography,Button, FormGroup} from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import Book from '../../Images/Book.png'
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { FormControl,Rating } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { addCartItem, getBooks,getCartItems} from '../../services/dataService';
+import { useParams } from 'react-router-dom';
+import QuantityComponent from '../quantity-component/QuantityComponent';
 
 function BookDetails() {
+    const [book,setBook] = useState({});
+    const [addCart,setAddCart] = useState(false);
+    let { id } = useParams();
+    const addToCart = async() => {
+        let response = await addCartItem(id)
+        if(response) {
+            setAddCart(true)
+        }
+    }
+
+    const [count,setCount] = useState(1);
+
+    const incrementCount = async() => {
+        setCount(prev => prev + 1)
+    }
+    const decrementCount = async() => {
+        if(count < 1) {
+        //    let response = await removeCartItem(id);
+        //    console.log(response)
+        } else {
+            setCount(prev => prev - 1)
+        }
+    }
+
+    const getCartItem = async() => {
+        let response = await getCartItems();
+        let arr = response.data.result;
+        console.log(arr);
+        let filteredItem = arr.find(item => {return item._id === id.toString()})
+        console.log(filteredItem)
+    }
+
+    const getSingleBook = async () => {
+        try {
+            let response = await getBooks();
+            const data = response.data.result
+            const filteredData = data.find(item => item._id === id.toString())
+            // console.log(filteredData)
+            setBook(filteredData);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        getSingleBook();
+        getCartItem();
+    }, []);
+
   return (
     <Box>
         <Grid container sx={{justifyContent:'center',alignItems:'flex-start'}}>
@@ -16,22 +66,17 @@ function BookDetails() {
                 <Typography component={'div'} sx={{border:'1px solid #D1D1D1',px:3,py:2}}>
                     <img src={Book} alt='Book' style={{height:367}}/>
                 </Typography>
-                <Box sx={{display:'flex',justifyContent:'space-between',my:3}}>
-                    <Button variant='contained' sx={{flexGrow:1,marginRight:'20px',backgroundColor:'#A03037','&:hover':{backgroundColor:'#A03037'}}}>Add to bag</Button>
-                    <Box item sx={{display:'flex',alignItems:'center',marginTop:3}}>
-                        <IconButton size='small' sx={{backgroundColor:'#FAFAFA',border:'1px solid #DBDBDB'}}><RemoveIcon  fontSize='sm'/></IconButton>
-                        <TextField sx={{width:'50px',mx:1}}
-                        inputProps={{
-                            style: {
-                                padding:4,
-                                textAlign:'center',
-                            }
-                        }}
-                        value={1}
-                        />
-                        <IconButton size='small' sx={{backgroundColor:'#FAFAFA',border:'1px solid #DBDBDB'}}><AddIcon fontSize='sm'/></IconButton>
-                        <Typography variant="body1" color="initial" sx={{mx:2}}>Remove</Typography>
-                    </Box>
+                <Box sx={{display:'flex',justifyContent:'space-between',alignItems:'center',my:3}}>
+                    {
+                        !addCart &&(
+                            <Button variant='contained' sx={{flexGrow:1,marginRight:'20px',backgroundColor:'#A03037','&:hover':{backgroundColor:'#A03037'}}} onClick={addToCart}>Add to bag</Button>
+                        )
+                    }
+                    { addCart && (
+                        <Box item sx={{display:'flex',alignItems:'center',flexGrow:1}}>
+                            <QuantityComponent />
+                        </Box>
+                    )}
                     <Button variant='contained' sx={{display:'inline-flex',alignItems:'center',flexGrow:1,backgroundColor:'#333333','&:hover':{backgroundColor:'#333333'}}}>
                         <FavoriteIcon style={{fontSize:17,margin:'0px 4px'}}/> 
                         Wishlist
@@ -41,10 +86,10 @@ function BookDetails() {
             <Grid item sx={{px:{xs:2,sm:5}}} xs={12} sm={8} md={6}>
                 <Box>
                     <Typography variant="h4" color="initial">
-                        Don't Make Me Think
+                        {book.bookName}
                     </Typography>
                     <Typography variant="h6" color="initial" sx={{color:'#878787'}}>
-                        by Steve Krug
+                        {book.bookAuthor}
                     </Typography>
                     <Typography variant="span" color="text.secondary" component="div" sx={{display:'flex',alignItems:'center',my:1}}>
                         <Typography sx={{display:'flex',alignItems:'center',backgroundColor:'#388E3C',color:'white',px:1}}>
@@ -57,10 +102,10 @@ function BookDetails() {
                     </Typography>
                     <Typography variant="span" component="div" sx={{display:'flex',alignItems:'center',my:1,color:'#0A0102',fontWeight:'bold'}}>
                         <Typography sx={{fontSize:30}}>
-                            Rs. 1500
+                           Rs. {book.price}
                         </Typography>
                         <Typography sx={{fontSize:12,textDecoration:'line-through',color:'#878787',px:1}}>
-                            Rs. 2000
+                            Rs.{book.discountPrice}
                         </Typography>
                     </Typography>
                 </Box>
@@ -68,7 +113,7 @@ function BookDetails() {
                     <Typography variant="body1" color="initial" sx={{fontSize:15,color:'#878787'}}>
                         <ul style={{padding:"15px"}}>
                             <li>Book Detail</li>    
-                            <Typography variant='body2' sx={{color:'#373434',fontSize:12}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quam minus ad, corporis at ipsa quae amet cum sequi molestias aliquam earum vero hic voluptatum aspernatur minima veniam consequuntur maxime. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed repudiandae expedita accusamus adipisci numquam deserunt harum magni ea aliquid praesentium ab perferendis facere, quasi ex id est reiciendis perspiciatis ullam!</Typography>
+                            <Typography variant='body2' sx={{color:'#373434',fontSize:12}}>{book.description}</Typography>
                         </ul>
                     </Typography>
                 <Divider sx={{color:'#9D9D9D'}}></Divider>

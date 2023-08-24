@@ -9,6 +9,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Signup.css';
 import {Link as Linky } from 'react-router-dom';
+import { userLogin } from '../../services/userService';
 
 function Login({changePage}) {
     const [showPassword, setShowPassword] = useState(false);
@@ -17,6 +18,23 @@ function Login({changePage}) {
     }
     const handleMouseDownPassword = () => {
 
+    }
+    const [data,setData] = useState({
+        email: '',
+        password:'', 
+    })
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [e.target.id]: e.target.value 
+        })
+    }
+    const onLogin = async() =>{ 
+        // localStorage.setItem('token',response.data.id)
+        let response = await userLogin(data)
+        console.log(response)
+        localStorage.setItem('token',response.data.result.accessToken)
+        window.location.reload();
     }
     return (
         <Grid container sx={{ justifyContent: 'center', gap: 2, flexDirection: 'column', alignItems: 'center',py:2}}>
@@ -46,6 +64,8 @@ function Login({changePage}) {
                                 padding: 6
                             }
                         }}
+                        value={data.email}
+                        onChange={handleChange}
                     />
                 </div>
             </Grid>
@@ -54,7 +74,9 @@ function Login({changePage}) {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         <label style={{ fontSize: '10px' }}>Password</label>
                         <OutlinedInput
-                            id="outlined-adornment-password"
+                            value={data.password}
+                            onChange={handleChange}
+                            id="password"
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
@@ -79,7 +101,7 @@ function Login({changePage}) {
                 </FormControl>
             </Grid>
             <Grid item>
-                <Button variant='contained' sx={{ width: '252px', backgroundColor: '#A03037' }}>
+                <Button type='submit' variant='contained' sx={{ width: '252px', backgroundColor: '#A03037' }} onClick={onLogin}>
                     Login
                 </Button>
             </Grid>
