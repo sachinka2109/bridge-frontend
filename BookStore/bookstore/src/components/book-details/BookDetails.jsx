@@ -12,6 +12,7 @@ import QuantityComponent from '../quantity-component/QuantityComponent';
 function BookDetails() {
     const [book,setBook] = useState({});
     const [addCart,setAddCart] = useState(false);
+    let filteredItem;
     let { id } = useParams();
     const addToCart = async() => {
         let response = await addCartItem(id)
@@ -20,34 +21,22 @@ function BookDetails() {
         }
     }
 
-    const [count,setCount] = useState(1);
-
-    const incrementCount = async() => {
-        setCount(prev => prev + 1)
-    }
-    const decrementCount = async() => {
-        if(count < 1) {
-        //    let response = await removeCartItem(id);
-        //    console.log(response)
-        } else {
-            setCount(prev => prev - 1)
-        }
-    }
 
     const getCartItem = async() => {
         let response = await getCartItems();
-        let arr = response.data.result;
+        const arr = response.data.result;
         console.log(arr);
-        let filteredItem = arr.find(item => {return item._id === id.toString()})
-        console.log(filteredItem)
+        filteredItem = arr.find(item => item.product_id._id === id)
+        if(filteredItem) {
+            setAddCart(true)
+        }
     }
 
     const getSingleBook = async () => {
         try {
             let response = await getBooks();
             const data = response.data.result
-            const filteredData = data.find(item => item._id === id.toString())
-            // console.log(filteredData)
+            let filteredData = data.find(item => item._id === id)
             setBook(filteredData);
         } catch(err) {
             console.log(err);
@@ -74,7 +63,7 @@ function BookDetails() {
                     }
                     { addCart && (
                         <Box item sx={{display:'flex',alignItems:'center',flexGrow:1}}>
-                            <QuantityComponent />
+                            <QuantityComponent id={id} setAddCart={setAddCart}/>
                         </Box>
                     )}
                     <Button variant='contained' sx={{display:'inline-flex',alignItems:'center',flexGrow:1,backgroundColor:'#333333','&:hover':{backgroundColor:'#333333'}}}>

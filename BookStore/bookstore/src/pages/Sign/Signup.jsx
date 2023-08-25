@@ -12,6 +12,10 @@ import { userSignUp } from '../../services/userService';
 
 function Signup({changePage}) {
     const [showPassword, setShowPassword] = useState(false);
+    const NameRegex = /^[A-Z]{1}[a-z]{2,}$/;
+    const UserNameRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]*$/;
+    const passRegex = /^.*(?=.{8,})(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/
+    const phoneRegex = /^[1-9]\d{2}\.\d{3}\.\d{4}$/
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     }
@@ -24,6 +28,18 @@ function Signup({changePage}) {
         password:'', 
         phone:''
     })
+
+    const [checkError, setCheckError] = useState({
+        fullNameTrue: false,
+        fullNameError:"",
+        EmailTrue: false,
+        EmailError: '',
+        PasswordTrue: false,
+        PasswordError: '',
+        phoneTrue:false,
+        phoneError:''
+    })
+
     const handleChange = (e) => {
         setData({
             ...data,
@@ -31,10 +47,37 @@ function Signup({changePage}) {
         })
     }
     const onSignUp = async() =>{ 
+        let fullNameTest = NameRegex.test(data.fullName)
+        let emailTest = UserNameRegex.test(data.email)
+        let passwordTest = passRegex.test(data.password)
+        let phoneTest = phoneRegex.test(data.phone)
         // localStorage.setItem('token',response.data.id)
-        let response = await userSignUp(data)
-        console.log(response)
-        window.location.reload();
+        if(fullNameTest === false) {
+            setCheckError({
+                fullNameTrue:true,
+                fullNameError:'Please Enter Valid Name'
+            })
+        } else if(emailTest === false) {
+            setCheckError({
+                EmailTrue:true,
+                EmailError: 'Enter Valid Email'
+            })
+        }   else if(passwordTest === false) {
+            setCheckError({
+                PasswordTrue:true,
+                PasswordError: 'The Password must contain atleast 8 characters,One UppercaseLetter,One LowercaseLetter,One number and Special Character'
+            })
+        } else if(phoneTest === true) {
+            setCheckError({
+                phoneTrue:true,
+                phoneError: 'Please Enter Valid Phone number'
+            })
+        }
+        if(fullNameTest && emailTest && passwordTest && phoneTest === true && checkError.confirmPasswordTrue === false) {
+            let response = await userSignUp(data)
+            console.log(response)
+            window.location.reload();
+        }
     }
     
     return (
@@ -66,6 +109,8 @@ function Signup({changePage}) {
                         }}
                         value={data.fullName}
                         onChange={handleChange}
+                        error={checkError.fullNameTrue}
+                        helperText={checkError.fullNameError}
                     />
                 </div>
             </Grid>
@@ -83,6 +128,8 @@ function Signup({changePage}) {
                         }}
                         value={data.email}
                         onChange={handleChange}
+                        error={checkError.EmailTrue}
+                        helperText={checkError.EmailError}
                     />
                 </div>
             </Grid>
@@ -93,6 +140,8 @@ function Signup({changePage}) {
                         <OutlinedInput
                             value={data.password}
                             onChange={handleChange}
+                            error={checkError.PasswordTrue}
+                            helperText={checkError.PasswordError}
                             id="password"
                             name='password'
                             type={showPassword ? 'text' : 'password'}
@@ -130,6 +179,8 @@ function Signup({changePage}) {
                         }}
                         value={data.phone}
                         onChange={handleChange}
+                        error={checkError.phoneTrue}
+                        helperText={checkError.phoneError}
                     />
                 </div>
             </Grid>

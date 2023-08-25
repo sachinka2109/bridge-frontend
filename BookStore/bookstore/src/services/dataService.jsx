@@ -7,12 +7,12 @@ const headerConfig = {
 };
 
 export let getBooks = async () => {
-  console.log(headerConfig);
+  // console.log(headerConfig);
   let response = await axios.get(
     "https://bookstore.incubation.bridgelabz.com/bookstore_user/get/book",
     headerConfig
   );
-  console.log(response);
+  // console.log(response);
   return response;
 };
 
@@ -30,6 +30,7 @@ export const getCartItems = async () => {
     "https://bookstore.incubation.bridgelabz.com/bookstore_user/get_cart_items",
     headerConfig
   );
+  console.log(response)
   return response;
 };
 
@@ -39,6 +40,7 @@ export const modifyCartItem = async (id, data) => {
     data,
     headerConfig
   );
+  console.log(response)
   return response;
 };
 
@@ -47,5 +49,6 @@ export const removeCartItem = async (id) => {
     `https://bookstore.incubation.bridgelabz.com/bookstore_user/remove_cart_item/${id}`,
     headerConfig
   );
+  console.log(response)
   return response;
 };

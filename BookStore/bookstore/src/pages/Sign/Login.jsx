@@ -12,6 +12,8 @@ import {Link as Linky } from 'react-router-dom';
 import { userLogin } from '../../services/userService';
 
 function Login({changePage}) {
+    const emailRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]+(.in)*$/;
+    const passwordRegex = /^.*(?=.{8,})(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/;
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -23,6 +25,14 @@ function Login({changePage}) {
         email: '',
         password:'', 
     })
+
+    const [checkError, setCheckError] = React.useState({
+        EmailTrue: false,
+        EmailError: '',
+        PasswordTrue: false,
+        PasswordError: ''
+    })
+
     const handleChange = (e) => {
         setData({
             ...data,
@@ -30,11 +40,25 @@ function Login({changePage}) {
         })
     }
     const onLogin = async() =>{ 
-        // localStorage.setItem('token',response.data.id)
-        let response = await userLogin(data)
-        console.log(response)
-        localStorage.setItem('token',response.data.result.accessToken)
-        window.location.reload();
+        let emailTest = emailRegex.test(data.email);
+        let passwordTest = passwordRegex.test(data.password);
+        if(emailTest === false) {
+            setCheckError({
+                EmailTrue: true,
+                EmailError: 'Please Enter valid Email'
+            })
+        } else if(passwordTest === false) {
+            setCheckError({
+                PasswordTrue: true,
+                PasswordError: 'Incorrect Password'
+            })
+        }
+        if(emailTest === true && passwordTest === true) {
+            let response = await userLogin(data)
+            console.log(response)
+            localStorage.setItem('token',response.data.result.accessToken)
+            window.location.reload();
+        }
     }
     return (
         <Grid container sx={{ justifyContent: 'center', gap: 2, flexDirection: 'column', alignItems: 'center',py:2}}>
@@ -66,6 +90,8 @@ function Login({changePage}) {
                         }}
                         value={data.email}
                         onChange={handleChange}
+                        error={checkError.EmailTrue}
+                        helperText = {checkError.EmailError}
                     />
                 </div>
             </Grid>
@@ -76,6 +102,8 @@ function Login({changePage}) {
                         <OutlinedInput
                             value={data.password}
                             onChange={handleChange}
+                            error={checkError.PasswordTrue}
+                            helperText = {checkError.PasswordError}
                             id="password"
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
