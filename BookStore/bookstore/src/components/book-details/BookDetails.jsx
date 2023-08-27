@@ -12,13 +12,12 @@ import QuantityComponent from '../quantity-component/QuantityComponent';
 function BookDetails() {
     const [book,setBook] = useState({});
     const [addCart,setAddCart] = useState(false);
+    const [cartItem,setCartItem] = useState({});
     let filteredItem;
     let { id } = useParams();
     const addToCart = async() => {
         let response = await addCartItem(id)
-        if(response) {
-            setAddCart(true)
-        }
+        getCartItem();
     }
 
 
@@ -27,6 +26,7 @@ function BookDetails() {
         const arr = response.data.result;
         console.log(arr);
         filteredItem = arr.find(item => item.product_id._id === id)
+        setCartItem(filteredItem)
         if(filteredItem) {
             setAddCart(true)
         }
@@ -45,8 +45,11 @@ function BookDetails() {
 
     useEffect(() => {
         getSingleBook();
-        getCartItem();
     }, []);
+
+    useEffect(() => {
+        getCartItem();
+    },[])
 
   return (
     <Box>
@@ -61,9 +64,9 @@ function BookDetails() {
                             <Button variant='contained' sx={{flexGrow:1,marginRight:'20px',backgroundColor:'#A03037','&:hover':{backgroundColor:'#A03037'}}} onClick={addToCart}>Add to bag</Button>
                         )
                     }
-                    { addCart && (
+                    { (addCart || filteredItem ) && (
                         <Box item sx={{display:'flex',alignItems:'center',flexGrow:1}}>
-                            <QuantityComponent id={id} setAddCart={setAddCart}/>
+                            <QuantityComponent item={cartItem} setAddCart={setAddCart} getCartItem={getCartItem}/>
                         </Box>
                     )}
                     <Button variant='contained' sx={{display:'inline-flex',alignItems:'center',flexGrow:1,backgroundColor:'#333333','&:hover':{backgroundColor:'#333333'}}}>
@@ -78,7 +81,7 @@ function BookDetails() {
                         {book.bookName}
                     </Typography>
                     <Typography variant="h6" color="initial" sx={{color:'#878787'}}>
-                        {book.bookAuthor}
+                        {book.author}
                     </Typography>
                     <Typography variant="span" color="text.secondary" component="div" sx={{display:'flex',alignItems:'center',my:1}}>
                         <Typography sx={{display:'flex',alignItems:'center',backgroundColor:'#388E3C',color:'white',px:1}}>
@@ -99,7 +102,7 @@ function BookDetails() {
                     </Typography>
                 </Box>
                 <Divider sx={{color:'#9D9D9D'}}></Divider>
-                    <Typography variant="body1" color="initial" sx={{fontSize:15,color:'#878787'}}>
+                    <Typography variant="body1" color="initial" sx={{fontSize:15,color:'#878787'}} component={'div'}>
                         <ul style={{padding:"15px"}}>
                             <li>Book Detail</li>    
                             <Typography variant='body2' sx={{color:'#373434',fontSize:12}}>{book.description}</Typography>

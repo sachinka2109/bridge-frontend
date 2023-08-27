@@ -1,24 +1,10 @@
 import { Grid, Typography, TextField, MenuItem, Button, InputAdornment} from '@mui/material'
-import React,{useState,useEffect} from 'react'
+import React from 'react'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { getCartItems } from '../../services/dataService'
 import CartItem from './CartItem';
 
 
-function Cart({onPlaceOrder}) {
-    const [data,setData] = useState([]);
-    // let data = myCartItems;
-    console.log(data)
-    const getCart = async() => {
-        let response = await getCartItems();
-        console.log(response)
-        setData(response.data.result);
-        console.log('myCartItems')
-    }
-
-    useEffect(() => {
-        getCart()
-    },[])
+function Cart({data,getCart,onPlaceOrder}) {
   return (
     <Grid container sx={{flexDirection:'column',border:'1px solid #DCDCDC',py:{xs:0,sm:2},px:{xs:0,sm:3}}}>
         <Grid item sx={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',p:1,px:3}}>

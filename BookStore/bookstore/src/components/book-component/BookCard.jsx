@@ -39,10 +39,10 @@ function BookCard({item}) {
                 </Typography>
                 <Typography variant="span" color="text.secondary" component="div" sx={{display:'flex',alignItems:'flex-start',my:1}}>
                     <span className='price'>
-                       Rs. {item.price}
+                       Rs. {item.discountPrice}
                     </span>
                     <span className='discount-price'>
-                        Rs. {item.discountPrice}
+                        Rs. {item.price}
                     </span>
                 </Typography>
             </CardContent>

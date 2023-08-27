@@ -1,59 +1,70 @@
-import { Box , IconButton, TextField} from '@mui/material'
-import React,{useEffect, useState} from 'react'
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import {getCartItems,modifyCartItem,removeCartItem} from '../../services/dataService'
+import { Box, IconButton, TextField } from "@mui/material";
+import React, { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { modifyCartItem, removeCartItem } from "../../services/dataService";
 
-function QuantityComponent({id,item,setAddCart}) {
-    const [cartItem,setCartItem] = useState({});
-    // console.log('quantityComponent');
-    let counter = cartItem.quantityToBuy;
-    const [count,setCount] = useState();
-    const handleCount = (string) => {
-        if(string === 'minus') {
-            if(count === 1) {
-                //logic to switch back to button and remove item
-                setAddCart(false)
-                return removeCartItem(cartItem._id)
-            } 
-            counter -=1;
-            setCount(counter)
-            return modifyCartItem(cartItem._id,{quantityToBuy:counter})
-        } else if(string === 'plus') {
-           counter +=1;
-           setCount(counter)
-           return modifyCartItem(cartItem._id,{quantityToBuy:counter})
+function QuantityComponent({item,setAddCart,getCart}) {
+  const [cartItem, setCartItem] = useState(item);
+  console.log("cartItem", cartItem);
+  const handleCount = async(string) => {
+    try {
+      if (string === "plus") {
+        setCartItem((prev) => ({
+          ...prev,
+          quantityToBuy: prev.quantityToBuy + 1,
+        }),
+        await modifyCartItem(cartItem._id, { quantityToBuy: cartItem.quantityToBuy + 1}));
+        // console.log('cartItemid',cartItem._id)
+      } else if (string === "minus") {
+        if(cartItem.quantityToBuy === 1) {
+          setAddCart(false)
+          // console.log('cartItemid',cartItem._id)
+          await removeCartItem(item._id)
         }
+        setCartItem((prev) => ({
+          ...prev,
+          quantityToBuy: prev.quantityToBuy - 1,
+        }),
+        await modifyCartItem(cartItem._id, { quantityToBuy: cartItem.quantityToBuy -1 }));
+      }
+      getCart();
     }
-
-    const getCartItem = async() => {
-        let response = await getCartItems();
-        const arr = response.data.result;
-         let filteredItem = arr.filter(item => item.product_id._id === id)
-        setCartItem(filteredItem[0])
-        setCount(filteredItem[0].quantityToBuy)
-        setAddCart(true)
+    catch(err) {
+      console.error("Error updating cart item:", err);
     }
+  };
 
-    useEffect(()=> {
-        getCartItem()
-    },[])
 
   return (
     <Box>
-        <IconButton size='small' sx={{backgroundColor:'#FAFAFA',border:'1px solid #DBDBDB'}} onClick={()=> handleCount('minus')}><RemoveIcon  fontSize='sm'/></IconButton>
-        <TextField sx={{width:'50px',mx:1}}
+      <IconButton
+        size="small"
+        sx={{ backgroundColor: "#FAFAFA", border: "1px solid #DBDBDB" }}
+        onClick={() => handleCount("minus")}
+      >
+        <RemoveIcon fontSize="sm" />
+      </IconButton>
+      <TextField
+        sx={{ width: "50px", mx: 1 }}
         inputProps={{
-            style: {
-                padding:4,
-                textAlign:'center',
-            }
+          style: {
+            padding: 4,
+            textAlign: "center",
+          },
         }}
-        value={count}
-        />
-        <IconButton size='small' sx={{backgroundColor:'#FAFAFA',border:'1px solid #DBDBDB'}} onClick={()=> handleCount('plus')}><AddIcon fontSize='sm'/></IconButton>
+        value={cartItem.quantityToBuy}
+        onChange={handleCount}
+      />
+      <IconButton
+        size="small"
+        sx={{ backgroundColor: "#FAFAFA", border: "1px solid #DBDBDB" }}
+        onClick={() => handleCount("plus")}
+      >
+        <AddIcon fontSize="sm" />
+      </IconButton>
     </Box>
-  )
+  );
 }
 
-export default QuantityComponent
+export default QuantityComponent;

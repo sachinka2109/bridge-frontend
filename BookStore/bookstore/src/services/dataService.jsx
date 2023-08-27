@@ -52,3 +52,14 @@ export const removeCartItem = async (id) => {
   console.log(response)
   return response;
 };
+
+
+export const orderItems = async (data) => {
+  let response = await axios.post(
+    `https://bookstore.incubation.bridgelabz.com/bookstore_user/add/order`,
+    data,
+    headerConfig
+  );
+  console.log(response)
+  return response;
+}

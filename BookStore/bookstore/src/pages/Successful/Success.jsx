@@ -1,6 +1,7 @@
 import { Grid, Typography, Button } from '@mui/material'
 import React from 'react'
 import OrderSuccess from '../../Images/ordersuccess.png'
+import { Link } from 'react-router-dom'
 
 function Success() {
   return (
@@ -35,9 +36,11 @@ function Success() {
                 </tbody>
             </table>
         </Grid>
-        <Button variant="contained" color="primary">
-          Continue Shopping
-        </Button>
+        <Link to='/'>    
+            <Button variant="contained" color="primary">
+            Continue Shopping
+            </Button>
+        </Link>
     </Grid>
   )
 }

@@ -23,8 +23,8 @@ function Router() {
             <Route path='/forgotpassword' element={<ForgotPassword/>} />
             <Route path='/book-details/:id' element={<ProtectedRoute><><Header/><BookDetails/></></ProtectedRoute>} />
             <Route path='/my-orders' element={<ProtectedRoute><><Header/><MyOrder/></></ProtectedRoute>} />
-            <Route path='/success' element={<ProtectedRoute><><Header/><Success/></></ProtectedRoute>} />
             <Route path='/cart' element={<ProtectedRoute><><Header/><MyCart/></></ProtectedRoute>} />
+            <Route path='/success' element={<ProtectedRoute><><Header/><Success/></></ProtectedRoute>} />
             {/* <Route path='*'>Error</Route> */}
         </Routes>
     </BrowserRouter>

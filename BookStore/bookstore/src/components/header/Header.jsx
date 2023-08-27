@@ -17,7 +17,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './Header.css';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -58,30 +58,30 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Header() {
-    // const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorElProfile, setAnchorElProfile] = React.useState(null);
     const open = Boolean(anchorElProfile);
-    // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   
-    // const isMenuOpen = Boolean(anchorEl);
-    // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   
-    // const handleProfileMenuOpen = (event) => {
-    //   setAnchorEl(event.currentTarget);
-    // };
+    const handleProfileMenuOpen = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
   
-    // const handleMobileMenuClose = () => {
-    //   setMobileMoreAnchorEl(null);
-    // };
+    const handleMobileMenuClose = () => {
+      setMobileMoreAnchorEl(null);
+    };
   
-    // const handleMenuClose = () => {
-    //   setAnchorEl(null);
-    //   handleMobileMenuClose();
-    // };
+    const handleMenuClose = () => {
+      setAnchorEl(null);
+      handleMobileMenuClose();
+    };
   
-    // const handleMobileMenuOpen = (event) => {
-    //   setMobileMoreAnchorEl(event.currentTarget);
-    // };
+    const handleMobileMenuOpen = (event) => {
+      setMobileMoreAnchorEl(event.currentTarget);
+    };
 
     const handleClick = (event) => {
       setAnchorElProfile(event.currentTarget);
@@ -92,88 +92,88 @@ function Header() {
       document.getElementById('profile-btn').classList.add('active')
     };
   
-    // const menuId = 'primary-search-account-menu';
-    // const renderMenu = (
-    //   <Menu
-    //     anchorEl={anchorEl}
-    //     anchorOrigin={{
-    //       vertical: 'top',
-    //       horizontal: 'right',
-    //     }}
-    //     id={menuId}
-    //     keepMounted
-    //     transformOrigin={{
-    //       vertical: 'top',
-    //       horizontal: 'right',
-    //     }}
-    //     open={isMenuOpen}
-    //     onClose={handleMenuClose}
-    //   >
-    //     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-    //     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    //   </Menu>
-    // );
+    const menuId = 'primary-search-account-menu';
+    const renderMenu = (
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        id={menuId}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      </Menu>
+    );
   
-    // const mobileMenuId = 'primary-search-account-menu-mobile';
-    // const renderMobileMenu = (
-    //   <Menu
-    //     anchorEl={mobileMoreAnchorEl}
-    //     anchorOrigin={{
-    //       vertical: 'top',
-    //       horizontal: 'right',
-    //     }}
-    //     id={mobileMenuId}
-    //     keepMounted
-    //     transformOrigin={{
-    //       vertical: 'top',
-    //       horizontal: 'right',
-    //     }}
-    //     open={isMobileMenuOpen}
-    //     onClose={handleMobileMenuClose}
-    //   >
-    //     <MenuItem>
-    //       <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-    //         <Badge badgeContent={4} color="error">
-    //           <MailIcon />
-    //         </Badge>
-    //       </IconButton>
-    //       <p>Messages</p>
-    //     </MenuItem>
-    //     <MenuItem>
-    //       <IconButton
-    //         size="large"
-    //         aria-label="show 17 new notifications"
-    //         color="inherit"
-    //       >
-    //         <Badge badgeContent={17} color="error">
-    //           <NotificationsIcon />
-    //         </Badge>
-    //       </IconButton>
-    //       <p>Notifications</p>
-    //     </MenuItem>
-    //     <MenuItem onClick={handleProfileMenuOpen}>
-    //       <IconButton
-    //         size="large"
-    //         aria-label="account of current user"
-    //         aria-controls="primary-search-account-menu"
-    //         aria-haspopup="true"
-    //         color="inherit"
-    //       >
-    //         <AccountCircle />
-    //       </IconButton>
-    //       <p>Profile</p>
-    //     </MenuItem>
-    //   </Menu>
-    // );
+    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        id={mobileMenuId}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+      >
+        <MenuItem>
+          <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            {/* <Badge badgeContent={4} color="error">
+              <MailIcon />
+            </Badge> */}
+          </IconButton>
+          <p>Messages</p>
+        </MenuItem>
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+          >
+            {/* <Badge badgeContent={17} color="error">
+              <NotificationsIcon />
+            </Badge> */}
+          </IconButton>
+          <p>Notifications</p>
+        </MenuItem>
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            {/* <AccountCircle /> */}
+          </IconButton>
+          <p>Profile</p>
+        </MenuItem>
+      </Menu>
+    );
     const onLogout = () => {
       localStorage.removeItem('token');
       window.location.reload();
     }
   
     return (
-      <Box sx={{ flexGrow:{xs: 0,sm:1}}}>
+      <Box>
         <AppBar position="static">
-          <Toolbar sx={{display:'flex',justifyContent:'flex-start',alignItems:'center',backgroundColor:'#A03037'}}>
+          <Toolbar sx={{display:'flex',justifyContent:'center',alignItems:'center',backgroundColor:'#A03037'}}>
             {/* <IconButton
               size="large"
               edge="start"
@@ -183,19 +183,18 @@ function Header() {
             >
               <MenuIcon />
             </IconButton> */}
-            <Box sx={{flexBasis:{xs:0,sm:'80px'}}}/>
-            <Link to='/' style={{textDecoration:'none'}}>            
+            <Link to='/' style={{textDecoration:'none',flex:'0 0 10%'}}>            
               <Typography
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ display:'flex',alignItems:'center',mx:{xs:0,md:'42px'},px:2,color:'white'}}
+                sx={{ display:'flex',alignItems:'center',px:2,color:'white'}}
               >
                 <Education/>
                 Bookstore
               </Typography>
             </Link>
-            <Search sx={{flexGrow:{xs:0,sm:2},bgcolor:'background.paper','&:hover':{bgcolor:'background.paper'}}}>
+            <Search sx={{flex:"0 1 490px",bgcolor:'background.paper','&:hover':{bgcolor:'background.paper'},marginRight:{xs:0,sm:10,md:16,lg:26}}}>
               <SearchIconWrapper>
                 <SearchIcon sx={{color:'#9D9D9D'}}/>
               </SearchIconWrapper>
@@ -205,8 +204,7 @@ function Header() {
                 sx={{color:'#9D9D9D'}}
               />
             </Search>
-            <Box sx={{flexGrow:2}}/>
-            <Box sx={{ display: { xs: 'none', md: 'flex' }}}>
+            <Box sx={{display: { xs: 'none', md: 'flex' },flex:"0 1 14%"}}>
                 <Button variant='contained' sx={{display:'flex',flexDirection:'column',px:3,backgroundColor:'#A03037',
                 textTransform:'none','&:hover':{backgroundColor: 'transparent',textDecoration: 'none'}}}
                 id="profile-btn"
@@ -253,14 +251,13 @@ function Header() {
                   </Button>
                 </Link>
             </Box>
-            <Box sx={{flex:'1 0'}}/>
-            <Box sx={{ display: { xs: 'flex', md: 'none' }}}>
+            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
                 aria-label="show more"
-                // aria-controls={mobileMenuId}
+                aria-controls={mobileMenuId}
                 aria-haspopup="true"
-                // onClick={handleMobileMenuOpen}
+                onClick={handleMobileMenuOpen}
                 color="inherit"
               >
                 <MoreIcon />
@@ -268,6 +265,8 @@ function Header() {
             </Box>
           </Toolbar>
         </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
       </Box>
     );
 }
