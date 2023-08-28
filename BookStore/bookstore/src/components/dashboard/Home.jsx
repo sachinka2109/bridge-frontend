@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography,Box } from '@mui/material'
 import BookCard from '../book-component/BookCard';
 import FormControl from '@mui/material/FormControl';
 import Pagination from '@mui/material/Pagination'
@@ -30,26 +30,24 @@ function Home() {
 
   return (
     <div>
-      <Grid container sx={{width:'100%',justifyContent:'center',flexDirection:'column',alignItems:'center'}}>
-        <Grid item sx={{display:'flex',justifyContent: 'space-between' }} xs={10} md={9} lg={9}>
-          <Typography variant="body1" color="initial" component={'div'} sx={{display:'flex',alignItems:'center',justifyContent:'space-between',flex:'1 0 100%'}}>
-            <Typography variant="body1" color="initial" component={'div'} sx={{fontSize:25,display:'flex',alignItems:'center'}}>
-              Books
-              <Typography variant="body1" color="initial" sx={{fontSize:12,color:'#9D9D9D'}}>
-                ({data.length})
-              </Typography>
+      <Grid container sx={{width:'100%',alignItems:'center',justifyContent:'center'}}>
+        <Grid item sx={{display:'flex',flex:'1 1 100%',justifyContent:'space-between'}} xs={10} md={9}>
+          <Typography variant="body1" color="initial" component={'div'} sx={{fontSize:25,display:'flex',alignItems:'center'}}>
+            Books
+            <Typography variant="body1" color="initial" sx={{fontSize:12,color:'#9D9D9D'}}>
+              ({data.length})
             </Typography>
-            <FormControl sx={{ m: 1, minWidth: 200}}>
-              <select style={{padding:5,backgroundColor:'white',border:'1px solid #E2E2E2',textAlign:'center'}} value={filter}>
-                <option selected>Sort By Relevance</option>
-                <option value={'low'}>Price:Low to High</option>
-                <option value={'high'}>Price:High to Low</option>
-                <option value={'new'}>New Arrivals</option>
-              </select>
-            </FormControl>
           </Typography>
+          <FormControl sx={{ m: 1, minWidth: 200}}>
+            <select style={{padding:5,backgroundColor:'white',border:'1px solid #E2E2E2',textAlign:'center'}} value={filter}>
+              <option selected>Sort By Relevance</option>
+              <option value={'low'}>Price:Low to High</option>
+              <option value={'high'}>Price:High to Low</option>
+              <option value={'new'}>New Arrivals</option>
+            </select>
+          </FormControl>
         </Grid>
-        <Grid item sx={{width:'80%'}}>
+        <Grid item sx={{display:'flex',width:'80%',flexDirection:'column',alignItems:'center'}}>
           <Grid container sx={{gap:3,flexWrap:'wrap',justifyContent:'center'}}>
             {currentBooks.map((item) => (
               <Link to={'/book-details/' + item._id} style={{ textDecoration: 'none' }} key={item._id}>
@@ -59,19 +57,18 @@ function Home() {
               </Link>
             ))}
           </Grid>
+          <Pagination
+            count={Math.ceil(data.length / booksPerPage)} 
+            page={currentPage}
+            variant="outlined"
+            shape="rounded"
+            sx={{ my: 5 ,
+            '& .Mui-selected': {
+              backgroundColor: '#8F2B2F',
+            }}}
+            onChange={handleChangePage}
+          />
         </Grid>
-        <Pagination
-          count={Math.ceil(data.length / booksPerPage)} 
-          page={currentPage}
-          variant="outlined"
-          shape="rounded"
-          sx={{ my: 5 ,
-          '& .Mui-selected': {
-            backgroundColor: '#8F2B2F',
-            color: 'white', 
-          }}}
-          onChange={handleChangePage}
-        />
       </Grid>
     </div>
   )

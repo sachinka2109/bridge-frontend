@@ -5,7 +5,7 @@ import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { FormControl,Rating } from '@mui/material';
 import { TextareaAutosize } from '@mui/base';
-import { addCartItem, getBooks,getCartItems} from '../../services/dataService';
+import { addCartItem, getBooks,getCartItems,postWishList} from '../../services/dataService';
 import { useParams } from 'react-router-dom';
 import QuantityComponent from '../quantity-component/QuantityComponent';
 
@@ -17,6 +17,11 @@ function BookDetails() {
     let { id } = useParams();
     const addToCart = async() => {
         let response = await addCartItem(id)
+        getCartItem();
+    }
+
+    const addToWishList = async() => {
+        let response = await postWishList(id)
         getCartItem();
     }
 
@@ -69,7 +74,7 @@ function BookDetails() {
                             <QuantityComponent item={cartItem} setAddCart={setAddCart} getCartItem={getCartItem}/>
                         </Box>
                     )}
-                    <Button variant='contained' sx={{display:'inline-flex',alignItems:'center',flexGrow:1,backgroundColor:'#333333','&:hover':{backgroundColor:'#333333'}}}>
+                    <Button variant='contained' sx={{display:'inline-flex',alignItems:'center',flexGrow:1,backgroundColor:'#333333','&:hover':{backgroundColor:'#333333'}}} onClick={addToWishList}>
                         <FavoriteIcon style={{fontSize:17,margin:'0px 4px'}}/> 
                         Wishlist
                     </Button>

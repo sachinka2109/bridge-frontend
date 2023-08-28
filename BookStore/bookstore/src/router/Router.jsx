@@ -10,6 +10,7 @@ import BookDetails from '../components/book-details/BookDetails'
 import MyOrder from '../components/my-order/MyOrder'
 import Success from '../pages/Successful/Success'
 import MyCart from '../components/cart-component/MyCart'
+import MyWishlist from '../components/wishlist-component/MyWishlist'
 
 function Router() {
   const [page,changePage] = useState(false);
@@ -23,6 +24,7 @@ function Router() {
             <Route path='/forgotpassword' element={<ForgotPassword/>} />
             <Route path='/book-details/:id' element={<ProtectedRoute><><Header/><BookDetails/></></ProtectedRoute>} />
             <Route path='/my-orders' element={<ProtectedRoute><><Header/><MyOrder/></></ProtectedRoute>} />
+            <Route path='/wishlist' element={<ProtectedRoute><><Header/><MyWishlist/></></ProtectedRoute>} />
             <Route path='/cart' element={<ProtectedRoute><><Header/><MyCart/></></ProtectedRoute>} />
             <Route path='/success' element={<ProtectedRoute><><Header/><Success/></></ProtectedRoute>} />
             {/* <Route path='*'>Error</Route> */}

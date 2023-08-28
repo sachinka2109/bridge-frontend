@@ -16,8 +16,9 @@ function Cart({data,getCart,onPlaceOrder}) {
                 startAdornment: <InputAdornment position="start"><LocationOnIcon sx={{color:'#A03037'}}/></InputAdornment>,
                 style:{margin:0}
             }}
+            value={"Use Current Location"}
             >
-                <MenuItem defaultValue='Use Current Location' selected>Use Current Location</MenuItem>
+                <MenuItem value={"Use Current Location"}>Use Current Location</MenuItem>
             </TextField>
         </Grid>
         <Grid item sx={{p:1,px:3}}>

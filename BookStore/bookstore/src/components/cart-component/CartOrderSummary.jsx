@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 
 
 function CartOrderSummary({data,toggleOrderSummary,getCart}) {
-    const [order,setOrder] = useState([]);
+    const [orders,setOrders] = useState({orders:[]});
     const myRef = useRef(true);
     const navigate = useNavigate();
     const onCheckOut = async(data) => {
@@ -17,14 +17,17 @@ function CartOrderSummary({data,toggleOrderSummary,getCart}) {
             product_price: item.product_id.discountPrice
         }));
     
-        setOrder((prevOrder) => [...prevOrder, ...newOrderItems],        
-        data.map(async(item) => (
-            await removeCartItem(item._id)
-        )),
+        setOrders((prevOrders) => ({
+            ...prevOrders,
+            orders: [...prevOrders.orders, ...newOrderItems],
+        }),
+        console.log('orders:',orders),
+        await orderItems(orders),
+        data.map(async (item) => {
+          await removeCartItem(item._id)
+        }),
+        );      
         navigate('/success')
-        );
-        // await orderItems(order)
-
     }
   return (
     <Grid container sx={{flexDirection:'column',border:'1px solid #DCDCDC',py:{xs:0,sm:2},px:{xs:0,sm:3}}}>

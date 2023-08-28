@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { ReactComponent as Education } from "../../Images/education.svg";
-import { Button } from '@mui/material';
+import { Button, Divider } from '@mui/material';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
@@ -91,6 +91,10 @@ function Header() {
       setAnchorElProfile(null);
       document.getElementById('profile-btn').classList.add('active')
     };
+    const onLogout = () => {
+      localStorage.removeItem('token');
+      window.location.reload();
+    }
   
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -113,6 +117,7 @@ function Header() {
         <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       </Menu>
     );
+
   
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
@@ -131,44 +136,21 @@ function Header() {
         open={isMobileMenuOpen}
         onClose={handleMobileMenuClose}
       >
-        <MenuItem>
-          <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-            {/* <Badge badgeContent={4} color="error">
-              <MailIcon />
-            </Badge> */}
-          </IconButton>
-          <p>Messages</p>
-        </MenuItem>
-        <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-          >
-            {/* <Badge badgeContent={17} color="error">
-              <NotificationsIcon />
-            </Badge> */}
-          </IconButton>
-          <p>Notifications</p>
-        </MenuItem>
-        <MenuItem onClick={handleProfileMenuOpen}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="inherit"
-          >
-            {/* <AccountCircle /> */}
-          </IconButton>
-          <p>Profile</p>
-        </MenuItem>
+        <Link to='/profile' style={{textDecoration:'none',color:'#878787'}}>
+          <MenuItem sx={{'&:hover':{color:'#A03037',backgroundColor:'lightcoral'}}}><PersonOutlineIcon /> Profile</MenuItem>
+        </Link>
+        <Link to='/my-orders' style={{textDecoration:'none',color:'#878787'}}>
+          <MenuItem sx={{'&:hover':{color:'#A03037',backgroundColor:'lightcoral'}}}><MarkunreadMailboxIcon />My Orders</MenuItem>
+        </Link>
+        <Link to='/wishlist' style={{textDecoration:'none',color:'#878787'}}>
+          <MenuItem sx={{'&:hover':{color:'#A03037',backgroundColor:'lightcoral'}}}><FavoriteBorderIcon />My Wishlist</MenuItem>
+        </Link>
+        <Link to='/cart' style={{textDecoration:'none',color:'#878787'}}>
+          <MenuItem sx={{'&:hover':{color:'#A03037',backgroundColor:'lightcoral'}}}><ShoppingCartIcon/> Cart</MenuItem>
+        </Link>
+        <Button variant='outlined' sx={{textTransform:'none',px:4,mx:1,my:1,borderColor:'#A03037',color:'#A03037','&:hover':{color:'#A03037',borderColor:'#A03037'}}} onClick={onLogout}>Logout</Button>
       </Menu>
     );
-    const onLogout = () => {
-      localStorage.removeItem('token');
-      window.location.reload();
-    }
   
     return (
       <Box>

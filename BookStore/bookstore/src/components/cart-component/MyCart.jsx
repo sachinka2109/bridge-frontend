@@ -32,7 +32,7 @@ function MyCart() {
   },[])
 
   return (
-    <Grid container sx={{mx:{xs:0,sm:11,md:22},p:1}}>
+    <Grid container sx={{mx:{xs:0,sm:11,md:17},p:1}}>
       {
         data.length === 0 ? (
           <>

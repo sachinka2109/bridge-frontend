@@ -30,7 +30,7 @@ export const getCartItems = async () => {
     "https://bookstore.incubation.bridgelabz.com/bookstore_user/get_cart_items",
     headerConfig
   );
-  console.log(response)
+  // console.log(response)
   return response;
 };
 
@@ -40,7 +40,7 @@ export const modifyCartItem = async (id, data) => {
     data,
     headerConfig
   );
-  console.log(response)
+  // console.log(response)
   return response;
 };
 
@@ -49,17 +49,31 @@ export const removeCartItem = async (id) => {
     `https://bookstore.incubation.bridgelabz.com/bookstore_user/remove_cart_item/${id}`,
     headerConfig
   );
-  console.log(response)
+  // console.log(response)
   return response;
 };
 
 
 export const orderItems = async (data) => {
-  let response = await axios.post(
-    `https://bookstore.incubation.bridgelabz.com/bookstore_user/add/order`,
-    data,
-    headerConfig
-  );
+  let response = await axios.post("https://bookstore.incubation.bridgelabz.com/bookstore_user/add/order",data,headerConfig);
+  console.log(response)
+  return response;
+}
+
+export const getWishList = async () => {
+  let response = await axios.get("https://bookstore.incubation.bridgelabz.com/bookstore_user/get_wishlist_items",headerConfig);
+  console.log('getWishList',response)
+  return response;
+}
+
+export const postWishList = async (id) => {
+  let response = await axios.post(`https://bookstore.incubation.bridgelabz.com/bookstore_user/add_wish_list/${id}`,'',headerConfig);
+  console.log(response)
+  return response;
+}
+
+export const deleteWishList = async (id) => {
+  let response = await axios.delete(`https://bookstore.incubation.bridgelabz.com/bookstore_user/remove_wishlist_item/${id}`,headerConfig);
   console.log(response)
   return response;
 }
