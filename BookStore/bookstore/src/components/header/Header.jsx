@@ -11,13 +11,15 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { ReactComponent as Education } from "../../Images/education.svg";
-import { Button, Divider } from '@mui/material';
+import { Badge, Button } from '@mui/material';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './Header.css';
 import { Link } from 'react-router-dom';
+import { getCartItems } from '../../services/dataService';
+import { useEffect } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -58,6 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Header() {
+    const [cart,setCart] = React.useState([]);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorElProfile, setAnchorElProfile] = React.useState(null);
     const open = Boolean(anchorElProfile);
@@ -151,6 +154,15 @@ function Header() {
         <Button variant='outlined' sx={{textTransform:'none',px:4,mx:1,my:1,borderColor:'#A03037',color:'#A03037','&:hover':{color:'#A03037',borderColor:'#A03037'}}} onClick={onLogout}>Logout</Button>
       </Menu>
     );
+
+    useEffect(() => {
+      getCart();
+    },[])
+
+    async function getCart() {
+      let response = await getCartItems();
+      setCart(response.data.result,console.log(cart))
+    }
   
     return (
       <Box>
@@ -228,7 +240,9 @@ function Header() {
                   <Button variant='contained' sx={{display:'flex',flexDirection:'column',px:4,backgroundColor:'#A03037',
                   textTransform:'none','&:hover':{backgroundColor: 'transparent',textDecoration: 'none'}}}
                   >
-                    <ShoppingCartIcon />
+                    <Badge badgeContent={cart.length}>
+                      <ShoppingCartIcon />
+                    </Badge>
                     Cart
                   </Button>
                 </Link>

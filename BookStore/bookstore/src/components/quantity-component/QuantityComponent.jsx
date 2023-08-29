@@ -58,7 +58,7 @@ function QuantityComponent({item,setAddCart,getCart}) {
       />
       <IconButton
         size="small"
-        sx={{ backgroundColor: "#FAFAFA", border: "1px solid #DBDBDB" }}
+        sx={{ backgroundColor: "#FAFAFA", border: "1px solid #DBDBDB"}}
         onClick={() => handleCount("plus")}
       >
         <AddIcon fontSize="sm" />
