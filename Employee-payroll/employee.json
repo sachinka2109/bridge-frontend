@@ -9,6 +9,26 @@
       "startDate": "2 February 2000",
       "notes": "hii hello",
       "id": 2
+    },
+    {
+      "name": "shubham kaythamwar",
+      "imageUrl": "https://i.pravatar.cc/35?img=11",
+      "gender": "Male",
+      "department": "[\"HR\",\"Engineer\"]",
+      "salary": "50000",
+      "startDate": "2 February 2001",
+      "notes": "sfsdfsdfsd",
+      "id": 3
+    },
+    {
+      "name": "alice queensland",
+      "imageUrl": "https://i.pravatar.cc/35?img=1",
+      "gender": "Female",
+      "department": "[\"Sales\",\"HR\"]",
+      "salary": "35000",
+      "startDate": "9 May 2011",
+      "notes": "wadawdawd",
+      "id": 4
     }
   ]
 }

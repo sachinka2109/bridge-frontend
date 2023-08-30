@@ -22,12 +22,13 @@ function onSubmit() {
         let gender;
         let selectedDepartment = [];
         // console.log(name + ' ' + salary + ' ' + day + ' ' + month + ' ' + year + ' ' + notes)
-        $("input[name='image']").each(function() {
-            if($(this).is(':checked')) {
-                imageUrl = $(this).val();
-                return false;
-            }
-        })
+        // $("input[name='image']").each(function() {
+        //     if($(this).is(':checked')) {
+        //         imageUrl = $(this).val();
+        //         return false;
+        //     }
+        // })
+        imageUrl = $("input[name='image']:checked").val();
     
         if($('#male').is(':checked')) {
             gender = $('#male').val();

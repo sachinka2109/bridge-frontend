@@ -1,0 +1,123 @@
+.flexbox-layout {
+    display:flex;
+    gap: 10px;
+    width: 400px;
+    height: 300px;
+    flex-flow: column wrap;
+}
+
+.box {
+    background-color: blue;
+    padding: 20px;
+}
+
+.box:nth-child(1),
+.box:nth-child(2),
+.box:nth-child(3) {
+    flex: 0 1 105px;
+}
+
+.box:nth-child(4) {
+    flex: 1 0 auto;
+}
+
+.box:nth-child(5) {
+    flex:0 1 5px;
+}
+
+.box:nth-child(6) {
+    flex:1 0 150px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; 
+}
+
+.row .box:nth-child(1) {
+    flex: 1 0 112px;
+}
+
+#box8 {
+    flex:1 0 120px;
+}
+
+.box:nth-child(9) {
+    flex: 0 0 123px;
+}
+
+.box:nth-child(10) {
+    margin-top: 68px;
+    flex: 1 0 100px;
+}
+
+/* .container {
+    display: flex;
+    width: 300px;
+    height: 200px;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.box {
+    background-color: blue;
+    color: white;
+    padding: 20px;
+}
+
+#box1 {
+    flex: 1 0 50px;
+}
+
+#box2 {
+    flex: 1 0 50px;
+}
+
+.flexbox1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.flexbox1 .box:nth-child(1) {
+    flex: 1 0 55px; 
+}
+
+.flexbox1 .box:nth-child(2) {
+    flex: 1 0 10px;
+}
+
+.flexbox1 .box:nth-child(3) {
+    flex: 0 1 0;
+    padding: 5px;
+}
+
+#box6 {
+    flex: 1 0 100px;
+}
+
+.box7 {
+    display: flex;
+    flex-direction: row;
+}
+
+#box7 {
+    padding: 5px;
+}
+
+.box8 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#box9 {
+    flex: 1 2 30px;
+}
+
+#box10 {
+    flex: 1 0 30px;
+} */
+

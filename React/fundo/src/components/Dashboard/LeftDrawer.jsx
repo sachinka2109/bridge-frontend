@@ -14,7 +14,7 @@ import Header from '../Header/Header';
 import './LeftDrawer.css';
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect,useDispatch } from 'react-redux';
 
 function LeftDrawer(props) {
   const [state, setState] = React.useState({
@@ -27,6 +27,11 @@ function LeftDrawer(props) {
   // if(state.left === false) {
   //   props.setLeftDrawerOpen(false);
   // }
+  let dispatch = useDispatch();
+  const handleTitleUpdate = (text) => {
+    console.log(text)
+    dispatch({type:text})
+  }
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -45,7 +50,7 @@ function LeftDrawer(props) {
       <List>
         {[{text:'Notes',icon: <LightbulbIcon/>,route:'/dashboard'},{text:'Remainder',icon: <NotificationsIcon/>},{text:'Edit Label',icon: <EditIcon/>},{text:'Archive',icon: <ArchiveIcon/>,route:'/archive'},{text:'Trash',icon: <DeleteIcon/>,route:'/trash'}]
         .map(({text,icon,route}, index) => (
-          <Link  key={text} to={route} style={{ textDecoration: 'none', color: 'inherit' }}>   
+          <Link  key={text} to={route} style={{ textDecoration: 'none', color: 'inherit' }}  onClick={() =>handleTitleUpdate(text)}>   
             <ListItem disablePadding>
               {state.left? 
                 (
@@ -99,10 +104,5 @@ function LeftDrawer(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-      title: state.title
-  };
-};
 
-export default connect(mapStateToProps)(LeftDrawer)
+export default connect()(LeftDrawer)
