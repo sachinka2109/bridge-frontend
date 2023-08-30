@@ -11,10 +11,10 @@ function ForgotPassword() {
         [event.target.name]: event.target.value
     })
   }
-  // const [checkError, setCheckError] = useState({
-  //   EmailTrue: false,
-  //   EmailError: '',
-  // })
+  const [checkError, setCheckError] = useState({
+    EmailTrue: false,
+    EmailError: '',
+  })
 
 
   const handleSubmit = async(event) => {
@@ -37,8 +37,8 @@ function ForgotPassword() {
                   value={details.email}
                   onChange={handleChange}
                   type='email'
-                  // error={checkError.EmailTrue}
-                  // helperText = {checkError.EmailError}
+                  error={checkError.EmailTrue}
+                  helperText = {checkError.EmailError}
               />
               </Grid>
               <Grid container sx={{marginBottom:'30px',padding:{xs:'10px 0px',sm:'30px'},justifyContent:'space-between'}}  >        

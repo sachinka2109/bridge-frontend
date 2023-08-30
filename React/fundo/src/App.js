@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import './App.css';
 import store from './components/Reducer/Store';
 import Router from './router/Router';
@@ -8,6 +9,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router></Router>
+      <Toaster />
     </Provider>
   );
 }

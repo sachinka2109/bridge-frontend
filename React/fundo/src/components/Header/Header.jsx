@@ -16,8 +16,10 @@ import AppsIcon from '@mui/icons-material/Apps';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import GridViewIcon from '@mui/icons-material/GridView';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
+import toast from 'react-hot-toast';
+import InfoIcon from '@mui/icons-material/Info';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -66,10 +68,13 @@ function Header(props) {
         setHide(!hide);
         props.toggleView();
     }
-
+    const navigate = useNavigate();
     let onSignOut = () => {
         localStorage.removeItem('token');
-        return <Navigate to={'/'} />
+        toast(() => (
+            <span style={{display:'flex',alignItems:'center'}}><InfoIcon color='primary'/>You have Logged Out</span>
+        ),'duration: 2000');
+        navigate('/')
     }
 
     const openSearchBar = () => {

@@ -1,14 +1,15 @@
 import React,{useState} from 'react'
 import { Grid,TextField,Button,Container} from '@mui/material'
 import { signIn } from '../../services/userFunction';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 
 function Signin() {
     const emailRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]+(.in)*$/;
     const passwordRegex = /^.*(?=.{8,})(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/;
     const [details,setDetails] = useState({email:"",password:""})
-
+    const navigate = useNavigate();
     const [checkError, setCheckError] = React.useState({
         EmailTrue: false,
         EmailError: '',
@@ -40,10 +41,16 @@ function Signin() {
             })
         }
         if(emailTest === true && passwordTest === true) {
-            let response = await signIn(details)
-            console.log(response.data.id)
-            console.log(response.data)
-            localStorage.setItem('token',response.data.id);
+            try {
+                let response = await signIn(details)
+                console.log(response.data.id)
+                console.log(response.data)
+                localStorage.setItem('token',response.data.id);
+                toast.success('User signed in successfully');
+                navigate('/dashboard')
+            } catch(err) { 
+                toast.error('Invalid credentials');
+            }
         }
         // axios.get('http://localhost:4000/users').then((response) => {
         //     let users = response.data;
@@ -78,18 +85,18 @@ function Signin() {
                     <h5 color='#dadce0' style={{margin:'10px 0',fontSize:'16px'}}>Use your Google Account</h5>
                 </Grid>
                 <Grid item marginBottom={'5px'} sx={{padding:{xs:'0 0 20px 0',sm:'0 30px 20px 30px'}}}>
-                    <TextField id="outlined-basic" label="Enter Email" variant="outlined" 
+                    <TextField data-testid="textfield" id="outlined-basic" label="Enter Email" variant="outlined" 
                     fullWidth  
                     name="email"
                     value={details.email}
                     onChange={handleChange}
-                    type='email'
+                    type='text'
                     error={checkError.EmailTrue}
                     helperText = {checkError.EmailError}
                 />
                 </Grid>
                 <Grid item sx={{padding:{xs:0,sm:'0 30px 20px 30px'}}}>
-                    <TextField id="outlined-basic" label="Enter your Password" variant="outlined" fullWidth 
+                    <TextField data-testid="textfield" id="outlined-basic" label="Enter your Password" variant="outlined" fullWidth 
                         type='password'
                         name="password"
                         value={details.password}
@@ -118,7 +125,7 @@ function Signin() {
                         </Link>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" type='submit' style={{textTransform: 'none'}}>Login</Button>
+                        <Button data-testid="loginbtn" variant="contained" type='submit' style={{textTransform: 'none'}}>Login</Button>
                     </Grid>
                 </Grid>
             </Grid>
