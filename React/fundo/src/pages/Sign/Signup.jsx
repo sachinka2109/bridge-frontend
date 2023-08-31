@@ -1,10 +1,11 @@
 import React,{useState} from 'react'
 import { Grid,TextField,Button,Container, FormControlLabel, Checkbox} from '@mui/material'
 // import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import Google from '../../images/google-img.png';
+import Google from '../../images/google-img.png'
 // import axios from 'axios';
 import { signUp } from '../../services/userFunction';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 function Signup() {
     const navigate = useNavigate();
@@ -84,9 +85,13 @@ function Signup() {
             })
         }
         if(firstNameTest && lastNameTest && emailTest && passwordTest === true && checkError.confirmPasswordTrue === false) {
-            let response = await signUp(details)
-            console.log(response.data)
-            navigate('/signin')
+            try {
+                let response = await signUp(details)
+                console.log(response.data)
+                return navigate('/signin')
+            }catch(err) {
+                toast.error('User Already Exists');
+            }
         }
     }
 
@@ -111,7 +116,7 @@ function Signup() {
                         <Grid item xs={12} md={10}>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} md={6}>
-                                    <TextField id="firstname" label="First name" variant="outlined" 
+                                    <TextField data-testid="textfield" id="firstname" label="First name" variant="outlined" 
                                     fullWidth
                                     value={details.fname} onChange={handleDetails}
                                     name='firstName'
@@ -120,7 +125,7 @@ function Signup() {
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={6}>
-                                    <TextField id="lastname" label="Last name" variant="outlined" 
+                                    <TextField data-testid="textfield" id="lastname" label="Last name" variant="outlined" 
                                     fullWidth
                                     value={details.lname} onChange={handleDetails}
                                     name='lastName'
@@ -130,7 +135,7 @@ function Signup() {
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} marginTop={'20px'}>
-                                <TextField id="email" label="Username" variant="outlined" 
+                                <TextField data-testid="textfield" id="email" label="Username" variant="outlined" 
                                 fullWidth
                                 value={details.email} onChange={handleDetails}
                                 name='email'
@@ -139,9 +144,9 @@ function Signup() {
                                 helperText={checkError.EmailError? checkError.EmailError : 'You can use letters,numbers & symbols'}
                                 />
                             </Grid>
-                            <Grid container spacing={2} style={{display:'flex',alignItems:'center',marginTop:'20px'}}>
-                                <Grid item xs={12} md={6}>
-                                    <TextField id="password" label="Password" variant="outlined" 
+                            <Grid container spacing={2} style={{display:'flex',alignItems:'flex-top',marginTop:'20px'}}>
+                                <Grid item sx={{display:'flex',gap:2,flexDirection:{xs:'column',md:'row'}}} xs={12}>
+                                    <TextField data-testid="textfield" id="password" label="Password" variant="outlined" 
                                     fullWidth
                                     value={details.password} onChange={handleDetails}
                                     type={showPassword? 'text': 'password'}
@@ -149,9 +154,7 @@ function Signup() {
                                     error={checkError.PasswordTrue}
                                     helperText={checkError.PasswordError}
                                     />
-                                </Grid>
-                                <Grid item xs={12} md={6} sx={{display:'flex',alignItems:'center'}}>
-                                    <TextField id="confirmPassword" label="Confirm" variant="outlined" 
+                                    <TextField data-testid="textfield" id="confirmPassword" label="Confirm" variant="outlined" 
                                     fullWidth
                                     type={showPassword? 'text': 'password'}
                                     name='confirmPassword'
@@ -159,9 +162,16 @@ function Signup() {
                                     helperText={checkError.confirmPasswordError}
                                     />
                                 </Grid>
-                                <Grid item style={{color:'rgba(0, 0, 0, 0.6)',paddingTop:'0'}}>
-                                    <h5>Use 8 or more characters with a mix of letters,numbers & symbols</h5>
+                                <Grid item xs={12} md={6} sx={{display:'flex',alignItems:'center'}}>
+
                                 </Grid>
+                                {
+                                    checkError.PasswordError || checkError.confirmPasswordError ? '' :(
+                                        <Grid item style={{color:'rgba(0, 0, 0, 0.6)',paddingTop:'0'}}>
+                                            <h5>Use 8 or more characters with a mix of letters,numbers & symbols</h5>
+                                        </Grid>
+                                    )
+                                }
                                 <Grid item justifyContent={'flex-start'} xs={10} style={{paddingTop:'0',textAlign:'left'}}>
                                     <FormControlLabel
                                     control={<Checkbox size='medium' checked={showPassword} onChange={handlePasswordVisibility}/>}
@@ -174,7 +184,7 @@ function Signup() {
                                     <Link to='/'>
                                         <Button variant='text' style={{ textTransform: 'none',fontSize:'16px'}}>Sign in instead</Button>
                                     </Link>
-                                    <Button variant='contained' type='submit'>
+                                    <Button variant='contained' type='submit' data-testid='submitbtn'>
                                         Next
                                     </Button>
                                 </Grid>
