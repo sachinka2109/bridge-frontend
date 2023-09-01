@@ -92,7 +92,7 @@ function Header(props) {
                         color="inherit"
                         aria-label="open drawer"
                         sx={{ mr: 1 }}
-                        onClick={props.handleOpen}
+                        onClick={() => {props.handleOpen(),props.setClicked(prev => !prev)}}
                     >
                         <MenuIcon/>
                     </IconButton>

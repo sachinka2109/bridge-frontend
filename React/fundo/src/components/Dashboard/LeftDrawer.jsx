@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -20,6 +20,7 @@ function LeftDrawer(props) {
   const [state, setState] = React.useState({
     left: false,
   });
+  const [clicked,setClicked] = useState(false)
 
   // if(state.left === true) {
   //   props.setLeftDrawerOpen(true);
@@ -82,8 +83,8 @@ function LeftDrawer(props) {
   return (
     <React.Fragment>
       <Box className='drawer-container'>
-        <Header handleOpen={handleOpen} toggleView={props.onButtonClick} searchText={props.searchText} setSearchText={props.setSearchText}></Header> 
-        <Box onMouseLeave={() => setState({left:false})}>
+        <Header handleOpen={handleOpen} toggleView={props.onButtonClick} searchText={props.searchText} setSearchText={props.setSearchText} setClicked={setClicked}></Header> 
+        <Box onMouseLeave={() => !clicked ?  setState({left:false}) : setState({left:true})}>
           <Drawer
             anchor={'left'}
             open={state['left']}

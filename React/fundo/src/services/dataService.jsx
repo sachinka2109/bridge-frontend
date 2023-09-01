@@ -29,6 +29,7 @@ export const updateArchive= async(data)=>{
 }
 
 export const deleteItem = async(data)=>{
+    console.log(data)
     let response = await axios.post("http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes",data,headerConfig)
     return response
 }

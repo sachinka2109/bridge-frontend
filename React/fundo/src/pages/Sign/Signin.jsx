@@ -46,8 +46,7 @@ function Signin() {
                 console.log(response.data.id)
                 console.log(response.data)
                 localStorage.setItem('token',response.data.id);
-                toast.success('User signed in successfully');
-                return navigate('/dashboard')
+                window.location.reload();
             } catch(err) { 
                 toast.error('Invalid credentials');
             }
