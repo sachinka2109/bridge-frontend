@@ -50,22 +50,13 @@ describe('Signin',() => {
         expect(passError).toBeInTheDocument();
     })
 
-    // test('We get response from server after submitting',async() => {
-    //     render(<Router />);
-    //     const login = screen.getByLabelText('Enter Email')
-    //     const password = screen.getByLabelText('Enter your Password');
-    //     const loginbtn = screen.getByTestId('loginbtn');
-    //     expect(login).toBeInTheDocument();
-    //     expect(password).toBeInTheDocument();
-    //     expect(loginbtn).toBeInTheDocument();
-    //     fireEvent.change(login, { target: { value: 'sachinkaythamwar@gmail.com' } });
-    //     fireEvent.change(password, { target: { value: 'Sachin@21' } });
-    //     expect(window.location.pathname).toBe('/');
-    //     fireEvent.click(loginbtn);
-    //     // let response = await signIn(data);
-    //     await waitFor(() => {
-    //         console.log(window.location.pathname)
-    //         expect(window.location.pathname).toBe('/dashboard');
-    //     });
-    // })
+    test('We get response from server after submitting',async() => {
+        
+
+        // let response = await signIn(data);
+        await waitFor(() => {
+            console.log(window.location.pathname)
+            expect(window.location.pathname).toBe('/dashboard');
+        });
+    })
 })

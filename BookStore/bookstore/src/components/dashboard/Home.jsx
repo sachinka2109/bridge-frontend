@@ -31,13 +31,15 @@ function Home() {
   return (
     <div>
       <Grid container sx={{width:'100%',alignItems:'center',justifyContent:'center'}}>
-        <Grid item sx={{display:'flex',flex:'1 1 100%',justifyContent:'space-between'}} xs={10} md={9}>
+        <Grid item sx={{display:'flex',justifyContent:'center',width:'80%'}}>
+          <Box sx={{flex:'0 1 3vw'}}/>
           <Typography variant="body1" color="initial" component={'div'} sx={{fontSize:25,display:'flex',alignItems:'center'}}>
             Books
             <Typography variant="body1" color="initial" sx={{fontSize:12,color:'#9D9D9D'}}>
               ({data.length})
             </Typography>
           </Typography>
+          <Box sx={{flex:'0 1 80%'}}/>
           <FormControl sx={{ m: 1, minWidth: 200}}>
             <select style={{padding:5,backgroundColor:'white',border:'1px solid #E2E2E2',textAlign:'center'}} value={filter}>
               <option selected>Sort By Relevance</option>
@@ -46,6 +48,7 @@ function Home() {
               <option value={'new'}>New Arrivals</option>
             </select>
           </FormControl>
+          <Box sx={{flex:'0 1 2vw'}}/>
         </Grid>
         <Grid item sx={{display:'flex',width:'80%',flexDirection:'column',alignItems:'center'}}>
           <Grid container sx={{gap:3,flexWrap:'wrap',justifyContent:'center'}}>
