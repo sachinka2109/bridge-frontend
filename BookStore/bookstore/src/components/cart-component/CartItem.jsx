@@ -5,12 +5,12 @@ import QuantityComponent from '../quantity-component/QuantityComponent';
 import { removeCartItem,deleteWishList } from '../../services/dataService';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function CartItem({data,getCart,myRef}) {
+function CartItem({data,getCartItem,myRef}) {
     console.log('cartItem',data)
     const removeItem = async() => {
         if(data.quantityToBuy) {
             await removeCartItem(data._id)
-            getCart();
+            getCartItem();
         } else {
             await deleteWishList(data.product_id._id)
         }
@@ -41,7 +41,7 @@ function CartItem({data,getCart,myRef}) {
                 {
                  !myRef && (
                     <Grid item sx={{display:'flex',alignItems:'center',marginTop:1}}>
-                        <QuantityComponent item = {data} getCart={getCart}/>
+                        <QuantityComponent item = {data} getCartItem={getCartItem}/>
                         <Typography variant="body1" color="initial" sx={{mx:{xs:1,sm:2},cursor:'pointer'}} onClick={removeItem}>Remove</Typography>
                     </Grid>
                  )

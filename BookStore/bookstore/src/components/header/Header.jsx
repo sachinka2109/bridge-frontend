@@ -30,16 +30,17 @@ import {
   StyledBoxContainer,
   StyledButton,
 } from "./Header.styled";
+import { connect,useDispatch } from 'react-redux';
 
-function Header() {
-  const [cart, setCart] = React.useState([]);
+function Header({cart}) {
+  // const [cart, setCart] = React.useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElProfile, setAnchorElProfile] = React.useState(null);
   const open = Boolean(anchorElProfile);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+  const dispatch = useDispatch();
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -91,7 +92,6 @@ function Header() {
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
-
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -150,10 +150,11 @@ function Header() {
   useEffect(() => {
     getCart();
   }, []);
-
+  
   async function getCart() {
     let response = await getCartItems();
-    setCart(response.data.result, console.log(cart));
+    // setCart(response.data.result, console.log(cart));
+    dispatch({type:'GET_CART_ITEMS',payload:response.data.result})
   }
 
   return (
@@ -241,7 +242,7 @@ function Header() {
             </Menu>
             <StyledMenuLink to="/cart">
               <StyledButton variant="contained" sx={{ px: 4 }}>
-                <Badge badgeContent={cart.length}>
+                <Badge badgeContent={cart.length} color="primary">
                   <ShoppingCartIcon />
                 </Badge>
                 Cart
@@ -268,4 +269,8 @@ function Header() {
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+  cart: state.CartReducer.cart,
+});
+
+export default connect(mapStateToProps)(Header);

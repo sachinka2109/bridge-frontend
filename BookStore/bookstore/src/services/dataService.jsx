@@ -12,7 +12,7 @@ export let getBooks = async () => {
     "https://bookstore.incubation.bridgelabz.com/bookstore_user/get/book",
     headerConfig
   );
-  // console.log(response);
+  console.log(response);
   return response;
 };
 

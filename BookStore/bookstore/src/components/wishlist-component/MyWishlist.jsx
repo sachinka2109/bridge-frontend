@@ -1,12 +1,10 @@
 import { Divider, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState,useRef } from 'react'
-import BookCard from '../book-component/BookCard'
 import CartItem from '../cart-component/CartItem'
 import { getWishList } from '../../services/dataService'
 
 function MyWishlist() {
     const [data,setData] = useState([]);
-    const myRef = useRef(true);
     const getWishlistData = async() =>{
         let response = await getWishList();
         console.log('wishlist',response)

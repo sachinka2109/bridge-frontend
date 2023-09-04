@@ -52,10 +52,10 @@ function Home() {
         </Grid>
         <Grid item sx={{display:'flex',width:'80%',flexDirection:'column',alignItems:'center'}}>
           <Grid container sx={{gap:3,flexWrap:'wrap',justifyContent:'center'}}>
-            {currentBooks.map((item) => (
+            {currentBooks.map((item,index) => (
               <Link to={'/book-details/' + item._id} style={{ textDecoration: 'none' }} key={item._id}>
                 <Grid item>
-                  <BookCard item={item} />
+                  <BookCard item={item} index={index}/>
                 </Grid>
               </Link>
             ))}

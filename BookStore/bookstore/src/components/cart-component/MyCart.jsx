@@ -1,16 +1,18 @@
 import React, {useEffect, useState } from 'react'
 import Cart from './Cart'
 import CartCustomerDetails from './CartCustomerDetails'
-import { Grid, Typography,Button } from '@mui/material'
+import { Grid, Typography,Button,Breadcrumbs } from '@mui/material'
 import CartOrderSummary from './CartOrderSummary'
 import { updateUser } from '../../services/userService'
 import { getCartItems } from '../../services/dataService'
 import { Link } from 'react-router-dom'
+import {connect ,useDispatch } from 'react-redux'
 
 function MyCart() {
   const [toggleCustomerDetails,setToggleCustomerDetails] = useState(false)
   const [toggleOrderSummary,setToggleOrderSummary] = useState(false)
   const [data,setData] = useState([]);
+  const dispatch = useDispatch()
   
   const onPlaceOrder = () => {
     setToggleCustomerDetails(true);
@@ -25,6 +27,7 @@ function MyCart() {
     console.log(response)
     setData(response.data.result);
     console.log('myCartItems')
+    dispatch({type:'GET_CART_ITEMS',payload:response.data.result})
   }
   
   useEffect(() => {
@@ -32,6 +35,13 @@ function MyCart() {
   },[])
 
   return (
+    <>
+    <Breadcrumbs aria-label="breadcrumb" sx={{mx:'11%',my:2}}>
+      <Link to='/' sx={{textDecoration:'none',color:'#9D9D9D'}}>
+          Home
+      </Link>
+      <Typography color="text.primary">My Cart</Typography>
+    </Breadcrumbs>
     <Grid container sx={{mx:{xs:0,sm:11,md:17},p:1}}>
       {
         data.length === 0 ? (
@@ -47,19 +57,20 @@ function MyCart() {
         ) : (
           <>
             <Grid item sx={{my:1}} xs={12} sm={10} md={9} lg={7}>
-              <Cart data={data} getCart={getCart} onPlaceOrder={onPlaceOrder} />
+              <Cart data={data} getCartItem={getCart} onPlaceOrder={onPlaceOrder} />
             </Grid>
             <Grid item sx={{my:1}} xs={12} sm={10} md={9} lg={7}>
               <CartCustomerDetails toggleCustomerDetails={toggleCustomerDetails} onContinue={onContinue}/>
             </Grid>
             <Grid item sx={{my:1}} xs={12} sm={10} md={9} lg={7}>
-              <CartOrderSummary data={data} toggleOrderSummary={toggleOrderSummary} getCart={getCart}/>
+              <CartOrderSummary data={data} toggleOrderSummary={toggleOrderSummary} getCartItem={getCart}/>
             </Grid>
           </>
         )
       }
     </Grid>
+    </>
   )
 }
 
-export default MyCart
+export default connect()(MyCart)
