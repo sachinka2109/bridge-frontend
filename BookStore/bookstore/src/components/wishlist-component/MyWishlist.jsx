@@ -1,7 +1,8 @@
-import { Divider, Grid, Typography } from '@mui/material'
+import { Divider, Grid, Typography,Breadcrumbs } from '@mui/material'
 import React, { useEffect, useState,useRef } from 'react'
 import CartItem from '../cart-component/CartItem'
 import { getWishList } from '../../services/dataService'
+import { Link } from 'react-router-dom'
 
 function MyWishlist() {
     const [data,setData] = useState([]);
@@ -15,7 +16,14 @@ function MyWishlist() {
         getWishlistData();
     },[])
   return (
-    <Grid sx={{my:8,mx:{xs:1,sm:5,md:19}}}>
+    <>
+    <Breadcrumbs aria-label="breadcrumb" sx={{mx:'11%',my:2}}>
+      <Link to='/' sx={{textDecoration:'none',color:'#9D9D9D'}}>
+          Home
+      </Link>
+      <Typography color="text.primary">My Wishlist</Typography>
+    </Breadcrumbs>
+    <Grid sx={{my:4,mx:{xs:1,sm:5,md:19}}}>
         <Grid container sx={{border:'1px solid #E4E4E4'}}>
             <Grid item sx={{backgroundColor:'#F5F5F5',px:4,py:2}} xs={12}>
                 <Typography variant="h5" color="initial">My Wishlist({data.length})</Typography>
@@ -34,6 +42,7 @@ function MyWishlist() {
             </Grid>
         </Grid>
     </Grid>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 const initialState = {
   cart: [],
-  wishlist: [],
-  user: null,
+  // wishlist: [],
+  // user: null,
 };
 
 // export const getCartTotal = (cart) =>

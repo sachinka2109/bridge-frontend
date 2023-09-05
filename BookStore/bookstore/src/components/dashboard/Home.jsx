@@ -9,7 +9,7 @@ import { getBooks } from '../../services/dataService';
 function Home() {
   const [data,setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filter,setFilter] = useState();
+  const [filter,setFilter] = useState('relevance');
   const booksPerPage = 8;
 
   useEffect(() => {
@@ -18,8 +18,18 @@ function Home() {
 
   const getAllBooks = async() => {
     let response = await getBooks();
-    console.log(response);
-    setData(response.data.result)
+    // console.log(response);
+    let bookData = response.data.result;
+    // console.log('bookData',bookData)
+    if(filter === 'low') {
+      setData(bookData.sort((a,b) => a.discountPrice - b.discountPrice))
+    } else if (filter === 'high') {
+      setData(bookData.sort((a,b) => a.discountPrice + b.discountPrice))
+    } else if (filter === 'new') {
+      setData(bookData.sort((a,b) => a.createdAt - b.createdAt))
+    } else {
+      setData(response.data.result)
+    }
   }
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
@@ -27,6 +37,16 @@ function Home() {
   const handleChangePage = (event, page) => {
     setCurrentPage(page);
   };
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value)
+    // console.log('filter',filter)
+  }
+
+  useEffect(() => {
+    getAllBooks();
+    // console.log('filter',filter)
+  }, [filter]);
 
   return (
     <div>
@@ -41,11 +61,11 @@ function Home() {
           </Typography>
           <Box sx={{flex:'0 1 80%'}}/>
           <FormControl sx={{ m: 1, minWidth: 200}}>
-            <select style={{padding:5,backgroundColor:'white',border:'1px solid #E2E2E2',textAlign:'center'}} value={filter}>
-              <option selected>Sort By Relevance</option>
-              <option value={'low'}>Price:Low to High</option>
-              <option value={'high'}>Price:High to Low</option>
-              <option value={'new'}>New Arrivals</option>
+            <select style={{padding:5,backgroundColor:'white',border:'1px solid #E2E2E2',textAlign:'center'}} value={filter} onChange={handleFilterChange}>
+              <option value="relevance">Sort By Relevance</option>
+              <option value='low'>Price:Low to High</option>
+              <option value='high'>Price:High to Low</option>
+              <option value='new'>New Arrivals</option>
             </select>
           </FormControl>
           <Box sx={{flex:'0 1 2vw'}}/>
