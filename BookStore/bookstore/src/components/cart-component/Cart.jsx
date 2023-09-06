@@ -21,7 +21,7 @@ function Cart({data,getCartItem,onPlaceOrder}) {
                 <MenuItem value={"Use Current Location"}>Use Current Location</MenuItem>
             </TextField>
         </Grid>
-        <Grid item sx={{p:1,px:3}}>
+        <Grid item sx={{display:'flex',p:1,px:3}}>
             <Grid container sx={{flexDirection:'column',gap:1}}>
                 <Grid item sx={{display:'flex',flexDirection:'column'}}>
                     {data.map(item => (

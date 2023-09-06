@@ -1,6 +1,6 @@
 import { Divider, Grid, Typography,Breadcrumbs } from '@mui/material'
 import React, { useEffect, useState,useRef } from 'react'
-import CartItem from '../cart-component/CartItem'
+import CartItem from '../../components/cart-component/CartItem'
 import { getWishList } from '../../services/dataService'
 import { Link } from 'react-router-dom'
 

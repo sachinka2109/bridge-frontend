@@ -40,7 +40,7 @@ function CartItem({data,getCartItem,myRef}) {
                 </Grid>
                 {
                  !myRef && (
-                    <Grid item sx={{display:'flex',alignItems:'center',marginTop:1}}>
+                    <Grid item sx={{display:'flex',alignItems:'center',marginTop:1,flexWrap:'nowrap'}}>
                         <QuantityComponent item = {data} getCartItem={getCartItem}/>
                         <Typography variant="body1" color="initial" sx={{mx:{xs:1,sm:2},cursor:'pointer'}} onClick={removeItem}>Remove</Typography>
                     </Grid>

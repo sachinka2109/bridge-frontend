@@ -54,7 +54,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 /******************************* Custom styling  ************************************/
 export const StyledHeaderToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
-  justifyContent: 'center',
+  justifyContent: !window.location.href.includes('forgotpassword')? 'center' :'flex-start',
   alignItems: 'center',
   backgroundColor: '#A03037',
 }))

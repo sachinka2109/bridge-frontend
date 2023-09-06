@@ -21,7 +21,7 @@ function Router() {
             <Route exact path='/' element={<ProtectedRoute><><Header/><Home/></></ProtectedRoute>}/>
             <Route path='/login' element={<AuthRoute><SignCombined page={page} changePage={changePage}/></AuthRoute>} />
             <Route path="/signup" element={<AuthRoute><SignCombined page={page} changePage={changePage}/></AuthRoute>}/>
-            <Route path='/forgotpassword' element={<ForgotPassword/>} />
+            <Route path='/forgotpassword' element={<AuthRoute><><Header/><ForgotPassword/></></AuthRoute>} />
             <Route path='/book-details/:id' element={<ProtectedRoute><><Header/><BookDetails/></></ProtectedRoute>} />
             <Route path='/my-orders' element={<ProtectedRoute><><Header/><MyOrder/></></ProtectedRoute>} />
             <Route path='/wishlist' element={<ProtectedRoute><><Header/><MyWishlist/></></ProtectedRoute>} />

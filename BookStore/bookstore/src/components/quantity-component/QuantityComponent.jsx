@@ -40,7 +40,7 @@ function QuantityComponent({item,setAddCart,getCartItem}) {
 
 
   return (
-    <Box>
+    <Box sx={{display:'flex'}}>
       <IconButton
         size="small"
         sx={{ backgroundColor: "#FAFAFA", border: "1px solid #DBDBDB" }}
