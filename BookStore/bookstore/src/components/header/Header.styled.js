@@ -1,5 +1,4 @@
 import { styled, alpha } from '@mui/material/styles';
-import { makeStyles } from '@mui/styles';
 import InputBase from '@mui/material/InputBase';
 import { Box, Button, MenuItem, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';

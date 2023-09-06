@@ -7,10 +7,10 @@ import ForgotPassword from '../pages/Sign/ForgotPassword'
 import ProtectedRoute from './ProtectedRoute'
 import AuthRoute from './AuthRoute'
 import BookDetails from '../components/book-details/BookDetails'
-import MyOrder from '../components/my-order/MyOrder'
+import MyOrder from '../pages/my-order/MyOrder'
 import Success from '../pages/Successful/Success'
-import MyCart from '../components/cart-component/MyCart'
-import MyWishlist from '../components/wishlist-component/MyWishlist'
+import MyCart from '../pages/cart/MyCart'
+import MyWishlist from '../pages/wishlist/MyWishlist'
 
 function Router() {
   const [page,changePage] = useState(false);
@@ -27,6 +27,8 @@ function Router() {
             <Route path='/wishlist' element={<ProtectedRoute><><Header/><MyWishlist/></></ProtectedRoute>} />
             <Route path='/cart' element={<ProtectedRoute><><Header/><MyCart/></></ProtectedRoute>} />
             <Route path='/success' element={<ProtectedRoute><><Header/><Success/></></ProtectedRoute>} />
+            <Route path='/profile' element={<ProtectedRoute><><Header/><Success/></></ProtectedRoute>} />
+            <Route path='/admin' element={<ProtectedRoute><><Header/><Success/></></ProtectedRoute>} />
             {/* <Route path='*'>Error</Route> */}
         </Routes>
     </BrowserRouter>
