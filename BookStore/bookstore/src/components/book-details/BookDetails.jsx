@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Typography,Button, FormGroup} from '@mui/material'
+import { Box, Divider, Grid, Typography,Button, FormGroup,Breadcrumbs} from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Book from '../../Images/Book.png'
 import StarIcon from '@mui/icons-material/Star';
@@ -8,27 +8,33 @@ import { TextareaAutosize } from '@mui/base';
 import { addCartItem, getBooks,getCartItems,postWishList} from '../../services/dataService';
 import { useParams } from 'react-router-dom';
 import QuantityComponent from '../quantity-component/QuantityComponent';
+import { connect,useDispatch } from 'react-redux';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from 'react-router-dom';
 
 function BookDetails() {
     const [book,setBook] = useState({});
     const [addCart,setAddCart] = useState(false);
+    const [review,setReview] = useState([]);
     const [cartItem,setCartItem] = useState({});
+    const dispatch = useDispatch();
     let filteredItem;
     let { id } = useParams();
     const addToCart = async() => {
-        let response = await addCartItem(id)
-        getCartItem();
+        await addCartItem(id)
+        getCartItem()
     }
 
     const addToWishList = async() => {
-        let response = await postWishList(id)
-        getCartItem();
+        await postWishList(id)
+        getCartItem()
     }
 
 
     const getCartItem = async() => {
         let response = await getCartItems();
         const arr = response.data.result;
+        dispatch({type:'GET_CART_ITEMS',payload:arr})
         console.log(arr);
         filteredItem = arr.find(item => item.product_id._id === id)
         setCartItem(filteredItem)
@@ -58,6 +64,12 @@ function BookDetails() {
 
   return (
     <Box>
+        <Breadcrumbs aria-label="breadcrumb" sx={{mx:'11%',my:2}}>
+            <Link to='/' sx={{textDecoration:'none',color:'#9D9D9D'}}>
+                Home
+            </Link>
+            <Typography color="text.primary">Books(01)</Typography>
+        </Breadcrumbs>
         <Grid container sx={{justifyContent:'center',alignItems:'flex-start'}}>
             <Grid item sx={{display:'flex',flexDirection:'column',mx:5}}>
                 <Typography component={'div'} sx={{border:'1px solid #D1D1D1',px:3,py:2}}>
@@ -129,10 +141,40 @@ function BookDetails() {
                         </Button>
                     </FormGroup>
                 </Box>
+                <Box>
+                    <Grid container sx={{display:'flex',flexDirection:'column',px:1,py:2}}>
+                        <Grid item sx={{display:'flex'}}>
+                            <Grid item>
+                                <AccountCircleIcon fontSize='large'/>
+                            </Grid>
+                            <Grid item sx={{paddingLeft:1}}>
+                                <Typography variant="body1" color="initial">Sachin Kaythamwar</Typography>
+                                <Rating name="half-rating" readOnly/>
+                            </Grid>
+                        </Grid>
+                        <Grid item sx={{paddingLeft:5}}>
+                            <Typography variant="body1" color="initial">Good product. Even though the translation could have been better, Chanakya's neeti are thought provoking. Chanakya has written on many different topics and his writings are succinct.</Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid container sx={{display:'flex',flexDirection:'column',px:1,py:2}}>
+                        <Grid item sx={{display:'flex'}}>
+                            <Grid item>
+                                <AccountCircleIcon fontSize='large'/>
+                            </Grid>
+                            <Grid item sx={{paddingLeft:1}}>
+                                <Typography variant="body1" color="initial">Sachin Kaythamwar</Typography>
+                                <Rating name="half-rating" readOnly/>
+                            </Grid>
+                        </Grid>
+                        <Grid item sx={{paddingLeft:5}}>
+                            <Typography variant="body1" color="initial">Good product. Even though the translation could have been better, Chanakya's neeti are thought provoking. Chanakya has written on many different topics and his writings are succinct.</Typography>
+                        </Grid>
+                    </Grid>
+                </Box>
             </Grid>
         </Grid>
     </Box>
   )
 }
 
-export default BookDetails
+export default connect()(BookDetails)

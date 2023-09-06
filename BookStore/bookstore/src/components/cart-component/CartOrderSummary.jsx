@@ -5,7 +5,7 @@ import { orderItems, removeCartItem } from '../../services/dataService';
 import {useNavigate} from 'react-router-dom';
 
 
-function CartOrderSummary({data,toggleOrderSummary,getCart}) {
+function CartOrderSummary({data,toggleOrderSummary,getCartItem}) {
     const [orders,setOrders] = useState({orders:[]});
     const myRef = useRef(true);
     const navigate = useNavigate();
@@ -26,6 +26,7 @@ function CartOrderSummary({data,toggleOrderSummary,getCart}) {
         data.map(async (item) => {
           await removeCartItem(item._id)
         }),
+        getCartItem(),
         );      
         navigate('/success')
     }
@@ -39,7 +40,7 @@ function CartOrderSummary({data,toggleOrderSummary,getCart}) {
                 <Grid container sx={{flexDirection:'column',gap:1}}>
                     <Grid item sx={{display:'flex',flexDirection:'column'}}>
                         {data.map(item => (
-                            <CartItem  key={data._id} data={item} getCart={getCart} myRef={myRef}/>
+                            <CartItem  key={data._id} data={item} getCartItem={getCartItem} myRef={myRef}/>
                         ))}
                     </Grid>
                     <Grid item sx={{alignSelf:'end'}}>

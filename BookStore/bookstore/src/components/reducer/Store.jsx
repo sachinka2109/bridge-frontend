@@ -1,8 +1,10 @@
 import {createStore,combineReducers} from 'redux';
 import CartReducer from './CartReducer';
+import SearchReducer from './SearchReducer';
 
 const mainReducer = combineReducers({
-    CartReducer: CartReducer
+    CartReducer: CartReducer,
+    SearchReducer:SearchReducer
 })
 
 const store = createStore(mainReducer)
