@@ -10,6 +10,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Signup.css';
 import {Link as Linky } from 'react-router-dom';
 import { userLogin } from '../../services/userService';
+import { adminUserLogin } from '../../services/adminService';
 
 function Login({changePage}) {
     const emailRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]+(.in)*$/;
@@ -54,10 +55,18 @@ function Login({changePage}) {
             })
         }
         if(emailTest === true && passwordTest === true) {
-            let response = await userLogin(data)
-            console.log(response)
-            localStorage.setItem('token',response.data.result.accessToken)
-            window.location.reload();
+            if(window.location.href.includes('signin')) {
+                let response = await userLogin(data)
+                console.log(response)
+                localStorage.setItem('token',response.data.result.accessToken)
+                window.location.reload();
+            }
+            else if(window.location.href.includes('admin-login')) { 
+                let response = await adminUserLogin(data)
+                console.log(response)
+                localStorage.setItem('admin-token',response.data.result.accessToken)
+                window.location.reload();
+            }
         }
     }
     return (
@@ -69,7 +78,7 @@ function Login({changePage}) {
                     </Link>
                 </Grid>
                 <Grid item onClick={()=> {changePage(true)}} className='Signup-link'>
-                    <Linky to={'/signup'} style={{textDecoration:'none'}}>         
+                    <Linky to={window.location.href.includes('admin-login') ? '/admin-signup' : '/signup'} style={{textDecoration:'none'}}>         
                         <Link sx={{ fontSize: '25px', color: '#878787',fontWeight:'bold',textDecoration:'none'}}>
                             SIGNUP
                         </Link>
@@ -124,7 +133,7 @@ function Login({changePage}) {
                                 }
                             }}
                         />
-                        <label style={{ fontSize: '10px',alignSelf:'flex-end',color:'#9D9D9D'}}>Forgot Password?</label>
+                        <label style={{ fontSize: '10px',alignSelf:'flex-end',color:'#9D9D9D'}}><Linky to='/forgotpassword' style={{textDecoration:'none',color:'#9D9D9D'}}>Forgot Password?</Linky></label>
                     </div>
                 </FormControl>
             </Grid>

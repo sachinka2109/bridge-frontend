@@ -67,7 +67,7 @@ function Header({cart}) {
     document.getElementById("profile-btn").classList.add("active");
   };
   const onLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     window.location.reload();
   };
 
@@ -148,22 +148,22 @@ function Header({cart}) {
   );
 
   useEffect(() => {
-    getCart();
+    if(!window.location.href.includes('forgotpassword') && !window.location.href.includes('admin')) {
+      getCart();
+    }
   }, []);
   
   async function getCart() {
-    if(!window.location.href.includes('forgotpassword')) {
       let response = await getCartItems();
       // setCart(response.data.result, console.log(cart));
       dispatch({type:'GET_CART_ITEMS',payload:response.data.result})
-    }
   }
 
   return (
     <Box>
       <AppBar position="static">
         <StyledHeaderToolbar>
-          <StyledHeaderLogoLink to="/">
+          <StyledHeaderLogoLink to={window.location.href.includes('admin')? "/admin/products" :"/"}>
             <StyledHeaderLogoTypography variant="h6" noWrap component="div">
               <Education />
               Bookstore
@@ -222,36 +222,52 @@ function Header({cart}) {
                       Profile
                     </StyledMenuItem>
                   </StyledMenuLink>
-                  <StyledMenuLink to="/my-orders">
-                    <StyledMenuItem>
-                      <MarkunreadMailboxIcon
-                        fontSize="sm"
-                        style={{ marginRight: 10 }}
-                      />
-                      My Orders
-                    </StyledMenuItem>
-                  </StyledMenuLink>
-                  <StyledMenuLink to="/wishlist">
-                    <StyledMenuItem>
-                      <FavoriteBorderIcon
-                        fontSize="sm"
-                        style={{ marginRight: 10 }}
-                      />
-                      My Wishlist
-                    </StyledMenuItem>
-                  </StyledMenuLink>
+                  {!window.location.href.includes('admin') && (
+                    <>                
+                      <StyledMenuLink to="/my-orders">
+                        <StyledMenuItem>
+                          <MarkunreadMailboxIcon
+                            fontSize="sm"
+                            style={{ marginRight: 10 }}
+                          />
+                          My Orders
+                        </StyledMenuItem>
+                      </StyledMenuLink>
+                      <StyledMenuLink to="/wishlist">
+                        <StyledMenuItem>
+                          <FavoriteBorderIcon
+                            fontSize="sm"
+                            style={{ marginRight: 10 }}
+                          />
+                          My Wishlist
+                        </StyledMenuItem>
+                      </StyledMenuLink>
+                    </>
+                  )}
                   <StyledLogoutBtn variant="outlined" onClick={onLogout}>
                     Logout
                   </StyledLogoutBtn>
                 </Menu>
-                <StyledMenuLink to="/cart">
-                  <StyledButton variant="contained" sx={{ px: 4 }}>
-                    <Badge badgeContent={cart.length} color="primary">
-                      <ShoppingCartIcon />
-                    </Badge>
-                    Cart
-                  </StyledButton>
-                </StyledMenuLink>
+                { !window.location.href.includes('admin') && (
+                  <StyledMenuLink to="/cart">
+                    <StyledButton variant="contained" sx={{ px: 4 }}>
+                      <Badge badgeContent={cart.length} color="primary">
+                        <ShoppingCartIcon />
+                      </Badge>
+                      Cart
+                    </StyledButton>
+                  </StyledMenuLink>
+                )}
+                { window.location.href.includes('admin') && (
+                  <StyledMenuLink to="/admin-orders">
+                    <StyledButton variant="contained" sx={{ px: 4 }}>
+                      <Badge badgeContent={cart.length} color="primary">
+                        <ShoppingCartIcon />
+                      </Badge>
+                      Orders
+                    </StyledButton>
+                  </StyledMenuLink>
+                )}
               </StyledBoxContainer>
               <Box sx={{ display: { xs: "flex", md: "none" } }}>
                 <IconButton

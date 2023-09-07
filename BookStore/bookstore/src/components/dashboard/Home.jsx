@@ -11,16 +11,15 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filter,setFilter] = useState('relevance');
   const booksPerPage = 8;
-
+  const location = window.location.href;
   useEffect(() => {
     getAllBooks()
   }, [])
 
   const getAllBooks = async() => {
     let response = await getBooks();
-    // console.log(response);
     let bookData = response.data.result;
-    // console.log('bookData',bookData)
+    console.log(response);
     if(filter === 'low') {
       setData(bookData.sort((a,b) => a.discountPrice - b.discountPrice))
     } else if (filter === 'high') {
@@ -73,7 +72,7 @@ function Home() {
         <Grid item sx={{display:'flex',width:'80%',flexDirection:'column',alignItems:'center'}}>
           <Grid container sx={{gap:3,flexWrap:'wrap',justifyContent:'center'}}>
             {currentBooks.map((item,index) => (
-              <Link to={'/book-details/' + item._id} style={{ textDecoration: 'none' }} key={item._id}>
+              <Link to={location.includes('admin')?'/admin/book-details/' + item._id :'/book-details/' + item._id} style={{ textDecoration: 'none' }} key={item._id}>
                 <Grid item>
                   <BookCard item={item} index={index}/>
                 </Grid>

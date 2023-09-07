@@ -5,7 +5,7 @@ const ProtectedRoute = ({children}) => {
     if(localStorage.getItem('token')) {
         return children
     }
-    return <Navigate to='/login'/>
+    return <Navigate to='/signin'/>
 }
 
 export default ProtectedRoute

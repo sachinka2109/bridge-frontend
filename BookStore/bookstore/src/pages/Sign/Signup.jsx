@@ -9,13 +9,13 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Login.css';
 import { Link as Linky } from 'react-router-dom';
 import { userSignUp } from '../../services/userService';
+import { adminUserSignup } from '../../services/adminService';
 
 function Signup({changePage}) {
     const [showPassword, setShowPassword] = useState(false);
-    const NameRegex = /^[A-Z]{1}[a-z]{2,}$/;
-    const UserNameRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]*$/;
+    const emailRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]*$/;
     const passRegex = /^.*(?=.{8,})(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/
-    const phoneRegex = /^[1-9]\d{2}\.\d{3}\.\d{4}$/
+    const phoneRegex = /^(\+91|0)?[6789]\d{9}$/
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     }
@@ -46,18 +46,14 @@ function Signup({changePage}) {
             [e.target.id]: e.target.value 
         })
     }
+
+    
     const onSignUp = async() =>{ 
-        let fullNameTest = NameRegex.test(data.fullName)
-        let emailTest = UserNameRegex.test(data.email)
+        let emailTest = emailRegex.test(data.email)
         let passwordTest = passRegex.test(data.password)
         let phoneTest = phoneRegex.test(data.phone)
         // localStorage.setItem('token',response.data.id)
-        if(fullNameTest === false) {
-            setCheckError({
-                fullNameTrue:true,
-                fullNameError:'Please Enter Valid Name'
-            })
-        } else if(emailTest === false) {
+        if(emailTest === false) {
             setCheckError({
                 EmailTrue:true,
                 EmailError: 'Enter Valid Email'
@@ -67,16 +63,22 @@ function Signup({changePage}) {
                 PasswordTrue:true,
                 PasswordError: 'The Password must contain atleast 8 characters,One UppercaseLetter,One LowercaseLetter,One number and Special Character'
             })
-        } else if(phoneTest === true) {
+        } else if(phoneTest === false) {
             setCheckError({
                 phoneTrue:true,
                 phoneError: 'Please Enter Valid Phone number'
             })
         }
-        if(fullNameTest && emailTest && passwordTest && phoneTest === true && checkError.confirmPasswordTrue === false) {
-            let response = await userSignUp(data)
-            console.log(response)
-            window.location.reload();
+        if(emailTest && passwordTest && phoneTest === true) {
+            if(window.location.href.includes('signup')) {
+                let response = await userSignUp(data)
+                console.log(response)
+                // return window.location.reload();
+            } else if(window.location.href.includes('admin-signup')) {
+                let response = await adminUserSignup(data)
+                console.log(response)
+                // return window.location.reload();
+            }
         }
     }
     
@@ -84,7 +86,7 @@ function Signup({changePage}) {
         <Grid container sx={{ justifyContent: 'center', gap: 2, flexDirection: 'column', alignItems: 'center',py:2}}>
             <Grid container sx={{ justifyContent: 'center', gap: 12 }}>
                 <Grid item onClick={()=> {changePage(false)}} className='Login-link'> 
-                    <Linky to={'/login'} style={{textDecoration:'none'}}>                
+                    <Linky to={window.location.href.includes('admin-signup') ? '/admin-login' : '/signin'} style={{textDecoration:'none'}}>                
                         <Link sx={{ fontSize: '25px', color: '#878787',fontWeight:'bold',textDecoration:'none'}} >
                             LOGIN
                         </Link>
@@ -109,8 +111,8 @@ function Signup({changePage}) {
                         }}
                         value={data.fullName}
                         onChange={handleChange}
-                        error={checkError.fullNameTrue}
-                        helperText={checkError.fullNameError}
+                        // error={checkError.fullNameTrue}
+                        // helperText={checkError.fullNameError}
                     />
                 </div>
             </Grid>
