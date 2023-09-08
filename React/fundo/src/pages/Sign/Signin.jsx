@@ -45,8 +45,8 @@ function Signin() {
                 let response = await signIn(details)
                 console.log(response.data.id)
                 console.log(response.data)
-                localStorage.setItem('token',response.data.id);
-                window.location.reload();
+                // window.location.reload();
+                navigate('/dashboard');
             } catch(err) { 
                 toast.error('Invalid credentials');
             }

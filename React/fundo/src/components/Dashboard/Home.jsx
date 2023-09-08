@@ -45,20 +45,18 @@ function Home() {
   }
 
   useEffect(()=> {
-    async function fetchData() {
-      getData();
-    }
-    fetchData();
+    getData();
   },[])
 
   useEffect(()=> {
+    console.log('data-called')
     if(searchText !== '') {
       const searchResult = data.filter(data => data.title.toLowerCase().includes(searchText.toLowerCase()) || data.description.toLowerCase().includes(searchText.toLowerCase()));
       setData(searchResult);
     } else {
       getData();
     }
-  },[searchText,data])
+  },[searchText,data.length])
 
   const getData = async() => {
     let currentUrl = window.location.href;

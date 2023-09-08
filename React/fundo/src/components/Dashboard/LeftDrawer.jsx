@@ -63,7 +63,7 @@ function LeftDrawer(props) {
                   </ListItemButton> 
                 ):
                 (
-                  <IconButton size='large' sx={{margin:'8px 16px'}} onMouseEnter={() => setState({left:true})}>
+                  <IconButton size='large' sx={{margin:'8px 16px'}}>
                     {icon}
                   </IconButton>
                 )

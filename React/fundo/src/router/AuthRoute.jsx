@@ -1,12 +1,14 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom';
+import { Navigate,useLocation } from 'react-router-dom';
 
 let AuthRoute = ({children}) => {
-    if(localStorage.getItem('token') === undefined || localStorage.getItem('token') === null) {
+    const location = useLocation(); 
+    const token = localStorage.getItem('token');
+    if(!token) {
         // console.log('this is  auth route')
         return children
     }
-    return <Navigate to='/dashboard' />
+    return <Navigate to='/dashboard' replace state={{ from: location }}/>
 }
 
 export default AuthRoute

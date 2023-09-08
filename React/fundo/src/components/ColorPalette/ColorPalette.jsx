@@ -25,10 +25,12 @@ const handleClick = (newPlacement) => (event) => {
  const selectColor = async(color) => {
   if(action==="create") {
     setNotes((prevState)=>({...prevState, color:color}))
+    setOpen(false);
   } else if(action==="edit") {
   let data={noteIdList:[noteId],color:color}
     let response = await updateColor(data);
     updatecolor();
+    setOpen(false);
     console.log(response);  
     // setNotes((prevState)=>({...prevState, color:color}))
   }

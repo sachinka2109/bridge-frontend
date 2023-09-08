@@ -3,6 +3,7 @@ import axios from 'axios'
 export let signIn = async(data) => {
     let response = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/login',data)
     console.log(response)
+    localStorage.setItem('token',response.data.id);
     return response
 }
 
