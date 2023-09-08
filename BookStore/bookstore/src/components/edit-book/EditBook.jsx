@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { FormControl, TextField, Box, Button } from "@mui/material";
-import { addProduct } from "../../services/adminDataService";
+import { FormControl, TextField, Box, Button, Typography } from "@mui/material";
+import { addProduct, updateProduct } from "../../services/adminDataService";
+import { useNavigate } from "react-router-dom";
 
-function EditBook() {
+function EditBook({item,getSingleBook}) {
+  const location = window.location.href;
+  const navigate = useNavigate();
   const [data, setData] = useState({
-    bookName: "",
-    author: "",
-    description: "",
-    quantity: "",
-    price: 0,
-    discountPrice: 0,
+    bookName: item?.bookName || "",
+    author: item?.author || "",
+    description: item?.description || "",
+    quantity: item?.quantity || "",
+    price: item?.price || 0,
+    discountPrice: item?.discountPrice || "",
   });
 
   const handleChange = (e) => {
@@ -20,13 +23,20 @@ function EditBook() {
   };
 
   const onSubmit = async () => {
-    console.log(data);
-    let res = await addProduct(data);
-    console.log("added", res);
+    if(location.includes('edit')) {
+      let res = await updateProduct(item._id,data);
+      console.log('edited',res);
+      getSingleBook();
+      navigate(`/admin/book-details/${item._id}`)
+    } else {
+      let res = await addProduct(data);
+      console.log("added", res);
+    }
   };
 
   return (
-    <Box sx={}>
+    <Box sx={{display:'flex',flexDirection:'column',border:'1px solid #d1d1d1',flex:'0 1 30%',p:5}}>
+      <Typography variant="h5" color="initial">{!location.includes('edit')?'Add Book' : 'Edit Book'}</Typography>
       <FormControl>
         <label style={{ fontSize: 12, color: "#0A0102", margin: "5px 0" }}>
           Book Name
@@ -57,10 +67,12 @@ function EditBook() {
         </label>
         <TextField
           name="description"
-          inputProps={{ style: { padding: 5 } }}
+          inputProps={{ style: { padding: 0 } }}
           value={data.description}
           onChange={handleChange}
           fullWidth
+          multiline
+          rows={2}
         ></TextField>
       </FormControl>
       <FormControl>
@@ -74,7 +86,6 @@ function EditBook() {
           onChange={handleChange}
           placeholder="Enter Number between 1 to 10"
           InputProps={{
-            style: { width: 250 }, // Adjust the font size as needed
             inputProps: { style: { padding: 5 } }, // Adjust padding if needed
           }}
           fullWidth
@@ -104,7 +115,7 @@ function EditBook() {
           fullWidth
         ></TextField>
       </FormControl>
-      <Button onClick={onSubmit}>Add Product</Button>
+        <Button onClick={onSubmit} variant="contained" sx={{backgroundColor:'#A03037','&:hover':{backgroundColor:'#A03037'},my:2}}>{location.includes('edit')? 'Update Product' : 'Add Book'}</Button>
     </Box>
   );
 }

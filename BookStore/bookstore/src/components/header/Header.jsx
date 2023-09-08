@@ -8,13 +8,13 @@ import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { ReactComponent as Education } from "../../Images/education.svg";
-import { Badge, Button } from "@mui/material";
+import { Badge } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MarkunreadMailboxIcon from "@mui/icons-material/MarkunreadMailbox";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getCartItems } from "../../services/dataService";
 import { useEffect } from "react";
 import {
@@ -30,6 +30,8 @@ import {
   StyledBoxContainer,
   StyledButton,
 } from "./Header.styled";
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { connect,useDispatch } from 'react-redux';
 
 function Header({cart}) {
@@ -41,6 +43,8 @@ function Header({cart}) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -68,7 +72,8 @@ function Header({cart}) {
   };
   const onLogout = () => {
     localStorage.clear();
-    window.location.reload();
+    // if(location.includes())
+    navigate('/signin')
   };
 
   const menuId = "primary-search-account-menu";
@@ -155,7 +160,6 @@ function Header({cart}) {
   
   async function getCart() {
       let response = await getCartItems();
-      // setCart(response.data.result, console.log(cart));
       dispatch({type:'GET_CART_ITEMS',payload:response.data.result})
   }
 
@@ -244,6 +248,22 @@ function Header({cart}) {
                       </StyledMenuLink>
                     </>
                   )}
+                  <StyledMenuLink to={location.pathname.includes('admin')? '/signin' : '/admin-login'}>
+                    <StyledMenuItem>
+                      {location.pathname.includes('admin')? (
+                        <AccountCircleIcon
+                        fontSize="sm"
+                        style={{ marginRight: 10 }}
+                      />
+                      ) : (
+                        <SupervisorAccountIcon
+                          fontSize="sm"
+                          style={{ marginRight: 10 }}
+                        />
+                      ) }
+                      {location.pathname.includes('admin') ? 'User' : 'Admin'}
+                    </StyledMenuItem>
+                  </StyledMenuLink>
                   <StyledLogoutBtn variant="outlined" onClick={onLogout}>
                     Logout
                   </StyledLogoutBtn>

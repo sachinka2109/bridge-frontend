@@ -8,11 +8,12 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Signup.css';
-import {Link as Linky } from 'react-router-dom';
+import {Link as Linky, useNavigate } from 'react-router-dom';
 import { userLogin } from '../../services/userService';
 import { adminUserLogin } from '../../services/adminService';
 
 function Login({changePage}) {
+    const navigate = useNavigate();
     const emailRegex = /^[a-z]{3,}(.[0-9a-z]*)?@([a-z]){2,}.[a-z]+(.in)*$/;
     const passwordRegex = /^.*(?=.{8,})(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/;
     const [showPassword, setShowPassword] = useState(false);
@@ -59,13 +60,13 @@ function Login({changePage}) {
                 let response = await userLogin(data)
                 console.log(response)
                 localStorage.setItem('token',response.data.result.accessToken)
-                window.location.reload();
+                navigate('/')
             }
             else if(window.location.href.includes('admin-login')) { 
                 let response = await adminUserLogin(data)
                 console.log(response)
                 localStorage.setItem('admin-token',response.data.result.accessToken)
-                window.location.reload();
+                navigate('/admin/products')
             }
         }
     }
