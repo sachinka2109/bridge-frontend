@@ -14,7 +14,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MarkunreadMailboxIcon from "@mui/icons-material/MarkunreadMailbox";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./Header.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getCartItems } from "../../services/dataService";
 import { useEffect } from "react";
 import {
@@ -32,9 +32,10 @@ import {
 } from "./Header.styled";
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { connect,useDispatch } from 'react-redux';
+import { connect,useDispatch, useSelector } from 'react-redux';
+import { useMemo } from "react";
 
-function Header({cart}) {
+function Header({cart,cartLength}) {
   // const [cart, setCart] = React.useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElProfile, setAnchorElProfile] = React.useState(null);
@@ -45,9 +46,6 @@ function Header({cart}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -157,10 +155,15 @@ function Header({cart}) {
       getCart();
     }
   }, []);
+
+  const cartLengths = useSelector(state => state.CartReducer.cartLength)
+  const memoCartLength = useMemo(()=> {
+    return cartLengths;
+  },[cartLengths])
   
   async function getCart() {
-      let response = await getCartItems();
-      dispatch({type:'GET_CART_ITEMS',payload:response.data.result})
+    let response = await getCartItems();
+    dispatch({type:'GET_CART_ITEMS',payload:response.data.result})
   }
 
   return (
@@ -227,7 +230,7 @@ function Header({cart}) {
                     </StyledMenuItem>
                   </StyledMenuLink>
                   {!window.location.href.includes('admin') && (
-                    <>                
+                    <div>                
                       <StyledMenuLink to="/my-orders">
                         <StyledMenuItem>
                           <MarkunreadMailboxIcon
@@ -246,7 +249,7 @@ function Header({cart}) {
                           My Wishlist
                         </StyledMenuItem>
                       </StyledMenuLink>
-                    </>
+                    </div>
                   )}
                   <StyledMenuLink to={location.pathname.includes('admin')? '/signin' : '/admin-login'}>
                     <StyledMenuItem>
@@ -271,7 +274,7 @@ function Header({cart}) {
                 { !window.location.href.includes('admin') && (
                   <StyledMenuLink to="/cart">
                     <StyledButton variant="contained" sx={{ px: 4 }}>
-                      <Badge badgeContent={cart.length} color="primary">
+                      <Badge badgeContent={memoCartLength} color="primary">
                         <ShoppingCartIcon />
                       </Badge>
                       Cart
@@ -313,6 +316,7 @@ function Header({cart}) {
 
 const mapStateToProps = (state) => ({
   cart: state.CartReducer.cart,
+  cartLength: state.CartReducer.cartLength
 });
 
 export default connect(mapStateToProps)(Header);

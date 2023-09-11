@@ -31,7 +31,7 @@ import { deleteProduct } from "../../services/adminDataService";
 function BookDetails() {
   const [book, setBook] = useState({});
   const [addCart, setAddCart] = useState(false);
-  const [review, setReview] = useState([]);
+  // const [review, setReview] = useState([]);
   const [cartItem, setCartItem] = useState({});
   const dispatch = useDispatch();
   const location = window.location.href;
@@ -59,11 +59,13 @@ function BookDetails() {
     let response = await getCartItems();
     const arr = response.data.result;
     dispatch({ type: "GET_CART_ITEMS", payload: arr });
-    console.log(arr);
+    // console.log(arr);
     filteredItem = arr.find((item) => item.product_id._id === id);
     setCartItem(filteredItem);
     if (filteredItem) {
       setAddCart(true);
+    } else {
+      setAddCart(false);
     }
   };
 
