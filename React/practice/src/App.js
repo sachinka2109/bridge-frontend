@@ -3,6 +3,7 @@ import MyCounter from './components/class-component/Render-props/MyCounter';
 import RenderCounterClass from './components/class-component/Render-props/RenderCounterClass'
 import RenderHoverClass from './components/class-component/Render-props/RenderHoverClass';
 import RenderNameClass from './components/class-component/Render-props/RenderNameClass';
+import Canvas from './components/function-component/Canvas/Canvas';
 import MainCallback from './components/function-component/UseCallback/MainCallback';
 import UseCallback from './components/function-component/UseCallback/UseCallback';
 import UseEffectExample from './components/function-component/UseEffect/UseEffectExample';
@@ -66,8 +67,9 @@ function App() {
             {/* <Task /> */}
             {/* <UseCallback/>
             <UseMemo /> */}
-            <UseRedCompA/>
+            {/* <UseRedCompA/> */}
             {/* <MainCallback /> */}
+            <Canvas/>
         </div>
       </div>
     </countContext.Provider>
