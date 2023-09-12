@@ -40,7 +40,7 @@ function CartOrderSummary({data,toggleOrderSummary,getCartItem}) {
                 <Grid container sx={{flexDirection:'column',gap:1}}>
                     <Grid item sx={{display:'flex',flexDirection:'column'}}>
                         {data.map(item => (
-                            <CartItem  key={data._id} data={item} getCartItem={getCartItem} myRef={myRef}/>
+                            <CartItem  key={item._id} data={item} getCartItem={getCartItem} myRef={myRef}/>
                         ))}
                     </Grid>
                     <Grid item sx={{alignSelf:'end'}}>

@@ -179,7 +179,6 @@ function BookDetails() {
               )}
               {(addCart || filteredItem) && (
                 <Box
-                  item
                   sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}
                 >
                   <QuantityComponent
@@ -213,13 +212,14 @@ function BookDetails() {
         ) : (
           <Grid item sx={{ px: { xs: 2, sm: 5 } }} xs={12} sm={8} md={6}>
             <Box>
-              <Typography variant="h4" color="initial">
+              <Typography component='div' variant="h4" color="initial">
                 {book.bookName}
               </Typography>
               <Typography
                 variant="h6"
                 color="initial"
                 sx={{ color: "#878787" }}
+                component='div'
               >
                 {book.author}
               </Typography>
@@ -237,11 +237,12 @@ function BookDetails() {
                     color: "white",
                     px: 1,
                   }}
+                  component='div'
                 >
                   4.5
                   <StarIcon fontSize="sm" />
                 </Typography>
-                <Typography sx={{ color: "#878787", fontSize: 15, px: 1 }}>
+                <Typography sx={{ color: "#878787", fontSize: 15, px: 1 }} component='div'>
                   (20)
                 </Typography>
               </Typography>
@@ -256,7 +257,7 @@ function BookDetails() {
                   fontWeight: "bold",
                 }}
               >
-                <Typography sx={{ fontSize: 30 }}>Rs. {book.price}</Typography>
+                <Typography sx={{ fontSize: 30 }} component='div'>Rs. {book.price}</Typography>
                 <Typography
                   sx={{
                     fontSize: 12,
@@ -264,6 +265,7 @@ function BookDetails() {
                     color: "#878787",
                     px: 1,
                   }}
+                  component='div'
                 >
                   Rs.{book.discountPrice}
                 </Typography>
@@ -281,6 +283,7 @@ function BookDetails() {
                 <Typography
                   variant="body2"
                   sx={{ color: "#373434", fontSize: 12 }}
+                  component='div'
                 >
                   {book.description}
                 </Typography>
@@ -369,14 +372,14 @@ function BookDetails() {
                         <AccountCircleIcon fontSize="large" />
                       </Grid>
                       <Grid item sx={{ paddingLeft: 1 }}>
-                        <Typography variant="body1" color="initial">
+                        <Typography variant="body1" color="initial" component='div'>
                           Sachin Kaythamwar
                         </Typography>
                         <Rating name="half-rating" readOnly />
                       </Grid>
                     </Grid>
                     <Grid item sx={{ paddingLeft: 5 }}>
-                      <Typography variant="body1" color="initial">
+                      <Typography variant="body1" color="initial" component='div'>
                         Good product. Even though the translation could have
                         been better, Chanakya's neeti are thought provoking.
                         Chanakya has written on many different topics and his

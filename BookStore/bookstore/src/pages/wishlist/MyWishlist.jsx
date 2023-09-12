@@ -31,9 +31,9 @@ function MyWishlist() {
             <Grid item sx={{width:'100%'}}>
                 {data.map(item => {
                     return (
-                        <div>
+                        <div key={item._id} >
                             <div style={{padding:40}}>
-                                <CartItem key={data._id}  data={item} getCart={getWishlistData} myRef={useRef}/>
+                                <CartItem data={item} getCartItem={getWishlistData} myRef={useRef}/>
                             </div>
                             <Divider></Divider>
                         </div>
