@@ -21,7 +21,7 @@ function CartOrderSummary({data,toggleOrderSummary,getCartItem}) {
             ...prevOrders,
             orders: [...prevOrders.orders, ...newOrderItems],
         }),
-        // console.log('orders:',orders),
+        console.log('orders:',orders),
         await orderItems(orders),
         data.map(async (item) => {
           await removeCartItem(item._id)

@@ -9,7 +9,7 @@ export let adminUserLogin = async(data) => {
 
 export let adminUserSignup = async(data) => {
     let response = await axios.post('https://bookstore.incubation.bridgelabz.com/bookstore_user/admin/registration',data)
-    // console.log(response)
+    console.log(response)
     return response
 }
   

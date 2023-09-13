@@ -1,18 +1,22 @@
 const initialState = {
   cart: [],
+  cartLength:0,
+  cartItem: null,
   // wishlist: [],
   // user: null,
 };
 
-// export const getCartTotal = (cart) =>
-//   cart?.reduce((amount, item) => item.price + amount, 0);
+export const getCartTotal = (cart) =>
+  cart?.reduce((amount, item) => item.discountPrice + amount, 0);
 
 const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_CART_ITEMS": 
+      const getCartLength = action.payload.reduce((total,item) => total + item.quantityToBuy,0)
       return {
         ...state,
-        cart:[...action.payload]
+        cart:[...action.payload],
+        cartLength: getCartLength
       }
     // case "GET_CART_ITEMS": 
     //   return {

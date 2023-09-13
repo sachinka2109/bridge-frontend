@@ -8,7 +8,7 @@ function MyWishlist() {
     const [data,setData] = useState([]);
     const getWishlistData = async() =>{
         let response = await getWishList();
-        // console.log('wishlist',response)
+        console.log('wishlist',response)
         setData(response.data.result.filter(item => item.product_id !== null))
     }
 
@@ -31,7 +31,7 @@ function MyWishlist() {
             <Grid item sx={{width:'100%'}}>
                 {data.map(item => {
                     return (
-                        <div>
+                        <div key={item._id} >
                             <div style={{padding:40}}>
                                 <CartItem data={item} getCartItem={getWishlistData} myRef={useRef}/>
                             </div>

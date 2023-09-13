@@ -274,14 +274,14 @@ function Header({cart,cartLength}) {
                 { !window.location.href.includes('admin') && (
                   <StyledMenuLink to="/cart">
                     <StyledButton variant="contained" sx={{ px: 4 }}>
-                      <Badge badgeContent={cart.length} color="primary">
+                      <Badge badgeContent={memoCartLength} color="primary">
                         <ShoppingCartIcon />
                       </Badge>
                       Cart
                     </StyledButton>
                   </StyledMenuLink>
                 )}
-                {/* { window.location.href.includes('admin') && (
+                { window.location.href.includes('admin') && (
                   <StyledMenuLink to="/admin-orders">
                     <StyledButton variant="contained" sx={{ px: 4 }}>
                       <Badge badgeContent={cart.length} color="primary">
@@ -290,7 +290,7 @@ function Header({cart,cartLength}) {
                       Orders
                     </StyledButton>
                   </StyledMenuLink>
-                )} */}
+                )}
               </StyledBoxContainer>
               <Box sx={{ display: { xs: "flex", md: "none" } }}>
                 <IconButton
@@ -316,6 +316,7 @@ function Header({cart,cartLength}) {
 
 const mapStateToProps = (state) => ({
   cart: state.CartReducer.cart,
+  cartLength: state.CartReducer.cartLength
 });
 
 export default connect(mapStateToProps)(Header);

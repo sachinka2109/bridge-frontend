@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import { Grid, Typography,Box,Button,Skeleton } from '@mui/material'
+import { Grid, Typography,Box,Button } from '@mui/material'
 import BookCard from '../book-component/BookCard';
 import FormControl from '@mui/material/FormControl';
 import Pagination from '@mui/material/Pagination'
@@ -72,13 +72,11 @@ function Home() {
         <Grid item sx={{display:'flex',width:'80%',flexDirection:'column',alignItems:'center'}}>
           <Grid container sx={{gap:3,flexWrap:'wrap',justifyContent:'center'}}>
             {currentBooks.map((item,index) => (
-              <>              
-                <Link to={location.includes('admin')?`/admin/book-details/${item._id}`:`/book-details/${item._id}`} style={{ textDecoration: 'none' }} key={item._id}>
-                  <Grid item key={data._id}>
-                    <BookCard item={item} index={index}/>
-                  </Grid>
-                </Link>
-              </>
+              <Link to={location.includes('admin')?`/admin/book-details/${item._id}`:`/book-details/${item._id}`} style={{ textDecoration: 'none' }} key={item._id}>
+                <Grid item>
+                  <BookCard item={item} index={index}/>
+                </Grid>
+              </Link>
             ))}
           </Grid>
           <Pagination

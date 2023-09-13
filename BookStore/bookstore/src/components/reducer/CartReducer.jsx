@@ -1,5 +1,6 @@
 const initialState = {
   cart: [],
+  cartLength:0
   // wishlist: [],
   // user: null,
 };
@@ -10,9 +11,11 @@ const initialState = {
 const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_CART_ITEMS": 
+      const getCartLength = action.payload.reduce((total,item) => total + item.quantityToBuy,0)
       return {
         ...state,
-        cart:[...action.payload]
+        cart:[...action.payload],
+        cartLength: getCartLength
       }
     // case "GET_CART_ITEMS": 
     //   return {

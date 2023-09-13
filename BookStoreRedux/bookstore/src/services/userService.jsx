@@ -14,7 +14,7 @@ export let userLogin = async(data) => {
 
 export let userSignUp = async(data) => {
     let response = await axios.post('https://bookstore.incubation.bridgelabz.com/bookstore_user/registration',data)
-    // console.log(response)
+    console.log(response)
     return response
 }
 
@@ -24,7 +24,7 @@ export const updateUser = async (data) => {
       data,
       headerConfig
     );
-    // console.log(response)
+    console.log(response)
     return response;
 };
   

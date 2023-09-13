@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 
 function QuantityComponent({item,setAddCart,getCartItem}) {
   const [cartItem, setCartItem] = useState(item);
-  console.log("cartItem", cartItem);
   const handleCount = async(string) => {
     try {
       if (string === "plus") {
@@ -64,6 +63,7 @@ function QuantityComponent({item,setAddCart,getCartItem}) {
         size="small"
         sx={{ backgroundColor: "#FAFAFA", border: "1px solid #DBDBDB"}}
         onClick={() => handleCount("plus")}
+        disabled={cartItem.quantityToBuy === 10}
       >
         <AddIcon fontSize="sm" />
       </IconButton>
