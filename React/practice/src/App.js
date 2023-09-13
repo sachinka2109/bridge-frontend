@@ -3,6 +3,7 @@ import MyCounter from './components/class-component/Render-props/MyCounter';
 import RenderCounterClass from './components/class-component/Render-props/RenderCounterClass'
 import RenderHoverClass from './components/class-component/Render-props/RenderHoverClass';
 import RenderNameClass from './components/class-component/Render-props/RenderNameClass';
+import Canvas from './components/function-component/Canvas/Canvas';
 import MainCallback from './components/function-component/UseCallback/MainCallback';
 import UseCallback from './components/function-component/UseCallback/UseCallback';
 import UseEffectExample from './components/function-component/UseEffect/UseEffectExample';
@@ -42,36 +43,40 @@ function App() {
 
   return (
     <countContext.Provider value={{countState:count,countDispatch:dispatch}}>
-      <div className="App">
+      {/* <div className="App">
         <div className="ClassComponents">
-          {/* <RenderCounterClass />
-          <RenderHoverClass/> */}
-          {/* <RenderNameClass render={(isLoggedIn) => isLoggedIn ? 'Sachin': 'Guest'} /> */}
-          {/* <MyCounter render ={(count,incrementCounter) => <RenderCounterClass count={count} incrementCounter={incrementCounter}/> } />
-          <MyCounter render ={(count,incrementCounter) => <RenderHoverClass count={count} incrementCounter={incrementCounter}/> } /> */}
-          {/* <MyCounter>{(count,incrementCounter) => <RenderCounterClass count={count} incrementCounter={incrementCounter}/>}</MyCounter> */}
+          <RenderCounterClass />
+          <RenderHoverClass/>
+          <RenderNameClass render={(isLoggedIn) => isLoggedIn ? 'Sachin': 'Guest'} />
+          <MyCounter render ={(count,incrementCounter) => <RenderCounterClass count={count} incrementCounter={incrementCounter}/> } />
+          <MyCounter render ={(count,incrementCounter) => <RenderHoverClass count={count} incrementCounter={incrementCounter}/> } />
+          <MyCounter>{(count,incrementCounter) => <RenderCounterClass count={count} incrementCounter={incrementCounter}/>}</MyCounter>
           
         </div>
         <hr />
         <div className="FunctionComponents">
-            {/* <UseRefButton />
+            <UseRefButton />
             <UseRefFun />
-            <UseRefCounter /> */}
-            {/* <UseRefParentFun /> */}
-            {/* <UseReducerFun />
+            <UseRefCounter />
+            <UseRefParentFun />
+            <UseReducerFun />
             <UseReducerExample />
-            <UseReducerObject /> */}
-            {/* <ParentState/> */}
-            {/* <StateWithPrev /> */}
-            {/* <Task /> */}
-            {/* <UseCallback/>
-            <UseMemo /> */}
+            <UseReducerObject />
+            <ParentState/>
+            <StateWithPrev />
+            <Task />
+            <UseCallback/>
+            <UseMemo />
             <UseRedCompA/>
-            {/* <MainCallback /> */}
+            <MainCallback />
+            
         </div>
-      </div>
+      </div> */}
+      <Canvas/>
     </countContext.Provider>
   );
 }
+
+
 
 export default App;
