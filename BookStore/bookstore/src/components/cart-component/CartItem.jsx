@@ -6,13 +6,14 @@ import { removeCartItem,deleteWishList } from '../../services/dataService';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function CartItem({data,getCartItem,myRef}) {
-    console.log('cartItem',data)
+    // console.log('cartItem',data)
     const removeItem = async() => {
         if(data.quantityToBuy) {
             await removeCartItem(data._id)
             getCartItem();
         } else {
             await deleteWishList(data.product_id._id)
+            getCartItem();
         }
     }
   return (

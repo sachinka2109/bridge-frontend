@@ -22,8 +22,8 @@ export const updateProduct = (id,data) => {
 }
 
 export const deleteProduct = (id) => {
-  console.log(id)
+  // console.log(id)
   let response = axios.delete(`https://bookstore.incubation.bridgelabz.com/bookstore_user/admin/delete/book/${id}`,headerConfig());
-  console.log(response)
+  // console.log(response)
   return response;
 }

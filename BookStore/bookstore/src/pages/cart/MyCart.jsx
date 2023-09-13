@@ -24,9 +24,9 @@ function MyCart() {
 
   const getCart = async() => {
     let response = await getCartItems();
-    console.log(response)
+    // console.log(response)
     setData(response.data.result);
-    console.log('myCartItems')
+    // console.log('myCartItems')
     dispatch({type:'GET_CART_ITEMS',payload:response.data.result})
   }
   

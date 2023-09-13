@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 function QuantityComponent({item,setAddCart,getCartItem}) {
   const [cartItem, setCartItem] = useState(item);
-  console.log("cartItem", cartItem);
+  // console.log("cartItem", cartItem);
   const handleCount = async(string) => {
     try {
       if (string === "plus") {

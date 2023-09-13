@@ -31,6 +31,7 @@ function EditBook({item,getSingleBook}) {
     } else {
       let res = await addProduct(data);
       console.log("added", res);
+      // navigate('/admin/products')
     }
   };
 

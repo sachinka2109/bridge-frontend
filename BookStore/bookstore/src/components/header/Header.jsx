@@ -34,7 +34,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { connect,useDispatch } from 'react-redux';
 
-function Header({cart}) {
+function Header({cart,cartLength}) {
   // const [cart, setCart] = React.useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElProfile, setAnchorElProfile] = React.useState(null);
@@ -227,7 +227,7 @@ function Header({cart}) {
                     </StyledMenuItem>
                   </StyledMenuLink>
                   {!window.location.href.includes('admin') && (
-                    <>                
+                    <div>                
                       <StyledMenuLink to="/my-orders">
                         <StyledMenuItem>
                           <MarkunreadMailboxIcon
@@ -246,7 +246,7 @@ function Header({cart}) {
                           My Wishlist
                         </StyledMenuItem>
                       </StyledMenuLink>
-                    </>
+                    </div>
                   )}
                   <StyledMenuLink to={location.pathname.includes('admin')? '/signin' : '/admin-login'}>
                     <StyledMenuItem>
@@ -271,14 +271,14 @@ function Header({cart}) {
                 { !window.location.href.includes('admin') && (
                   <StyledMenuLink to="/cart">
                     <StyledButton variant="contained" sx={{ px: 4 }}>
-                      <Badge badgeContent={cart.length} color="primary">
+                      <Badge badgeContent={cartLength} color="primary">
                         <ShoppingCartIcon />
                       </Badge>
                       Cart
                     </StyledButton>
                   </StyledMenuLink>
                 )}
-                { window.location.href.includes('admin') && (
+                {/* { window.location.href.includes('admin') && (
                   <StyledMenuLink to="/admin-orders">
                     <StyledButton variant="contained" sx={{ px: 4 }}>
                       <Badge badgeContent={cart.length} color="primary">
@@ -287,7 +287,7 @@ function Header({cart}) {
                       Orders
                     </StyledButton>
                   </StyledMenuLink>
-                )}
+                )} */}
               </StyledBoxContainer>
               <Box sx={{ display: { xs: "flex", md: "none" } }}>
                 <IconButton
@@ -313,6 +313,7 @@ function Header({cart}) {
 
 const mapStateToProps = (state) => ({
   cart: state.CartReducer.cart,
+  cartLength:state.CartReducer.cartLength
 });
 
 export default connect(mapStateToProps)(Header);
