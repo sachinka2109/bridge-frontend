@@ -79,11 +79,9 @@ function Login({changePage}) {
                     </Link>
                 </Grid>
                 <Grid item onClick={()=> {changePage(true)}} className='Signup-link'>
-                    <Linky to={window.location.href.includes('admin-login') ? '/admin-signup' : '/signup'} style={{textDecoration:'none'}}>         
-                        <Link sx={{ fontSize: '25px', color: '#878787',fontWeight:'bold',textDecoration:'none'}}>
-                            SIGNUP
-                        </Link>
-                    </Linky>
+                    <Link component={Linky} to={window.location.href.includes('admin-login') ? '/admin-signup' : '/signup'} style={{textDecoration:'none',fontSize: '25px', color: '#0A0102',fontWeight:'bold',textDecoration:'none'}}>         
+                        SIGNUP
+                    </Link>
                 </Grid>
             </Grid>
             <Grid item>
@@ -101,8 +99,10 @@ function Login({changePage}) {
                         value={data.email}
                         onChange={handleChange}
                         error={checkError.EmailTrue}
-                        helperText = {checkError.EmailError}
                     />
+                    {checkError.EmailTrue && (
+                        <div style={{ fontSize: '12px', color: 'red' }}>{checkError.EmailError}</div>
+                    )}
                 </div>
             </Grid>
             <Grid item sx={{marginTop:'3px',marginBottom:'14px'}}>
@@ -113,7 +113,6 @@ function Login({changePage}) {
                             value={data.password}
                             onChange={handleChange}
                             error={checkError.PasswordTrue}
-                            helperText = {checkError.PasswordError}
                             id="password"
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
@@ -134,7 +133,10 @@ function Login({changePage}) {
                                 }
                             }}
                         />
-                        <label style={{ fontSize: '10px',alignSelf:'flex-end',color:'#9D9D9D'}}><Linky to='/forgotpassword' style={{textDecoration:'none',color:'#9D9D9D'}}>Forgot Password?</Linky></label>
+                        {checkError.PasswordTrue && (
+                            <div style={{ fontSize: '12px', color: 'red' }}>{checkError.PasswordError}</div>
+                        )}
+                        <label style={{ fontSize: '10px',alignSelf:'flex-end',color:'#9D9D9D'}}><Link component={Linky} to='/forgotpassword' style={{textDecoration:'none',color:'#9D9D9D'}}>Forgot Password?</Link></label>
                     </div>
                 </FormControl>
             </Grid>

@@ -6,6 +6,7 @@ import {
   Button,
   FormGroup,
   Breadcrumbs,
+  Skeleton,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Book from "../../Images/Book.png";
@@ -31,6 +32,7 @@ import { deleteProduct } from "../../services/adminDataService";
 function BookDetails() {
   const [book, setBook] = useState({});
   const [addCart, setAddCart] = useState(false);
+  const [loading, setLoading] = useState(true);
   // const [review, setReview] = useState([]);
   const [cartItem, setCartItem] = useState({});
   const dispatch = useDispatch();
@@ -47,11 +49,10 @@ function BookDetails() {
     await postWishList(id);
     getCartItem();
   };
-
   const deleteBook = async () => {
     let response = await deleteProduct(id);
-    if(response) {
-      navigate("/admin/products")
+    if (response) {
+      navigate("/admin/products");
     }
   };
 
@@ -81,7 +82,10 @@ function BookDetails() {
   };
 
   useEffect(() => {
-    getSingleBook();
+    setLoading(true);
+    getSingleBook().then(() => {
+      setLoading(false);
+    });
   }, []);
 
   useEffect(() => {
@@ -103,38 +107,110 @@ function BookDetails() {
         sx={{ justifyContent: "center", alignItems: "flex-start" }}
       >
         <Grid item sx={{ display: "flex", flexDirection: "column", mx: 5 }}>
-          <Typography
-            component={"div"}
-            sx={{ border: "1px solid #D1D1D1", px: 3, py: 2 }}
-          >
-            <img src={Book} alt="Book" style={{ height: 367 }} />
-          </Typography>
-          {location.includes("admin") ? (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                my: 3,
-              }}
+          {loading ? (
+            <Skeleton
+              animation="wave"
+              variant="rectangle"
+              width={284}
+              height={367}
+            />
+          ) : (
+            <Typography
+              component={"div"}
+              sx={{ border: "1px solid #D1D1D1", px: 3, py: 2 }}
             >
-              {!location.includes("edit") ? (
-                <>
-                  <Link
-                    to={`/admin/book-details/${id}?edit=true`}
-                    style={{ marginRight: "20px", flexGrow: 1 }}
-                  >
+              <img src={Book} alt="Book" style={{ height: 367 }} />
+            </Typography>
+          )}
+          {loading ? (
+            <></>
+          ) : (
+            <>
+              {location.includes("admin") ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    my: 3,
+                  }}
+                >
+                  {!location.includes("edit") ? (
+                    <>
+                      <Link
+                        to={`/admin/book-details/${id}?edit=true`}
+                        style={{ marginRight: "20px", flexGrow: 1 }}
+                      >
+                        <Button
+                          variant="contained"
+                          sx={{
+                            backgroundColor: "#A03037",
+                            "&:hover": { backgroundColor: "#A03037" },
+                          }}
+                          fullWidth
+                        >
+                          Edit
+                        </Button>
+                      </Link>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          flexGrow: 1,
+                          backgroundColor: "#333333",
+                          "&:hover": { backgroundColor: "#333333" },
+                        }}
+                        onClick={deleteBook}
+                      >
+                        <DeleteIcon
+                          style={{ fontSize: 17, margin: "0px 4px" }}
+                        />
+                        Delete
+                      </Button>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </Box>
+              ) : (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    my: 3,
+                  }}
+                >
+                  {!addCart && (
                     <Button
                       variant="contained"
                       sx={{
+                        flexGrow: 1,
+                        marginRight: "20px",
                         backgroundColor: "#A03037",
                         "&:hover": { backgroundColor: "#A03037" },
                       }}
-                      fullWidth
+                      onClick={addToCart}
                     >
-                      Edit
+                      Add to bag
                     </Button>
-                  </Link>
+                  )}
+                  {(addCart || filteredItem) && (
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        flexGrow: 1,
+                      }}
+                    >
+                      <QuantityComponent
+                        item={cartItem}
+                        setAddCart={setAddCart}
+                        getCartItem={getCartItem}
+                      />
+                    </Box>
+                  )}
                   <Button
                     variant="contained"
                     sx={{
@@ -144,84 +220,33 @@ function BookDetails() {
                       backgroundColor: "#333333",
                       "&:hover": { backgroundColor: "#333333" },
                     }}
-                    onClick={deleteBook}
+                    onClick={addToWishList}
                   >
-                    <DeleteIcon style={{ fontSize: 17, margin: "0px 4px" }} />
-                    Delete
+                    <FavoriteIcon style={{ fontSize: 17, margin: "0px 4px" }} />
+                    Wishlist
                   </Button>
-                </>
-              ) : (
-                <></>
-              )}
-            </Box>
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                my: 3,
-              }}
-            >
-              {!addCart && (
-                <Button
-                  variant="contained"
-                  sx={{
-                    flexGrow: 1,
-                    marginRight: "20px",
-                    backgroundColor: "#A03037",
-                    "&:hover": { backgroundColor: "#A03037" },
-                  }}
-                  onClick={addToCart}
-                >
-                  Add to bag
-                </Button>
-              )}
-              {(addCart || filteredItem) && (
-                <Box
-                  sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}
-                >
-                  <QuantityComponent
-                    item={cartItem}
-                    setAddCart={setAddCart}
-                    getCartItem={getCartItem}
-                  />
                 </Box>
               )}
-              <Button
-                variant="contained"
-                sx={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  flexGrow: 1,
-                  backgroundColor: "#333333",
-                  "&:hover": { backgroundColor: "#333333" },
-                }}
-                onClick={addToWishList}
-              >
-                <FavoriteIcon style={{ fontSize: 17, margin: "0px 4px" }} />
-                Wishlist
-              </Button>
-            </Box>
+            </>
           )}
         </Grid>
         {location.includes("edit") ? (
           <Grid item sx={{ px: { xs: 2, sm: 5 } }} xs={12} sm={8} md={6}>
-            <EditBook item={book} getSingleBook={getSingleBook}/>
+            <EditBook item={book} getSingleBook={getSingleBook} />
           </Grid>
         ) : (
           <Grid item sx={{ px: { xs: 2, sm: 5 } }} xs={12} sm={8} md={6}>
             <Box>
-              <Typography component='div' variant="h4" color="initial">
-                {book.bookName}
+              <Typography component="div" variant="h4" color="initial">
+                {loading ? <Skeleton /> : `${book.bookName}`}
               </Typography>
               <Typography
                 variant="h6"
                 color="initial"
                 sx={{ color: "#878787" }}
-                component='div'
+                component="div"
               >
-                {book.author}
+                {loading ? <Skeleton /> : `${book.author}`}
               </Typography>
               <Typography
                 variant="span"
@@ -229,22 +254,31 @@ function BookDetails() {
                 component="div"
                 sx={{ display: "flex", alignItems: "center", my: 1 }}
               >
-                <Typography
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    backgroundColor: "#388E3C",
-                    color: "white",
-                    px: 1,
-                  }}
-                  component='div'
-                >
-                  4.5
-                  <StarIcon fontSize="sm" />
-                </Typography>
-                <Typography sx={{ color: "#878787", fontSize: 15, px: 1 }} component='div'>
-                  (20)
-                </Typography>
+                {loading ? (
+                  <Skeleton width={100} />
+                ) : (
+                  <>
+                    <Typography
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        backgroundColor: "#388E3C",
+                        color: "white",
+                        px: 1,
+                      }}
+                      component="div"
+                    >
+                      4.5
+                      <StarIcon fontSize="sm" />
+                    </Typography>
+                    <Typography
+                      sx={{ color: "#878787", fontSize: 15, px: 1 }}
+                      component="div"
+                    >
+                      (20)
+                    </Typography>
+                  </>
+                )}
               </Typography>
               <Typography
                 variant="span"
@@ -257,7 +291,9 @@ function BookDetails() {
                   fontWeight: "bold",
                 }}
               >
-                <Typography sx={{ fontSize: 30 }} component='div'>Rs. {book.price}</Typography>
+                <Typography sx={{ fontSize: 30 }} component="div">
+                  {loading ? <Skeleton width={80} /> : `Rs. ${book.price}`}
+                </Typography>
                 <Typography
                   sx={{
                     fontSize: 12,
@@ -265,9 +301,13 @@ function BookDetails() {
                     color: "#878787",
                     px: 1,
                   }}
-                  component='div'
+                  component="div"
                 >
-                  Rs.{book.discountPrice}
+                  {loading ? (
+                    <Skeleton width={80} variant="rectangle" />
+                  ) : (
+                    `Rs.${book.discountPrice}`
+                  )}
                 </Typography>
               </Typography>
             </Box>
@@ -283,9 +323,16 @@ function BookDetails() {
                 <Typography
                   variant="body2"
                   sx={{ color: "#373434", fontSize: 12 }}
-                  component='div'
+                  component="div"
                 >
-                  {book.description}
+                  {loading ? (
+                    <>
+                      <Skeleton width={"100%"} />
+                      <Skeleton width={"100%"} />
+                    </>
+                  ) : (
+                    `${book.description}`
+                  )}
                 </Typography>
               </ul>
             </Typography>
@@ -323,6 +370,7 @@ function BookDetails() {
                         alignSelf: "end",
                         my: 1,
                       }}
+                      disabled={loading}
                     >
                       Submit
                     </Button>
@@ -340,21 +388,36 @@ function BookDetails() {
                   >
                     <Grid item sx={{ display: "flex" }}>
                       <Grid item>
-                        <AccountCircleIcon fontSize="large" />
+                        {loading ? (
+                          <Skeleton variant="circular" width={30} height={30} />
+                        ) : (
+                          <AccountCircleIcon fontSize="large" />
+                        )}
                       </Grid>
                       <Grid item sx={{ paddingLeft: 1 }}>
                         <Typography variant="body1" color="initial">
-                          Sachin Kaythamwar
+                          {loading ? (
+                            <Skeleton width={80} />
+                          ) : (
+                            "Sachin Kaythamwar"
+                          )}
                         </Typography>
-                        <Rating name="half-rating" readOnly />
+                        {loading ? "" : <Rating name="half-rating" readOnly />}
                       </Grid>
                     </Grid>
                     <Grid item sx={{ paddingLeft: 5 }}>
                       <Typography variant="body1" color="initial">
-                        Good product. Even though the translation could have
+                        {loading ? (
+                          <>
+                            <Skeleton width={"100%"} />
+                            <Skeleton width={"30%"} />
+                          </>
+                        ) : (
+                          `Good product. Even though the translation could have
                         been better, Chanakya's neeti are thought provoking.
                         Chanakya has written on many different topics and his
-                        writings are succinct.
+                        writings are succinct.`
+                        )}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -369,21 +432,36 @@ function BookDetails() {
                   >
                     <Grid item sx={{ display: "flex" }}>
                       <Grid item>
-                        <AccountCircleIcon fontSize="large" />
+                        {loading ? (
+                          <Skeleton variant="circular" width={30} height={30} />
+                        ) : (
+                          <AccountCircleIcon fontSize="large" />
+                        )}
                       </Grid>
                       <Grid item sx={{ paddingLeft: 1 }}>
-                        <Typography variant="body1" color="initial" component='div'>
-                          Sachin Kaythamwar
+                        <Typography variant="body1" color="initial">
+                          {loading ? (
+                            <Skeleton width={80} />
+                          ) : (
+                            "Sachin Kaythamwar"
+                          )}
                         </Typography>
-                        <Rating name="half-rating" readOnly />
+                        {loading ? "" : <Rating name="half-rating" readOnly />}
                       </Grid>
                     </Grid>
                     <Grid item sx={{ paddingLeft: 5 }}>
-                      <Typography variant="body1" color="initial" component='div'>
-                        Good product. Even though the translation could have
+                      <Typography variant="body1" color="initial">
+                        {loading ? (
+                          <>
+                            <Skeleton width={"100%"} />
+                            <Skeleton width={"30%"} />
+                          </>
+                        ) : (
+                          `Good product. Even though the translation could have
                         been better, Chanakya's neeti are thought provoking.
                         Chanakya has written on many different topics and his
-                        writings are succinct.
+                        writings are succinct.`
+                        )}
                       </Typography>
                     </Grid>
                   </Grid>
