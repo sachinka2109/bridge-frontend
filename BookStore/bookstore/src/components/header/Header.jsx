@@ -39,6 +39,7 @@ function Header({cart,cartLength}) {
   // const [cart, setCart] = React.useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElProfile, setAnchorElProfile] = React.useState(null);
+  const [active,setActive] = React.useState(false);
   const open = Boolean(anchorElProfile);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -62,11 +63,13 @@ function Header({cart,cartLength}) {
 
   const handleClick = (event) => {
     setAnchorElProfile(event.currentTarget);
-    document.getElementById("profile-btn").classList.remove("active");
+    // document.getElementById("profile-btn").classList.remove("active");
+    setActive(true);
   };
   const handleClose = () => {
     setAnchorElProfile(null);
-    document.getElementById("profile-btn").classList.add("active");
+    setActive(false);
+    // document.getElementById("profile-btn").classList.add("active");
   };
   const onLogout = () => {
     localStorage.clear();
@@ -167,7 +170,7 @@ function Header({cart,cartLength}) {
   }
 
   return (
-    <Box>
+    <Box sx={{width:'100%'}}>
       <AppBar position="static">
         <StyledHeaderToolbar>
           <StyledHeaderLogoLink to={window.location.href.includes('admin')? "/admin/products" :"/"}>
@@ -198,7 +201,7 @@ function Header({cart,cartLength}) {
                   aria-haspopup="true"
                   aria-expanded={open ? "true" : undefined}
                   onClick={handleClick}
-                  className="active"
+                  className={active? "profile-btn" : ""}
                   sx={{ px: 3 }}
                 >
                   <PersonOutlineIcon />

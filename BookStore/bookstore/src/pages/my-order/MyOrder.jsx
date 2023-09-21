@@ -14,7 +14,7 @@ function MyOrder() {
         <Typography color="text.primary">My Orders</Typography>
         </Breadcrumbs>
         <Grid sx={{my:4,mx:{xs:1,sm:5,md:19}}}>
-            <Grid container sx={{border:'1px solid #DCDCDC',justifyContent:'space-between',alignItems:'flex-start',p:2}}>
+            <Grid container sx={{border:'1px solid #DCDCDC',justifyContent:'space-between',alignItems:'flex-start',p:2,minWidth:375}}>
                 <Grid item sx={{display:'flex'}}>
                     <Grid item>
                         <img src={Book} alt='book' style={{height:85,objectFit:'contain'}}/>
@@ -23,7 +23,7 @@ function MyOrder() {
                         <Grid item>
                             <Typography variant="h6" color="initial" sx={{fontWeight:'bold',lineHeight:1}}>Don't Make Me Think</Typography>
                             <Typography variant="body1" color="initial" sx={{fontSize:12,color:'#9D9D9D',marginTop:2,marginBottom:1}}>by Steve Krug</Typography>
-                            <Typography variant="body1" color="initial" sx={{display:'flex',fontSize:15,alignItems:'center',fontWeight:'bold'}}>
+                            <Typography component='div' variant="body1" color="initial" sx={{display:'flex',fontSize:15,alignItems:'center',fontWeight:'bold'}}>
                                 Rs. 1500 
                                 <Typography sx={{fontSize:12,textDecoration:'line-through',color:'#9D9D9D',mx:2}}>Rs.2000</Typography>
                             </Typography>
@@ -31,7 +31,7 @@ function MyOrder() {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center',fontWeight:'bold'}}>
+                    <Typography component='div' variant="body1" color="initial" sx={{display:'flex',alignItems:'center',fontWeight:'bold'}}>
                         <CircleIcon style={{fontSize:10,color:'#26A541',margin:3}}/>
                         Order Placed on May 21
                     </Typography>

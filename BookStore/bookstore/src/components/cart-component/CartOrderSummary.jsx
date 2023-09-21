@@ -31,7 +31,7 @@ function CartOrderSummary({data,toggleOrderSummary,getCartItem}) {
         navigate('/success')
     }
   return (
-    <Grid container sx={{flexDirection:'column',border:'1px solid #DCDCDC',py:{xs:0,sm:2},px:{xs:0,sm:3}}}>
+    <Grid container sx={{flexDirection:'column',border:'1px solid #DCDCDC',py:{xs:0,sm:2},px:{xs:0,sm:3},minWidth:360}}>
         <Grid item sx={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',p:1,px:3}}>
             <Typography variant="h6" color="initial" sx={{fontWeight:'bold'}}>Order Summary</Typography>
         </Grid>
@@ -40,7 +40,7 @@ function CartOrderSummary({data,toggleOrderSummary,getCartItem}) {
                 <Grid container sx={{flexDirection:'column',gap:1}}>
                     <Grid item sx={{display:'flex',flexDirection:'column'}}>
                         {data.map(item => (
-                            <CartItem  key={data._id} data={item} getCartItem={getCartItem} myRef={myRef}/>
+                            <CartItem  key={item._id} data={item} getCartItem={getCartItem} myRef={myRef}/>
                         ))}
                     </Grid>
                     <Grid item sx={{alignSelf:'end'}}>

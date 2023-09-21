@@ -4,6 +4,8 @@ import { addProduct, updateProduct } from "../../services/adminDataService";
 import { useNavigate } from "react-router-dom";
 
 function EditBook({item,getSingleBook}) {
+  const bookNameRegex = /^[\w\s.,'-]+$/;
+  const fullNameRegex = /^[A-Za-z\s.'-]+$/;
   const location = window.location.href;
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -15,6 +17,21 @@ function EditBook({item,getSingleBook}) {
     discountPrice: item?.discountPrice || "",
   });
 
+  const [error,setError] = useState({
+    isBookNameTrue: false,
+    bookNameError: '',
+    isAuthorTrue: false,
+    authorError: '',
+    isDescriptionTrue:false,
+    descriptionError:'',
+    isQuantityTrue:false,
+    quantityError:'',
+    isPriceTrue:false,
+    priceError:'',
+    isDiscountPriceTrue:false,
+    discountPriceError:''
+  })
+
   const handleChange = (e) => {
     setData({
       ...data,
@@ -23,15 +40,59 @@ function EditBook({item,getSingleBook}) {
   };
 
   const onSubmit = async () => {
-    if(location.includes('edit')) {
-      let res = await updateProduct(item._id,data);
-      console.log('edited',res);
-      getSingleBook();
-      navigate(`/admin/book-details/${item._id}`)
+    const booknameTest = bookNameRegex.test(data.bookName);
+    const authorTest = fullNameRegex.test(data.author);
+    if(booknameTest === false) {
+      return setError({
+        isBookNameTrue:true,
+        bookNameError:'Please Enter good BookName'
+      })
+    } else if(authorTest === false) {
+      return setError({
+        isAuthorTrue:true,
+        authorError: 'author name should have firstname and lastname'
+      })
+    } else if(data.description === '' || data.description.length < 3) {
+      return setError({
+        isDescriptionTrue:true,
+        descriptionError: 'Enter BookDescription'
+      })
+    }else if(data.quantity < 0 || data.quantity > 10) {
+      return setError({
+        isQuantityTrue:true,
+        quantityError: 'Please Enter quantity from 1-10'
+      })
+    }else if(data.price < 0 && data.price < data.discountPrice) {
+      return setError({
+        isPriceTrue:true,
+        priceError: 'Please Enter price greater than discount price'
+      })
+    }else if(data.discountPrice > data.price) {
+      return setError({
+        isDiscountPriceTrue:true,
+        discountPriceError: 'Discount price should be less than original price'
+      })
     } else {
-      let res = await addProduct(data);
-      console.log("added", res);
-    }
+      setError({
+        isDescriptionTrue:false,
+        descriptionError: '',
+        isQuantityTrue:false,
+        quantityError: '',
+        isPriceTrue:false,
+        priceError: '',
+        isDiscountPriceTrue:false,
+        discountPriceError: ''
+      })
+      if(location.includes('edit')) {
+        let res = await updateProduct(item._id,data);
+        console.log('edited',res);
+        getSingleBook();
+        navigate(`/admin/book-details/${item._id}`)
+      } else {
+        let res = await addProduct(data);
+        console.log("added", res);
+      }
+    } 
   };
 
   return (
@@ -47,6 +108,8 @@ function EditBook({item,getSingleBook}) {
           value={data.bookName}
           onChange={handleChange}
           fullWidth
+          error={error.isBookNameTrue}
+          helperText={error.bookNameError}
         ></TextField>
       </FormControl>
       <FormControl>
@@ -59,6 +122,8 @@ function EditBook({item,getSingleBook}) {
           value={data.author}
           onChange={handleChange}
           fullWidth
+          error={error.isAuthorTrue}
+          helperText={error.authorError}
         ></TextField>
       </FormControl>
       <FormControl>
@@ -73,6 +138,8 @@ function EditBook({item,getSingleBook}) {
           fullWidth
           multiline
           rows={2}
+          error={error.isDescriptionTrue}
+          helperText={error.descriptionError}
         ></TextField>
       </FormControl>
       <FormControl>
@@ -89,6 +156,8 @@ function EditBook({item,getSingleBook}) {
             inputProps: { style: { padding: 5 } }, // Adjust padding if needed
           }}
           fullWidth
+          error={error.isQuantityTrue}
+          helperText={error.quantityError}
         ></TextField>
       </FormControl>
       <FormControl>
@@ -101,6 +170,8 @@ function EditBook({item,getSingleBook}) {
           value={data.price}
           onChange={handleChange}
           fullWidth
+          error={error.isPriceTrue}
+          helperText={error.priceError}
         ></TextField>
       </FormControl>
       <FormControl>
@@ -113,6 +184,8 @@ function EditBook({item,getSingleBook}) {
           value={data.discountPrice}
           onChange={handleChange}
           fullWidth
+          error={error.isDiscountPriceTrue}
+          helperText={error.discountPriceError}
         ></TextField>
       </FormControl>
         <Button onClick={onSubmit} variant="contained" sx={{backgroundColor:'#A03037','&:hover':{backgroundColor:'#A03037'},my:2}}>{location.includes('edit')? 'Update Product' : 'Add Book'}</Button>

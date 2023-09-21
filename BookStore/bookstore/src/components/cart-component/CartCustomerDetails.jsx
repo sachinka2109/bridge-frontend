@@ -25,7 +25,7 @@ function CartCustomerDetails({toggleCustomerDetails,onContinue}) {
     };
 
   return (
-    <Grid container sx={{flexDirection:'column',border:'1px solid #DCDCDC',py:{xs:0,sm:2},px:{xs:0,sm:3}}}>
+    <Grid container sx={{flexDirection:'column',border:'1px solid #DCDCDC',py:{xs:0,sm:2},px:{xs:0,sm:3},minWidth:360}}>
         <Grid item sx={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',p:1,px:3}}>
             <Typography variant="h6" color="initial" sx={{fontWeight:'bold'}} component={'div'}>Customer Details</Typography>
             { toggleCustomerDetails && (

@@ -13,6 +13,7 @@ const headerConfig = () => {
 
 export const addProduct = (data) => {
     let response = axios.post('https://bookstore.incubation.bridgelabz.com/bookstore_user/admin/add/book',data,headerConfig());
+    console.log(response)
     return response;
 }
 

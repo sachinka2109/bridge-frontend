@@ -2,7 +2,7 @@
     position: relative;
 }
 
-#profile-btn::after{
+.profile-btn::after{
     position: absolute;
     content: "";
     height: 5px;

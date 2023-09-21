@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import { Grid, Typography,Box,Button } from '@mui/material'
+import { Grid, Typography,Box,Button, Skeleton } from '@mui/material'
 import BookCard from '../book-component/BookCard';
 import FormControl from '@mui/material/FormControl';
 import Pagination from '@mui/material/Pagination'
@@ -10,6 +10,7 @@ function Home() {
   const [data,setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [filter,setFilter] = useState('relevance');
+  const [loading,setLoading] = useState(true);
   const booksPerPage = 8;
   const location = window.location.href;
   useEffect(() => {
@@ -43,8 +44,14 @@ function Home() {
   }
 
   useEffect(() => {
-    getAllBooks();
+    // getAllBooks();
     // console.log('filter',filter)
+      // Set loading to true before fetching data
+    setLoading(true);
+    getAllBooks().then(() => {
+      // Set loading to false after data is fetched
+      setLoading(false);
+    });
   }, [filter]);
 
   return (
@@ -74,7 +81,11 @@ function Home() {
             {currentBooks.map((item,index) => (
               <Link to={location.includes('admin')?`/admin/book-details/${item._id}`:`/book-details/${item._id}`} style={{ textDecoration: 'none' }} key={item._id}>
                 <Grid item>
-                  <BookCard item={item} index={index}/>
+                  { loading ? (
+                    <Skeleton sx={{ height: 289 }} animation="wave" variant="rectangular"><BookCard item={item} index={index}/></Skeleton> 
+                  ): (
+                    <BookCard item={item} index={index}/>
+                  )}
                 </Grid>
               </Link>
             ))}
