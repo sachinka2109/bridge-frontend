@@ -10,9 +10,9 @@ function Success() {
             <img src={OrderSuccess} alt='order-success'/>
         </Grid>
         <Grid item>
-            <Typography variant="body1" color="initial" sx={{textAlign:'center',fontSize:18}} component='div'>
+            <Typography variant="body1" color="initial" sx={{textAlign:'center',fontSize:18}}>
                 hurray!!!your order is confirmed
-                <Typography variant="body1" color="initial" sx={{fontSize:18}} component='div'>
+                <Typography variant="body1" color="initial" sx={{fontSize:18}}>
                     the order id is #123456 save the order id for <br />
                     further communication
                 </Typography>

@@ -23,7 +23,7 @@ function MyOrder() {
                         <Grid item>
                             <Typography variant="h6" color="initial" sx={{fontWeight:'bold',lineHeight:1}}>Don't Make Me Think</Typography>
                             <Typography variant="body1" color="initial" sx={{fontSize:12,color:'#9D9D9D',marginTop:2,marginBottom:1}}>by Steve Krug</Typography>
-                            <Typography component='div' variant="body1" color="initial" sx={{display:'flex',fontSize:15,alignItems:'center',fontWeight:'bold'}}>
+                            <Typography variant="body1" color="initial" sx={{display:'flex',fontSize:15,alignItems:'center',fontWeight:'bold'}}>
                                 Rs. 1500 
                                 <Typography sx={{fontSize:12,textDecoration:'line-through',color:'#9D9D9D',mx:2}}>Rs.2000</Typography>
                             </Typography>
@@ -31,7 +31,7 @@ function MyOrder() {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <Typography component='div' variant="body1" color="initial" sx={{display:'flex',alignItems:'center',fontWeight:'bold'}}>
+                    <Typography variant="body1" color="initial" sx={{display:'flex',alignItems:'center',fontWeight:'bold'}}>
                         <CircleIcon style={{fontSize:10,color:'#26A541',margin:3}}/>
                         Order Placed on May 21
                     </Typography>

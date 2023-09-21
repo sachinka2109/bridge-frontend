@@ -25,7 +25,7 @@ function Cart({data,getCartItem,onPlaceOrder}) {
             <Grid container sx={{flexDirection:'column',gap:1}}>
                 <Grid item sx={{display:'flex',flexDirection:'column'}}>
                     {data.map(item => (
-                        <CartItem  key={item._id} data={item} getCartItem={getCartItem}/>
+                        <CartItem  key={data._id} data={item} getCartItem={getCartItem}/>
                     ))}
                 </Grid>
                 <Grid item sx={{alignSelf:'end'}}>

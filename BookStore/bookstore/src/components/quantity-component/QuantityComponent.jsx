@@ -1,5 +1,5 @@
 import { Box, IconButton, TextField } from "@mui/material";
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { modifyCartItem, removeCartItem } from "../../services/dataService";
@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 function QuantityComponent({item,setAddCart,getCartItem}) {
   const [cartItem, setCartItem] = useState(item);
+  console.log("cartItem", cartItem);
   const handleCount = async(string) => {
     try {
       if (string === "plus") {
@@ -22,7 +23,7 @@ function QuantityComponent({item,setAddCart,getCartItem}) {
           setAddCart(false)
           // console.log('cartItemid',cartItem._id)
           await removeCartItem(item._id)
-          return getCartItem();
+          getCartItem();
         }
         setCartItem((prev) => ({
           ...prev,
@@ -44,7 +45,6 @@ function QuantityComponent({item,setAddCart,getCartItem}) {
         size="small"
         sx={{ backgroundColor: "#FAFAFA", border: "1px solid #DBDBDB" }}
         onClick={() => handleCount("minus")}
-        disabled={cartItem.quantityToBuy === 1}
       >
         <RemoveIcon fontSize="sm" />
       </IconButton>

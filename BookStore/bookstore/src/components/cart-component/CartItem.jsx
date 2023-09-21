@@ -6,14 +6,13 @@ import { removeCartItem,deleteWishList } from '../../services/dataService';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function CartItem({data,getCartItem,myRef}) {
-    // console.log('cartItem',data)
+    console.log('cartItem',data)
     const removeItem = async() => {
         if(data.quantityToBuy) {
             await removeCartItem(data._id)
             getCartItem();
         } else {
             await deleteWishList(data.product_id._id)
-            getCartItem();
         }
     }
   return (
@@ -43,7 +42,7 @@ function CartItem({data,getCartItem,myRef}) {
                  !myRef && (
                     <Grid item sx={{display:'flex',alignItems:'center',marginTop:1,flexWrap:'nowrap'}}>
                         <QuantityComponent item = {data} getCartItem={getCartItem}/>
-                        <Typography  variant="body1" color="initial" sx={{mx:{xs:1,sm:2},cursor:'pointer'}} onClick={removeItem}>Remove</Typography>
+                        <Typography variant="body1" color="initial" sx={{mx:{xs:1,sm:2},cursor:'pointer'}} onClick={removeItem}>Remove</Typography>
                     </Grid>
                  )
                 }

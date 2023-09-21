@@ -86,9 +86,11 @@ function Signup({changePage}) {
         <Grid container sx={{ justifyContent: 'center', gap: 2, flexDirection: 'column', alignItems: 'center',py:2}}>
             <Grid container sx={{ justifyContent: 'center', gap: 12 }}>
                 <Grid item onClick={()=> {changePage(false)}} className='Login-link'> 
-                    <Link component={Linky} to={window.location.href.includes('admin-signup') ? '/admin-login' : '/signin'} sx={{textDecoration:'none', fontSize: '25px', color: '#878787',fontWeight:'bold',textDecoration:'none'}}>                
-                        LOGIN
-                    </Link>
+                    <Linky to={window.location.href.includes('admin-signup') ? '/admin-login' : '/signin'} style={{textDecoration:'none'}}>                
+                        <Link sx={{ fontSize: '25px', color: '#878787',fontWeight:'bold',textDecoration:'none'}} >
+                            LOGIN
+                        </Link>
+                    </Linky>
                 </Grid>
                 <Grid item className='Signup-link active'>
                     <Link sx={{ fontSize: '25px', color: '#0A0102',fontWeight:'bold',textDecoration:'none'}}>
@@ -129,10 +131,8 @@ function Signup({changePage}) {
                         value={data.email}
                         onChange={handleChange}
                         error={checkError.EmailTrue}
+                        helperText={checkError.EmailError}
                     />
-                    {checkError.EmailTrue && (
-                        <div style={{ fontSize: '12px', color: 'red' }}>{checkError.EmailError}</div>
-                    )}
                 </div>
             </Grid>
             <Grid item sx={{marginTop:'3px',marginBottom:'14px'}}>
@@ -143,6 +143,7 @@ function Signup({changePage}) {
                             value={data.password}
                             onChange={handleChange}
                             error={checkError.PasswordTrue}
+                            helperText={checkError.PasswordError}
                             id="password"
                             name='password'
                             type={showPassword ? 'text' : 'password'}
@@ -164,9 +165,6 @@ function Signup({changePage}) {
                                 }
                             }}
                         />
-                        {checkError.PasswordTrue && (
-                            <div style={{ fontSize: '12px', color: 'red' }}>{checkError.PasswordError}</div>
-                        )}
                     </div>
                 </FormControl>
             </Grid>
@@ -184,10 +182,8 @@ function Signup({changePage}) {
                         value={data.phone}
                         onChange={handleChange}
                         error={checkError.phoneTrue}
+                        helperText={checkError.phoneError}
                     />
-                    {checkError.phoneTrue && (
-                        <div style={{ fontSize: '12px', color: 'red' }}>{checkError.phoneError}</div>
-                    )}
                 </div>
             </Grid>
             <Grid item>
