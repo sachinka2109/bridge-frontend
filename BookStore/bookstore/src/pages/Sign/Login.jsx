@@ -79,7 +79,7 @@ function Login({changePage}) {
                     </Link>
                 </Grid>
                 <Grid item onClick={()=> {changePage(true)}} className='Signup-link'>
-                    <Link component={Linky} to={window.location.href.includes('admin-login') ? '/admin-signup' : '/signup'} style={{textDecoration:'none',fontSize: '25px', color: '#0A0102',fontWeight:'bold',textDecoration:'none'}}>         
+                    <Link component={Linky} to={window.location.href.includes('admin-login') ? '/admin-signup' : '/signup'} style={{textDecoration:'none',fontSize: '25px', color: '#0A0102',fontWeight:'bold'}}>         
                         SIGNUP
                     </Link>
                 </Grid>

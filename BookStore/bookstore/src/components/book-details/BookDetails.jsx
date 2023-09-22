@@ -296,7 +296,7 @@ function BookDetails() {
                 }}
               >
                 <Typography sx={{ fontSize: 30 }} component="div">
-                  {loading ? <Skeleton width={80} /> : `Rs. ${book.price}`}
+                  {loading ? <Skeleton width={80} /> : `Rs. ${book.discountPrice}`}
                 </Typography>
                 <Typography
                   sx={{
@@ -310,7 +310,7 @@ function BookDetails() {
                   {loading ? (
                     <Skeleton width={80} variant="rectangle" />
                   ) : (
-                    `Rs.${book.discountPrice}`
+                    `Rs.${book.price}`
                   )}
                 </Typography>
               </Typography>

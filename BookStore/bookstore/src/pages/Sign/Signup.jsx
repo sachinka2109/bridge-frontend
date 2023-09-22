@@ -86,7 +86,7 @@ function Signup({changePage}) {
         <Grid container sx={{ justifyContent: 'center', gap: 2, flexDirection: 'column', alignItems: 'center',py:2}}>
             <Grid container sx={{ justifyContent: 'center', gap: 12 }}>
                 <Grid item onClick={()=> {changePage(false)}} className='Login-link'> 
-                    <Link component={Linky} to={window.location.href.includes('admin-signup') ? '/admin-login' : '/signin'} sx={{textDecoration:'none', fontSize: '25px', color: '#878787',fontWeight:'bold',textDecoration:'none'}}>                
+                    <Link component={Linky} to={window.location.href.includes('admin-signup') ? '/admin-login' : '/signin'} sx={{textDecoration:'none', fontSize: '25px', color: '#878787',fontWeight:'bold'}}>                
                         LOGIN
                     </Link>
                 </Grid>

@@ -1,19 +1,15 @@
 import axios from 'axios';
 
-let headerConf;
 const headerConfig = () => {
-  headerConf = {
+  return {
     headers: {
       "x-access-token": localStorage.getItem("admin-token"),
     },
-  }
-  return headerConf;
+  };
 };
-
 
 export const addProduct = (data) => {
     let response = axios.post('https://bookstore.incubation.bridgelabz.com/bookstore_user/admin/add/book',data,headerConfig());
-    console.log(response)
     return response;
 }
 

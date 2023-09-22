@@ -1,13 +1,11 @@
 import axios from "axios";
 
-let headerConf;
 const headerConfig = () => {
-  headerConf = {
+  return {
     headers: {
       "x-access-token": localStorage.getItem("token"),
     },
-  }
-  return headerConf;
+  };
 };
 
 export let getBooks = async () => {

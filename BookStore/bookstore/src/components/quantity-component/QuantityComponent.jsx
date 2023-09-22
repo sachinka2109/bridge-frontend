@@ -4,8 +4,10 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { modifyCartItem, removeCartItem } from "../../services/dataService";
 import { connect } from "react-redux";
+import { useLocation } from "react-router";
 
 function QuantityComponent({item,setAddCart,getCartItem}) {
+  const location = useLocation();
   const [cartItem, setCartItem] = useState(item);
   const handleCount = async(string) => {
     try {
@@ -44,7 +46,7 @@ function QuantityComponent({item,setAddCart,getCartItem}) {
         size="small"
         sx={{ backgroundColor: "#FAFAFA", border: "1px solid #DBDBDB" }}
         onClick={() => handleCount("minus")}
-        disabled={cartItem.quantityToBuy === 1}
+        disabled={cartItem.quantityToBuy === 1 && location.pathname.includes('cart')}
       >
         <RemoveIcon fontSize="sm" />
       </IconButton>
@@ -63,6 +65,7 @@ function QuantityComponent({item,setAddCart,getCartItem}) {
         size="small"
         sx={{ backgroundColor: "#FAFAFA", border: "1px solid #DBDBDB"}}
         onClick={() => handleCount("plus")}
+        disabled={cartItem.quantityToBuy >= 10 && location.pathname.includes('cart')}
       >
         <AddIcon fontSize="sm" />
       </IconButton>
