@@ -21,7 +21,7 @@ function UseEffectExample() {
 
     useEffect(() => {
         let interval = setInterval(() => {
-            console.log('Mounting and unmounting') 
+            console.log('Mounting the component now') 
         }, 5000);
 
         return() => {

@@ -19,6 +19,7 @@ import UseRefParentFun from './components/function-component/UseRef/UseRefParent
 import ChildState from './components/function-component/UseState/ChildState';
 import ParentState from './components/function-component/UseState/ParentState';
 import StateWithPrev from './components/function-component/UseState/StateWithPrev';
+import MyRenderProp from './components/function-component/render-props/MyRenderProp';
 import Task from './components/task/Task';
 import { createContext, useReducer } from 'react';
 
@@ -72,7 +73,8 @@ function App() {
             
         </div>
       </div> */}
-      <Canvas/>
+      {/* <Canvas/> */}
+      <MyRenderProp />
     </countContext.Provider>
   );
 }
