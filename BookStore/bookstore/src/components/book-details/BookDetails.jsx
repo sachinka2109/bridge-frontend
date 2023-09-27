@@ -18,6 +18,7 @@ import {
   addCartItem,
   getBooks,
   getCartItems,
+  getFeedback,
   postWishList,
 } from "../../services/dataService";
 import { useNavigate, useParams } from "react-router-dom";
@@ -31,6 +32,7 @@ import { deleteProduct } from "../../services/adminDataService";
 
 function BookDetails() {
   const [book, setBook] = useState({});
+  const [feedback,setFeedback] = useState([]);
   const [bookIndex, setBookIndex] = useState(1);
   const [addCart, setAddCart] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -85,11 +87,18 @@ function BookDetails() {
     }
   };
 
+  const getBookFeedback = async() => {
+    let response = await getFeedback(id)
+    setFeedback(response.data.result);
+  }
+
   useEffect(() => {
     setLoading(true);
     getSingleBook().then(() => {
       setLoading(false);
-    });
+    }) && getBookFeedback().then(() => {
+      setLoading(false);
+    })
   }, []);
 
   useEffect(() => {
@@ -381,6 +390,7 @@ function BookDetails() {
                   </FormGroup>
                 </Box>
                 <Box>
+                  {feedback.map(item => (
                   <Grid
                     container
                     sx={{
@@ -403,10 +413,10 @@ function BookDetails() {
                           {loading ? (
                             <Skeleton width={80} />
                           ) : (
-                            "Sachin Kaythamwar"
+                            `${item.user_id.fullName}`
                           )}
                         </Typography>
-                        {loading ? "" : <Rating name="half-rating" readOnly />}
+                        {loading ? "" : <Rating name="half-rating" readOnly value={item.rating}/>}
                       </Grid>
                     </Grid>
                     <Grid item sx={{ paddingLeft: 5 }}>
@@ -417,58 +427,12 @@ function BookDetails() {
                             <Skeleton width={"30%"} />
                           </>
                         ) : (
-                          `Good product. Even though the translation could have
-                        been better, Chanakya's neeti are thought provoking.
-                        Chanakya has written on many different topics and his
-                        writings are succinct.`
+                          `${item.comment}`
                         )}
                       </Typography>
                     </Grid>
                   </Grid>
-                  <Grid
-                    container
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      px: 1,
-                      py: 2,
-                    }}
-                  >
-                    <Grid item sx={{ display: "flex" }}>
-                      <Grid item>
-                        {loading ? (
-                          <Skeleton variant="circular" width={30} height={30} />
-                        ) : (
-                          <AccountCircleIcon fontSize="large" />
-                        )}
-                      </Grid>
-                      <Grid item sx={{ paddingLeft: 1 }}>
-                        <Typography variant="body1" color="initial">
-                          {loading ? (
-                            <Skeleton width={80} />
-                          ) : (
-                            "Sachin Kaythamwar"
-                          )}
-                        </Typography>
-                        {loading ? "" : <Rating name="half-rating" readOnly />}
-                      </Grid>
-                    </Grid>
-                    <Grid item sx={{ paddingLeft: 5 }}>
-                      <Typography variant="body1" color="initial">
-                        {loading ? (
-                          <>
-                            <Skeleton width={"100%"} />
-                            <Skeleton width={"30%"} />
-                          </>
-                        ) : (
-                          `Good product. Even though the translation could have
-                        been better, Chanakya's neeti are thought provoking.
-                        Chanakya has written on many different topics and his
-                        writings are succinct.`
-                        )}
-                      </Typography>
-                    </Grid>
-                  </Grid>
+                  ))}
                 </Box>
               </>
             )}

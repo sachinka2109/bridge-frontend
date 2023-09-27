@@ -14,7 +14,7 @@ function MyOrder() {
         <Typography color="text.primary">My Orders</Typography>
         </Breadcrumbs>
         <Grid sx={{my:4,mx:{xs:1,sm:5,md:19}}}>
-            <Grid container sx={{border:'1px solid #DCDCDC',justifyContent:'space-between',alignItems:'flex-start',p:2,minWidth:375}}>
+            <Grid container sx={{border:'1px solid #DCDCDC',justifyContent:'space-between',alignItems:'flex-start',p:2,minWidth:375,flexWrap:'nowrap'}}>
                 <Grid item sx={{display:'flex'}}>
                     <Grid item>
                         <img src={Book} alt='book' style={{height:85,objectFit:'contain'}}/>
