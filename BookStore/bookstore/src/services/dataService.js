@@ -23,7 +23,7 @@ export const getFeedback = async(id) => {
     `https://bookstore.incubation.bridgelabz.com/bookstore_user/get/feedback/${id}`,
     headerConfig()
   );
-  console.log(response);
+  // console.log(response);
   return response;
 }
 

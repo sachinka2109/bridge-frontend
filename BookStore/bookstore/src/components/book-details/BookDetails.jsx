@@ -36,12 +36,14 @@ function BookDetails() {
   const [bookIndex, setBookIndex] = useState(1);
   const [addCart, setAddCart] = useState(false);
   const [loading, setLoading] = useState(true);
-  // const [review, setReview] = useState([]);
+  const [rating,setRating] = useState(0);
   const [cartItem, setCartItem] = useState({});
   const dispatch = useDispatch();
   const location = window.location.href;
   const navigate = useNavigate();
   let filteredItem;
+  let totalRating;
+  let averageRating;
   let { id } = useParams();
   const addToCart = async () => {
     await addCartItem(id);
@@ -87,10 +89,24 @@ function BookDetails() {
     }
   };
 
-  const getBookFeedback = async() => {
-    let response = await getFeedback(id)
-    setFeedback(response.data.result);
-  }
+  // const getBookFeedback = async() => {
+  //   let response = await getFeedback(id)
+  //   setFeedback(response.data.result,
+  //     totalRating = feedback.reduce((acc, item) => acc + item.rating, 0),
+  //     averageRating = totalRating / feedback.length,
+  //     setRating(averageRating)
+  //   );
+  // }
+
+  const getBookFeedback = async () => {
+    let response = await getFeedback(id);
+    const feedbackData = response.data.result;
+    totalRating = feedbackData.reduce((acc, item) => acc + item.rating, 0);
+    averageRating = feedbackData.length > 0 ? totalRating / feedbackData.length : 0;
+    setFeedback(feedbackData);
+    setRating(averageRating);
+  };
+
 
   useEffect(() => {
     setLoading(true);
@@ -273,22 +289,22 @@ function BookDetails() {
                   <>
                     <Typography
                       sx={{
-                        display: "flex",
-                        alignItems: "center",
+                        display:'flex',
+                        alignItems:'center',
                         backgroundColor: "#388E3C",
                         color: "white",
                         px: 1,
                       }}
                       component="div"
                     >
-                      4.5
+                      {rating}
                       <StarIcon fontSize="sm" />
                     </Typography>
                     <Typography
                       sx={{ color: "#878787", fontSize: 15, px: 1 }}
                       component="div"
                     >
-                      (20)
+                      ({feedback.length})
                     </Typography>
                   </>
                 )}
@@ -399,6 +415,7 @@ function BookDetails() {
                       px: 1,
                       py: 2,
                     }}
+                    key={item._id}
                   >
                     <Grid item sx={{ display: "flex" }}>
                       <Grid item>

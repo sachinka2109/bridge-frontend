@@ -1,8 +1,9 @@
 const initialState = {
   cart: [],
-  cartLength:0
+  cartLength:0,
   // wishlist: [],
   // user: null,
+  rating:0
 };
 
 // export const getCartTotal = (cart) =>
