@@ -16,6 +16,7 @@ import { FormControl, Rating } from "@mui/material";
 import { TextareaAutosize } from "@mui/base";
 import {
   addCartItem,
+  addFeedback,
   getBooks,
   getCartItems,
   getFeedback,
@@ -32,6 +33,10 @@ import { deleteProduct } from "../../services/adminDataService";
 
 function BookDetails() {
   const [book, setBook] = useState({});
+  const [giveFeedback,setGiveFeedback] = useState({
+    comment:"",
+    rating:0
+  });
   const [feedback,setFeedback] = useState([]);
   const [bookIndex, setBookIndex] = useState(1);
   const [addCart, setAddCart] = useState(false);
@@ -104,17 +109,36 @@ function BookDetails() {
     totalRating = feedbackData.reduce((acc, item) => acc + item.rating, 0);
     averageRating = feedbackData.length > 0 ? totalRating / feedbackData.length : 0;
     setFeedback(feedbackData);
-    setRating(averageRating);
+    setRating(averageRating.toFixed(1));
   };
+
+  const handleGiveRating = (e,newRating) => {
+    setGiveFeedback({
+      ...giveFeedback,
+      rating: newRating
+    })
+  }
+
+  const handleGiveFeedback = (e) => {
+    setGiveFeedback({
+      ...giveFeedback,
+      [e.target.id]: e.target.value
+    })
+  }
+
+  const onSubmitFeedback = async() => {
+    let response = await addFeedback(id,giveFeedback);
+    console.log(response);
+    getBookFeedback();
+  }
 
 
   useEffect(() => {
     setLoading(true);
     getSingleBook().then(() => {
       setLoading(false);
-    }) && getBookFeedback().then(() => {
-      setLoading(false);
     })
+    getBookFeedback();
   }, []);
 
   useEffect(() => {
@@ -291,7 +315,7 @@ function BookDetails() {
                       sx={{
                         display:'flex',
                         alignItems:'center',
-                        backgroundColor: "#388E3C",
+                        backgroundColor: rating >3.5 ? "#388E3C" : rating >2.0 ? "orange" : rating <=2.0? "lightcoral": "",
                         color: "white",
                         px: 1,
                       }}
@@ -383,11 +407,14 @@ function BookDetails() {
                       >
                         Overall rating
                       </label>
-                      <Rating name="half-rating" precision={0.5} />
+                      <Rating name="half-rating" id="rating" value={giveFeedback.rating} onChange={handleGiveRating}/>
                       <TextareaAutosize
+                        id="comment"
                         minRows={3}
                         placeholder="Write Your Review"
                         style={{ border: "none", marginTop: "10px" }}
+                        value={giveFeedback.comment}
+                        onChange={handleGiveFeedback}
                       />
                     </FormControl>
                     <Button
@@ -400,6 +427,7 @@ function BookDetails() {
                         my: 1,
                       }}
                       disabled={loading}
+                      onClick={onSubmitFeedback}
                     >
                       Submit
                     </Button>

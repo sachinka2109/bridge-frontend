@@ -27,6 +27,15 @@ export const getFeedback = async(id) => {
   return response;
 }
 
+export const addFeedback = async(id,data) => {
+  let response = await axios.post(
+    `https://bookstore.incubation.bridgelabz.com/bookstore_user/add/feedback/${id}`,
+    data,
+    headerConfig()
+  );
+  return response;
+}
+
 export const addCartItem = async (data) => {
   let response = await axios.post(
     `https://bookstore.incubation.bridgelabz.com/bookstore_user/add_cart_item/${data}`,
