@@ -30,6 +30,12 @@ function Home() {
     getData();
   }
 
+  const onUnArchive = async (item) => {
+    let data = {noteIdList:[item.id],isArchived:false}
+    await updateArchive(data);
+    getData();
+  }
+
   const onChangeView = () => {
     changeViewList(!viewList);
   }
@@ -45,11 +51,6 @@ function Home() {
   }
 
   useEffect(()=> {
-    getData();
-  },[])
-
-  useEffect(()=> {
-    console.log('data-called')
     if(searchText !== '') {
       const searchResult = data.filter(data => data.title.toLowerCase().includes(searchText.toLowerCase()) || data.description.toLowerCase().includes(searchText.toLowerCase()));
       setData(searchResult);
@@ -57,6 +58,7 @@ function Home() {
       getData();
     }
   },[searchText,data.length])
+
 
   const getData = async() => {
     let currentUrl = window.location.href;
@@ -67,7 +69,7 @@ function Home() {
       let newArray = arr.filter(item => item.isArchived === false && item.isDeleted === false)
       setData(newArray)
     } else if (currentUrl.includes('archive')) {
-      let newArray = arr.filter(item => item.isArchived === true)
+      let newArray = arr.filter(item => item.isArchived === true )
       setData(newArray)
     } else if(currentUrl.includes('trash')) {
       let newArray = arr.filter(item => item.isDeleted === true)
@@ -88,8 +90,8 @@ function Home() {
         </Box> 
         <Box sx={{display:viewList? 'flex':'block',flexWrap:'wrap',justifyContent:'center',my:'30px',rowGap:'30px'}}>
         {data.map((item) => (viewList ? 
-          (<TakeNoteThree key={item.id} data={item} onArchive={()=> onArchive(item)} getData={getData} /> ) : 
-          (<TakeNoteThreeList key={item.id} data={item} onArchive={()=> onArchive(item)} getData={getData}/> ))
+          (<TakeNoteThree key={item.id} data={item} onArchive={()=> onArchive(item)} onUnArchive={()=> onUnArchive(item)} getData={getData} /> ) : 
+          (<TakeNoteThreeList key={item.id} data={item} onArchive={()=> onArchive(item)} onUnArchive={()=> onUnArchive(item)} getData={getData}/> ))
         )}
         </Box>
       </Box>

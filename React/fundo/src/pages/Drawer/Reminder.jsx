@@ -1,10 +1,9 @@
 import React from 'react'
+import Home from '../../components/Dashboard/Home'
 
 function Reminder() {
   return (
-    <div>
-        
-    </div>
+    <Home/> 
   )
 }
 

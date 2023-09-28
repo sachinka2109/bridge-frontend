@@ -1,8 +1,8 @@
 import React from 'react'
 
-const myHoc = (wrappedComponent) => {
+const HocFun = (wrappedComponent) => {
     return (props) => {
     }
 }
 
-export default HocFun
+export default HocFun;

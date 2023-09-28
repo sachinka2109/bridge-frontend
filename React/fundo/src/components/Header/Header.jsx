@@ -83,8 +83,8 @@ function Header(props) {
 
   return (
     <React.Fragment>
-        <Box sx={{ flexGrow: 1 }} >
-            <AppBar  elevation={0} sx={{position:"static",borderBottom:'1px solid #dadce0'}}>
+        <Box sx={{ flexGrow: 1,position:'sticky',zIndex:3,marginBottom:10 }} >
+            <AppBar  elevation={0} sx={{borderBottom:'1px solid #dadce0'}}>
                 <Toolbar sx={{ display: 'flex', alignItems: 'center',backgroundColor:'white',color:'#5f6368'}}>
                     <IconButton
                         size="large"
@@ -104,9 +104,7 @@ function Header(props) {
                         noWrap
                         component={'span'}
                         sx={{ display: { xs:'flex',alignItems:'center' }}}
-                        width={'13vw'}
                     >
-                        {/* {location.includes('dashboard') ? ( */}
                         <React.Fragment>
                             <img
                             className="gb_Rc gb_Rd"
@@ -119,14 +117,9 @@ function Header(props) {
                             />
                             {props.title}
                         </React.Fragment>
-                        {/* ) : location.includes('archive') ? (
-                        'Archive'
-                        ) : location.includes('trash') ? (
-                        'Trash'
-                        ) : null} */}
                     </Typography>
-                    <Box sx={{flexGrow:1,marginRight:'10vw'}}>
-                        <Search sx={{flexGrow:1,display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',borderRadius:'10px',padding:'5px',bgcolor: "background.paper",boxShadow:' 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)'}}>
+                    <Box sx={{flexGrow:1,mx:14,display:{xs:'none',md:'flex'}}}>
+                        <Search sx={{display:{xs:'none',md:'flex'},justifyContent:'flex-start',alignItems:'center',borderRadius:'10px',padding:'5px',bgcolor: "background.paper",boxShadow:' 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)'}}>
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
@@ -137,6 +130,7 @@ function Header(props) {
                             />
                         </Search>
                     </Box>
+                    <Box sx={{flexGrow:{xs:1,md:0}}}/>
                     <Box sx={{ display: 'flex',justifyContent:'flex-end'}}>
                         <IconButton size="large"  color="inherit" sx={{display:{xs:'flex',md:'none'}}} onClick={openSearchBar}>
                             <SearchIcon />

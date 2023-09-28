@@ -134,7 +134,7 @@ function TakeNoteThree(props) {
                     />
                     <IconButton
                       size="small"
-                      onClick={() => props.onArchive(props.data)}
+                      onClick={() =>props.data.isArchived ?props.onUnArchive(props.data) : props.onArchive(props.data)}
                     >
                       {props.data.isArchived ? (
                         <UnarchiveIcon fontSize="12px" />

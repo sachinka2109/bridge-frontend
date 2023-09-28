@@ -21,6 +21,7 @@ function LeftDrawer(props) {
     left: false,
   });
   const [clicked,setClicked] = useState(false)
+  const [selected,setSelected]= useState("Notes");
 
   // if(state.left === true) {
   //   props.setLeftDrawerOpen(true);
@@ -51,11 +52,11 @@ function LeftDrawer(props) {
       <List>
         {[{text:'Notes',icon: <LightbulbIcon/>,route:'/dashboard'},{text:'Remainder',icon: <NotificationsIcon/>},{text:'Edit Label',icon: <EditIcon/>},{text:'Archive',icon: <ArchiveIcon/>,route:'/archive'},{text:'Trash',icon: <DeleteIcon/>,route:'/trash'}]
         .map(({text,icon,route}, index) => (
-          <Link  key={text} to={route} style={{ textDecoration: 'none', color: 'inherit' }}  onClick={() =>handleTitleUpdate(text)}>   
+          <Link  key={text} to={route} style={{ textDecoration: 'none', color: 'inherit' }}  onClick={() =>{handleTitleUpdate(text);setSelected(text)}}>   
             <ListItem disablePadding>
               {state.left? 
                 (
-                  <ListItemButton>
+                  <ListItemButton sx={{backgroundColor: selected === text ? '#feefc3' : '','&:hover':{backgroundColor: selected === text ? '#feefc3' : ''}}}>
                     <IconButton size='large' disabled>
                       {icon}
                     </IconButton>
@@ -63,7 +64,7 @@ function LeftDrawer(props) {
                   </ListItemButton> 
                 ):
                 (
-                  <IconButton size='large' sx={{margin:'8px 16px'}}>
+                  <IconButton size='large' sx={{margin:'8px 16px',backgroundColor: selected === text ? '#feefc3' : '','&:hover':{backgroundColor: selected === text ? '#feefc3' : ''} }}>
                     {icon}
                   </IconButton>
                 )
