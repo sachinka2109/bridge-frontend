@@ -15,7 +15,7 @@ function Router() {
             <Routes>
                 <Route exact path='/' element={<AuthRoute><Signin/></AuthRoute>}/>
                 <Route path='/signup' element={<AuthRoute><Signup/></AuthRoute>}/>
-                <Route path='/forgotpassword' element={<ForgotPassword/>} />
+                <Route path='/forgotpassword' element={<AuthRoute><ForgotPassword/></AuthRoute>} />
                 <Route path="/dashboard" element={<ProtectedRoute><Home/></ProtectedRoute>} />
                 <Route path="/archive" element={<ProtectedRoute><Archive/></ProtectedRoute>} />
                 <Route path="/trash" element={<ProtectedRoute><Trash/></ProtectedRoute>} />
