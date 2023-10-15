@@ -22,28 +22,29 @@ import StateWithPrev from './components/function-component/UseState/StateWithPre
 import MyRenderProp from './components/function-component/render-props/MyRenderProp';
 import Task from './components/task/Task';
 import { createContext, useReducer } from 'react';
+import useDarkMode from './hooks/useDarkMode';
 
 const initialState = 0;
-const reducer = (currentState,action) => {
-    switch (action) {
-        case 'INCREMENT': 
-            return currentState + 1;
-        case 'DECREMENT':
-            return currentState - 1;
-        case 'RESET':
-            return initialState;
-        default: 
-            return currentState;
-    }
+const reducer = (currentState, action) => {
+  switch (action) {
+    case 'INCREMENT':
+      return currentState + 1;
+    case 'DECREMENT':
+      return currentState - 1;
+    case 'RESET':
+      return initialState;
+    default:
+      return currentState;
+  }
 }
 
 export const countContext = createContext()
 
 function App() {
-  const [count,dispatch] = useReducer(reducer,initialState);
-
+  const [count, dispatch] = useReducer(reducer, initialState);
+  const [darkMode, toggleDarkMode] = useDarkMode();
   return (
-    <countContext.Provider value={{countState:count,countDispatch:dispatch}}>
+    <countContext.Provider value={{ countState: count, countDispatch: dispatch }}>
       {/* <div className="App">
         <div className="ClassComponents">
           <RenderCounterClass />
@@ -74,7 +75,15 @@ function App() {
         </div>
       </div> */}
       {/* <Canvas/> */}
-      <MyRenderProp />
+      {/* <MyRenderProp /> */}
+      <div>
+        <button onClick={toggleDarkMode}>
+          Toggle Dark Mode
+        </button>
+        <div className={darkMode ? 'dark' : ''}>
+          This is a dark mode component.
+        </div>
+      </div>
     </countContext.Provider>
   );
 }
